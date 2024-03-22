@@ -8,7 +8,7 @@ import com.neep.meatlib.recipe.ingredient.RecipeInput;
 import com.neep.meatlib.recipe.ingredient.RecipeInputs;
 import com.neep.meatlib.recipe.ingredient.RecipeOutputImpl;
 import com.neep.neepmeat.init.NMrecipeTypes;
-import com.neep.neepmeat.machine.grinder.GrinderStorage;
+import com.neep.neepmeat.machine.grinder.IGrinderStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
@@ -20,11 +20,10 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @SuppressWarnings("UnstableApiUsage")
-public class GrindingRecipe implements MeatlibRecipe<GrinderStorage>
+public class GrindingRecipe implements MeatlibRecipe<IGrinderStorage>
 {
     protected Identifier id;
     protected RecipeInput<Item> itemInput;
@@ -44,12 +43,9 @@ public class GrindingRecipe implements MeatlibRecipe<GrinderStorage>
     }
 
     @Override
-    public boolean matches(GrinderStorage inventory)
+    public boolean matches(IGrinderStorage inventory)
     {
-        itemInput.cacheMatching(); // TODO: Make this automatic and make the method private
-        Collection<Item> i = itemInput.getAll();
-        boolean bl = itemInput.test(inventory.getInputStorage());
-        return bl;
+        return itemInput.testStorage(inventory.getInputStorage());
     }
 
     public RecipeInput<Item> getItemInput()
@@ -91,11 +87,11 @@ public class GrindingRecipe implements MeatlibRecipe<GrinderStorage>
     }
 
     @Override
-    public boolean takeInputs(GrinderStorage storage, TransactionContext transaction)
+    public boolean takeInputs(IGrinderStorage storage, TransactionContext transaction)
     {
         try (Transaction inner = transaction.openNested())
         {
-            Optional<Item> item = itemInput.getFirstMatching(storage.getInputStorage());
+            Optional<Item> item = itemInput.getFirstMatching(storage.getInputStorage(), transaction);
             if (item.isEmpty())
             {
                 throw new IllegalStateException("Storage contents must conform to recipe");
@@ -113,7 +109,7 @@ public class GrindingRecipe implements MeatlibRecipe<GrinderStorage>
     }
 
     @Override
-    public boolean ejectOutputs(GrinderStorage context, TransactionContext transaction)
+    public boolean ejectOutputs(IGrinderStorage context, TransactionContext transaction)
     {
         try (Transaction inner = transaction.openNested())
         {

@@ -158,6 +158,8 @@ public class NMFluidsClient
             registry.register(TISSUE_SLURRY_FLOWING);
             registry.register(MILK);
             registry.register(MILK_FLOWING);
+            registry.register(PASTEURISED_MILK);
+            registry.register(PASTEURISED_MILK_FLOWING);
             registry.register(FEED);
             registry.register(FEED_FLOWING);
             registry.register(PINKDRINK);

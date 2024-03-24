@@ -31,7 +31,10 @@ public class NMEmiPlugin implements EmiPlugin {
     public static final EmiStack ALLOY_SMELTING_WORKSTATION = EmiStack.of(NMBlocks.ALLOY_KILN);
     public static final EmiStack COMPACTING_WORKSTATION = EmiStack.of(NMBlocks.CHARNEL_COMPACTOR);
     public static final EmiStack ENLIGHTENING_WORKSTATION = EmiStack.of(NMBlocks.PEDESTAL);
-    public static final EmiStack GRINDING_WORKSTATION = EmiStack.of(NMBlocks.GRINDER);
+    public static final EmiStack INTEGRATOR_WORKSTATION = EmiStack.of(NMBlocks.INTEGRATOR_EGG);
+    public static final EmiStack ADV_INTEGRATOR_WORKSTATION = EmiStack.of(NMBlocks.ADVANCED_INTEGRATOR);
+    public static final EmiStack GRINDING_WORKSTATION = EmiStack.of(NMBlocks.CRUSHER);
+    public static final EmiStack LARGE_CRUSHER_WORKSTATION = EmiStack.of(NMBlocks.LARGE_CRUSHER);
     public static final EmiStack VIVISECTION_WORKSTATION = EmiStack.of(NMItems.SACRIFICIAL_SCALPEL);
     public static final EmiStack HEATING_WORKSTATION = EmiStack.of(FluidTransport.MULTI_TANK);
     public static final EmiStack MANUFACTURE_WORKSTATION = EmiStack.of(PLCBlocks.PLC);
@@ -73,6 +76,7 @@ public class NMEmiPlugin implements EmiPlugin {
         registry.addWorkstation(COMPACTING, COMPACTING_WORKSTATION);
         registry.addWorkstation(ENLIGHTENING, ENLIGHTENING_WORKSTATION);
         registry.addWorkstation(GRINDING, GRINDING_WORKSTATION);
+        registry.addWorkstation(GRINDING, LARGE_CRUSHER_WORKSTATION);
         registry.addWorkstation(VIVISECTION, VIVISECTION_WORKSTATION);
         registry.addWorkstation(HEATING, HEATING_WORKSTATION);
         registry.addWorkstation(MANUFACTURE, MANUFACTURE_WORKSTATION);
@@ -100,6 +104,7 @@ public class NMEmiPlugin implements EmiPlugin {
                 .map(AlloySmeltingEmiRecipe::new)
                 .forEach(registry::addRecipe);
         MeatlibRecipes.getInstance().getAllValuesOfType(NMrecipeTypes.GRINDING)
+                .filter(r -> !r.destroy())
                 .map(GrindingEmiRecipe::new)
                 .forEach(registry::addRecipe);
         MeatlibRecipes.getInstance().getAllValuesOfType(NMrecipeTypes.HEATING)

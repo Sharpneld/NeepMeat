@@ -62,7 +62,7 @@ public abstract class AbstractPipeBlock extends BaseBlock
 
     public AbstractPipeBlock(String itemName, ItemSettings itemSettings, Settings settings)
     {
-        super(itemName, itemSettings, settings.solid());
+        super(itemName, itemSettings, settings.solidBlock((state, world, pos) -> true));
         this.setDefaultState(this.stateManager.getDefaultState()
                 .with(NORTH_CONNECTION, PipeConnectionType.NONE)
                 .with(EAST_CONNECTION, PipeConnectionType.NONE)

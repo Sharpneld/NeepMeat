@@ -3,6 +3,7 @@ package com.neep.neepmeat.block.entity;
 import com.neep.meatlib.block.MeatlibBlock;
 import com.neep.meatlib.item.BaseBlockItem;
 import com.neep.meatlib.item.ItemSettings;
+import com.neep.meatlib.item.MeatlibItemSettings;
 import com.neep.meatlib.item.TooltipSupplier;
 import com.neep.neepmeat.NMItemGroups;
 import com.neep.neepmeat.init.NMBlocks;
@@ -37,7 +38,7 @@ public class CronenCakeBlock extends CakeBlock implements MeatlibBlock
     {
         super(settings);
         this.registryName = registryName;
-        this.blockItem = new BaseBlockItem(this, registryName, ItemSettings.block().tooltip(TooltipSupplier.simple(1)), new FabricItemSettings().group(NMItemGroups.FOOD));
+        this.blockItem = new BaseBlockItem(this, registryName, ItemSettings.block().tooltip(TooltipSupplier.simple(1)), new MeatlibItemSettings().group(NMItemGroups.FOOD));
     }
 
     @Override

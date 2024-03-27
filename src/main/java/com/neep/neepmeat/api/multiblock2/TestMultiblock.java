@@ -15,10 +15,9 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
@@ -88,7 +87,7 @@ public class TestMultiblock extends Multiblock2ControllerBlock<TestMultiblock.TM
         protected BlockEntityType<TMStructureBlockEntity> registerBlockEntity()
         {
             return Registry.register(
-                    Registries.BLOCK_ENTITY_TYPE, new Identifier(NeepMeat.NAMESPACE, "test_multiblock_structure"),
+                    Registry.BLOCK_ENTITY_TYPE, new Identifier(NeepMeat.NAMESPACE, "test_multiblock_structure"),
                     FabricBlockEntityTypeBuilder.create(
                                     (p, s) -> new TMStructureBlockEntity(getBlockEntityType(), p, s),this)
                             .build());

@@ -8,11 +8,11 @@ import com.neep.neepmeat.NeepMeat;
 import com.neep.neepmeat.guide.article.Article;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.Registries;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.InputStream;
@@ -126,14 +126,14 @@ public class GuideReloadListener implements SimpleSynchronousResourceReloadListe
     @Nullable
     public GuideNode.ArticleNode getArticleByItem(ItemStack stack)
     {
-        Identifier itemId = Registries.ITEM.getId(stack.getItem());
+        Identifier itemId = Registry.ITEM.getId(stack.getItem());
         return articleNodes.stream().filter(n -> n.getId().equals(itemId.getPath())).findFirst().orElse(null);
     }
 
     @Nullable
     public List<GuideNode> getPath(ItemStack stack)
     {
-        Identifier itemId = Registries.ITEM.getId(stack.getItem());
+        Identifier itemId = Registry.ITEM.getId(stack.getItem());
         GuideNode target = articleNodes.stream().filter(n -> n.matchesLookupTerm(itemId.toString())).findFirst().orElse(null);
         if (target != null)
         {

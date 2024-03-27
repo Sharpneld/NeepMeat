@@ -24,7 +24,7 @@ public abstract class MultiBlockStructure<T extends BigBlockStructureEntity> ext
 
     public MultiBlockStructure(Multiblock2ControllerBlock<?> parent, Settings settings)
     {
-        super(settings.nonOpaque().pistonBehavior(PistonBehavior.IGNORE));
+        super(settings.nonOpaque());
         this.parent = parent;
         this.blockEntityType = registerBlockEntity();
     }

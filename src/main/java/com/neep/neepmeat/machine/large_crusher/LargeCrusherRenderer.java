@@ -11,13 +11,13 @@ import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.RotationAxis;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 
@@ -114,12 +114,12 @@ public class LargeCrusherRenderer implements BlockEntityRenderer<LargeCrusherBlo
         int k = getRenderedAmount(stack);
         BakedModel bakedModel = itemRenderer.getModel(stack, world, null, 0);
         boolean depth = bakedModel.hasDepth();
-        float sX = bakedModel.getTransformation().ground.scale.x;
-        float sY = bakedModel.getTransformation().ground.scale.y;
-        float sZ = bakedModel.getTransformation().ground.scale.z;
+        float sX = bakedModel.getTransformation().ground.scale.getX();
+        float sY = bakedModel.getTransformation().ground.scale.getY();
+        float sZ = bakedModel.getTransformation().ground.scale.getZ();
 
         // Rotate by 1 degree to prevent axis fighting with nearby block models
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(1));
+        matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(1));
 
 
         float t;
@@ -144,9 +144,9 @@ public class LargeCrusherRenderer implements BlockEntityRenderer<LargeCrusherBlo
                 }
             }
             matrices.translate(0, 0, 0.25);
-            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(depth ? 0 : -20));
+            matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(depth ? 0 : -20));
             matrices.translate(0, 0, -0.25);
-            itemRenderer.renderItem(stack, ModelTransformationMode.GROUND, false, matrices, vertices, light, OverlayTexture.DEFAULT_UV, bakedModel);
+            itemRenderer.renderItem(stack, ModelTransformation.Mode.GROUND, false, matrices, vertices, light, OverlayTexture.DEFAULT_UV, bakedModel);
             matrices.pop();
             if (depth)
                 continue;

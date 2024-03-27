@@ -77,7 +77,7 @@ public class MeatlibItemSettings extends FabricItemSettings
 
     public MeatlibItemSettings group(ItemGroup group)
     {
-        this.group = group;
+        super.group(group);
         return this;
     }
 

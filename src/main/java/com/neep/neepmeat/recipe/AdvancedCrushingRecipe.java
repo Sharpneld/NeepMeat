@@ -54,10 +54,11 @@ public class AdvancedCrushingRecipe extends GrindingRecipe
         @Override
         public boolean takeInputs(IGrinderStorage storage, TransactionContext transaction)
         {
-            var it = storage.getInputStorage().nonEmptyIterator();
-            if (it.hasNext())
+            for (StorageView<ItemVariant> view : storage.getInputStorage())
             {
-                StorageView<ItemVariant> view = it.next();
+                if (view.isResourceBlank())
+                    continue;
+
                 view.extract(view.getResource(), 1, transaction);
                 return true;
             }

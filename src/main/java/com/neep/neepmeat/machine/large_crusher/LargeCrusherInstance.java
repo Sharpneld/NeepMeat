@@ -52,7 +52,7 @@ public class LargeCrusherInstance extends BlockEntityInstance<LargeCrusherBlockE
         {
             var unit = facing.getUnitVector();
             double magnitude = Math.abs(0.05 * sinTime1);
-            matrixStack.translate(unit.x * magnitude, 0, unit.z * magnitude);
+            matrixStack.translate(unit.getX() * magnitude, 0, unit.getZ() * magnitude);
         }
 
         BERenderUtils.rotateFacing(facing, matrixStack);

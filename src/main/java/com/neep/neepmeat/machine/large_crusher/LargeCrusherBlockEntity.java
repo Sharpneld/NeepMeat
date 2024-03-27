@@ -15,7 +15,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
 import net.minecraft.nbt.NbtCompound;
@@ -95,7 +95,7 @@ public class LargeCrusherBlockEntity extends MotorisedMachineBlockEntity impleme
             if (world.getTime() % 8 == 0)
             {
                 float damageAmount = power * 20;
-                DamageSource damageSource = world.getDamageSources().generic();
+                DamageSource damageSource = DamageSource.GENERIC;
                 List<ItemStack> resultStacks = new ArrayList<>();
 
                 entities.stream().filter(e -> e instanceof LivingEntity).map(LivingEntity.class::cast).forEach(entity ->
@@ -159,21 +159,26 @@ public class LargeCrusherBlockEntity extends MotorisedMachineBlockEntity impleme
     private void dropLoot(ServerWorld world, LivingEntity entity, DamageSource damageSource, List<ItemStack> resultStacks)
     {
         Identifier identifier = entity.getLootTable();
-        LootTable lootTable = world.getServer().getLootManager().getLootTable(identifier);
-        LootContextParameterSet.Builder builder = (new LootContextParameterSet.Builder(world))
-                .add(LootContextParameters.THIS_ENTITY, entity)
-                .add(LootContextParameters.ORIGIN, entity.getPos())
-                .add(LootContextParameters.DAMAGE_SOURCE, damageSource)
-                .addOptional(LootContextParameters.KILLER_ENTITY, damageSource.getAttacker())
-                .addOptional(LootContextParameters.DIRECT_KILLER_ENTITY, damageSource.getSource());
+        LootTable lootTable = world.getServer().getLootManager().getTable(identifier);
+        LootContext.Builder builder = (new LootContext.Builder(world))
+                .parameter(LootContextParameters.THIS_ENTITY, entity)
+                .parameter(LootContextParameters.ORIGIN, entity.getPos())
+                .parameter(LootContextParameters.DAMAGE_SOURCE, damageSource)
+                .optionalParameter(LootContextParameters.KILLER_ENTITY, damageSource.getAttacker())
+                .optionalParameter(LootContextParameters.DIRECT_KILLER_ENTITY, damageSource.getSource());
+
+//        Identifier identifier = entity.getLootTable();
+//        LootTable lootTable = entity.getWorld().getServer().getLootManager().getTable(identifier);
+//        LootContext.Builder builder = entity.getLootContextBuilder(causedByPlayer, source);
+//        lootTable.generateLoot(builder.build(LootContextTypes.ENTITY), this::dropStack);
 
 //        if (causedByPlayer && this.attackingPlayer != null)
 //        {
 //            builder = builder.add(LootContextParameters.LAST_DAMAGE_PLAYER, this.attackingPlayer).luck(this.attackingPlayer.getLuck());
 //        }
 
-        LootContextParameterSet lootContextParameterSet = builder.build(LootContextTypes.ENTITY);
-        lootTable.generateLoot(lootContextParameterSet, entity.getLootTableSeed(), resultStacks::add);
+        LootContext lootContextParameterSet = builder.build(LootContextTypes.ENTITY);
+        lootTable.generateLoot(lootContextParameterSet, resultStacks::add);
     }
 
     @Override

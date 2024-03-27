@@ -66,7 +66,7 @@ public abstract class Multiblock2ControllerBlock<T extends MultiBlockStructure<?
         {
             getAssembledPattern(state).placeBlocks(world, controllerPos, controllerPos);
             world.setBlockState(controllerPos, state.with(ASSEMBLED, true));
-            world.playSound(null, controllerPos, NMSounds.MULTIBLOCK_ASSEMBLE, SoundCategory.BLOCKS);
+            world.playSound(null, controllerPos, NMSounds.MULTIBLOCK_ASSEMBLE, SoundCategory.BLOCKS, 1, 1);
             return true;
         }
         return false;
@@ -76,7 +76,7 @@ public abstract class Multiblock2ControllerBlock<T extends MultiBlockStructure<?
     {
         MultiblockUnassembledPattern pattern = getUnassembledPattern(state);
         pattern.placeBlocks(world, controllerPos, controllerPos);
-        world.playSound(null, origin, NMSounds.MULTIBLOCK_DISASSEMBLE, SoundCategory.BLOCKS);
+        world.playSound(null, origin, NMSounds.MULTIBLOCK_DISASSEMBLE, SoundCategory.BLOCKS, 1, 1);
     }
 
     protected boolean checkSpaceForAssembly(World world, BlockPos origin, BlockState state)

@@ -4,22 +4,21 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.*;
 import net.minecraft.item.ItemStack;
 
 public interface RenderItemGuiEvent
 {
-    Event<RenderItemGuiEvent> EVENT = EventFactory.createArrayBacked(RenderItemGuiEvent.class,
-            (listeners) -> (context, textRenderer, stack, x, y) ->
-            {
-                for (RenderItemGuiEvent listener : listeners)
-                {
-                    listener.render(context, textRenderer, stack, x, y);
-                }
-            });
-
-    void render(DrawContext context, TextRenderer textRenderer, ItemStack stack, int x, int y);
+//    Event<RenderItemGuiEvent> EVENT = EventFactory.createArrayBacked(RenderItemGuiEvent.class,
+//            (listeners) -> (context, textRenderer, stack, x, y) ->
+//            {
+//                for (RenderItemGuiEvent listener : listeners)
+//                {
+//                    listener.render(context, textRenderer, stack, x, y);
+//                }
+//            });
+//
+//    void render(TextRenderer context, TextRenderer textRenderer, ItemStack stack, int x, int y);
 
     static void renderGuiQuad(BufferBuilder buffer, int x, int y, int width, int height, int red, int green, int blue, int alpha)
     {

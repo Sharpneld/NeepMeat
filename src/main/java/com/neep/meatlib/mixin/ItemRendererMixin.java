@@ -1,6 +1,5 @@
 package com.neep.meatlib.mixin;
 
-import com.neep.meatlib.client.api.event.RenderItemGuiEvent;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,7 @@
 package com.neep.neepmeat.init;
 
 import com.neep.meatlib.item.BaseCraftingItem;
+import com.neep.meatlib.item.MeatlibItemSettings;
 import com.neep.meatlib.item.TooltipSupplier;
 import com.neep.meatlib.item.EnlightenmentFoodItem;
 import com.neep.meatlib.registry.ItemRegistry;

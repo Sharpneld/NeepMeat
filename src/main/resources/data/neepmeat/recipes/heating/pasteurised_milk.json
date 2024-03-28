@@ -1,7 +1,7 @@
 {
   "type": "neepmeat:heating",
   "input": {
-    "tag": "c:milks",
+    "tag": "c:milk",
     "amount": 8100
   },
   "output": {

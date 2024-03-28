@@ -7,6 +7,7 @@ import com.neep.neepmeat.fluid.FluidFactory;
 import com.neep.neepmeat.fluid.MeatFluidFactory;
 import com.neep.neepmeat.fluid.ore_fat.OreFatFluidFactory;
 import com.neep.neepmeat.item.MeatCartonStorage;
+import io.github.tropheusj.milk.Milk;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -14,7 +15,6 @@ import net.fabricmc.fabric.api.transfer.v1.fluid.base.EmptyItemFluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.fluid.base.FullItemFluidStorage;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.FlowableFluid;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
@@ -91,10 +91,10 @@ public class NMFluids
     public static Block TISSUE_SLURRY;
     public static FluidFactory TISSUE_SLURRY_FACTORY = new FluidFactory(NeepMeat.NAMESPACE, "tissue_slurry", false, 5, 2);
 
-    public static FlowableFluid FLOWING_MILK;
-    public static FlowableFluid STILL_MILK;
-    public static Block MILK;
-    public static FluidFactory MILK_FACTORY = new FluidFactory(NeepMeat.NAMESPACE, "milk", false, 5, 1).withBucketItem(Items.MILK_BUCKET);
+//    public static FlowableFluid FLOWING_MILK;
+//    public static FlowableFluid STILL_MILK;
+//    public static Block MILK;
+//    public static FluidFactory MILK_FACTORY = new FluidFactory(NeepMeat.NAMESPACE, "milk", false, 5, 1).withBucketItem(Items.MILK_BUCKET);
 
     public static FlowableFluid FLOWING_P_MILK;
     public static FlowableFluid STILL_PASTEURISED_MILK;
@@ -177,9 +177,9 @@ public class NMFluids
         TISSUE_SLURRY_BUCKET = TISSUE_SLURRY_FACTORY.registerItem();
         TISSUE_SLURRY = TISSUE_SLURRY_FACTORY.registerBlock();
 
-        STILL_MILK = MILK_FACTORY.registerStill();
-        FLOWING_MILK = MILK_FACTORY.registerFlowing();
-        MILK = MILK_FACTORY.registerBlock();
+//        STILL_MILK = MILK_FACTORY.registerStill();
+//        FLOWING_MILK = MILK_FACTORY.registerFlowing();
+//        MILK = MILK_FACTORY.registerBlock();
 
         STILL_PASTEURISED_MILK = P_MILK_FACTORY.registerStill();
         FLOWING_P_MILK = P_MILK_FACTORY.registerFlowing();
@@ -218,9 +218,11 @@ public class NMFluids
         FluidStorage.combinedItemApiProvider(NMItems.CARTON).register(context ->
                 new MeatCartonStorage(context, NMItems.CARTON, NMItems.MEAT_CARTON, NMFluids.STILL_C_MEAT, FluidConstants.INGOT));
 
-        FluidStorage.combinedItemApiProvider(Items.MILK_BUCKET).register(context ->
-                new FullItemFluidStorage(context, Items.BUCKET, FluidVariant.of(NMFluids.STILL_MILK), FluidConstants.BUCKET));
-        FluidStorage.combinedItemApiProvider(Items.BUCKET).register(context ->
-                new EmptyItemFluidStorage(context, Items.MILK_BUCKET, NMFluids.STILL_MILK, FluidConstants.BUCKET));
+//        FluidStorage.combinedItemApiProvider(Items.MILK_BUCKET).register(context ->
+//                new FullItemFluidStorage(context, Items.BUCKET, FluidVariant.of(Milk.STILL_MILK), FluidConstants.BUCKET));
+//        FluidStorage.combinedItemApiProvider(Items.BUCKET).register(context ->
+//                new EmptyItemFluidStorage(context, Items.MILK_BUCKET, Milk.STILL_MILK, FluidConstants.BUCKET));
+        Milk.enableCauldron();
+        Milk.enableMilkFluid();
     }
 }

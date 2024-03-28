@@ -2,8 +2,6 @@ package com.neep.meatlib.item;
 
 import com.neep.meatlib.registry.ItemRegistry;
 import com.neep.neepmeat.NMItemGroups;
-import com.neep.neepmeat.init.NMItems;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.AliasedBlockItem;
@@ -21,7 +19,7 @@ public class BaseSeedsItem extends AliasedBlockItem implements MeatlibItem
 
     public BaseSeedsItem(Block block, String registryName, int maxCount, int loreLines)
     {
-        super(block, new FabricItemSettings().maxCount(maxCount).group(NMItemGroups.GENERAL));
+        super(block, new MeatlibItemSettings().maxCount(maxCount).group(NMItemGroups.GENERAL));
         this.registryName = registryName;
         this.lore = loreLines;
         ItemRegistry.queue(this);

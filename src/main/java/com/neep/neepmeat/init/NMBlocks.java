@@ -105,7 +105,7 @@ public class NMBlocks
 
 //    public static Block OBJ_TEST = BlockRegistry.queue(new BigBlock("obj_test", FabricBlockSettings.copyOf(Blocks.STONE)));
 
-    public static Block TEST_MULTIBLOCK = BlockRegistry.queue(new TestMultiblock("test_multiblock", FabricBlockSettings.of(Material.METAL)));
+//    public static Block TEST_MULTIBLOCK = BlockRegistry.queue(new TestMultiblock("test_multiblock", FabricBlockSettings.of(Material.METAL)));
 
     public static BasePaintedBlock SMOOTH_TILE = new BasePaintedBlock("smooth_tile", FabricBlockSettings.of(Material.STONE).hardness(5.0f));
 

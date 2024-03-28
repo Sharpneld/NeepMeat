@@ -49,8 +49,8 @@ public class NMClientPlugin implements REIClientPlugin, NMREIPlugin
     {
         registerRecipeFiller(registry, ItemManufactureRecipe.class, PLCRecipes.MANUFACTURE, ManufactureDisplay::new);
         registry.add(new TransformingToolDisplay(TransformingToolRecipe.getInstance()));
-        registerRecipeFiller(registry, GrindingRecipe.class, NMrecipeTypes.GRINDING, GrindingDisplay.filler(GRINDING));
-        registerRecipeFiller(registry, AdvancedCrushingRecipe.class, NMrecipeTypes.ADVANCED_CRUSHING, GrindingDisplay.filler(ADVANCED_CRUSHING));
+        registerRecipeFiller(registry, GrindingRecipe.class, NMrecipeTypes.GRINDING, r -> !r.destroy(), GrindingDisplay.filler(GRINDING));
+        registerRecipeFiller(registry, AdvancedCrushingRecipe.class, NMrecipeTypes.ADVANCED_CRUSHING, r -> !r.destroy(), GrindingDisplay.filler(ADVANCED_CRUSHING));
         registerRecipeFiller(registry, TrommelRecipe.class, NMrecipeTypes.TROMMEL, TrommelDisplay::new);
         registerRecipeFiller(registry, FluidHeatingRecipe.class, NMrecipeTypes.HEATING, HeatingDisplay::new);
         registerRecipeFiller(registry, AlloyKilnRecipe.class, NMrecipeTypes.ALLOY_SMELTING, AlloySmeltingDisplay::new);
@@ -134,7 +134,11 @@ public class NMClientPlugin implements REIClientPlugin, NMREIPlugin
     }
 
     public static <T extends MeatlibRecipe<?>, D extends Display> void registerRecipeFiller(DisplayRegistry registry, Class<T> typeClass, MeatRecipeType<? super T> recipeType, Function<? extends T, @Nullable D> filler) {
-        registerRecipeFiller(registry, typeClass, type -> Objects.equals(recipeType, type), t -> true, filler);
+        registerRecipeFiller(registry, typeClass, recipeType, t -> true, filler);
+    }
+
+    public static <T extends MeatlibRecipe<?>, D extends Display> void registerRecipeFiller(DisplayRegistry registry, Class<T> typeClass, MeatRecipeType<? super T> recipeType, Predicate<? extends T> predicate, Function<? extends T, @Nullable D> filler) {
+        registerRecipeFiller(registry, typeClass, type -> Objects.equals(recipeType, type), predicate, filler);
     }
 
     public static <T extends MeatlibRecipe<?>, D extends Display> void registerRecipeFiller(DisplayRegistry registry, Class<T> typeClass, Predicate<MeatRecipeType<? super T>> type, Predicate<? extends T> predicate, Function<? extends T, @Nullable D> filler)

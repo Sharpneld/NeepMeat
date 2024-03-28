@@ -40,7 +40,7 @@ public class GrindingDisplay extends BasicDisplay
             this.outputs.add(EntryIngredients.ofItems(List.of(recipe.getAuxOutput().resource()), (int) recipe.getAuxOutput().minAmount()));
             this.outputs.get(1).forEach(stack -> stack.tooltip(List.of(
 //                Text.of("Min: " + recipe.getItemOutput().minAmount() + ", Max: " + recipe.getItemOutput().maxAmount()),
-                    Text.of("Chance: " + recipe.getItemOutput().chance())
+                    Text.of("Chance: " + recipe.getAuxOutput().chance())
             )));
         }
     }
@@ -64,7 +64,7 @@ public class GrindingDisplay extends BasicDisplay
     @Override
     public CategoryIdentifier<?> getCategoryIdentifier()
     {
-        return NMREIPlugin.GRINDING;
+        return categoryIdentifier;
     }
 
 }

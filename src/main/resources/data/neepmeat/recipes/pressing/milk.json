@@ -4,7 +4,7 @@
     "id": "minecraft:cow"
   },
   "output": {
-    "resource": "neepmeat:milk",
+    "resource": "milk:still_milk",
     "amount": 9000
   }
 }

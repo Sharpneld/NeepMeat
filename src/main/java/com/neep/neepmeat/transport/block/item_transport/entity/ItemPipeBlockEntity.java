@@ -159,15 +159,20 @@ public class ItemPipeBlockEntity extends SyncableBlockEntity
         return cache;
     }
 
-    @Nullable
-    public Storage<ItemVariant> getStorage(Direction localDirection)
+    public BlockApiCache<Storage<ItemVariant>, Direction> getStorageCache(Direction localDirection)
     {
         int id = localDirection.ordinal();
         if (storageCaches.get(id) == null)
         {
             storageCaches.set(id, BlockApiCache.create(ItemStorage.SIDED, (ServerWorld) world, pos.offset(localDirection)));
         }
-        return storageCaches.get(id).find(localDirection.getOpposite());
+        return storageCaches.get(id);
+    }
+
+    @Nullable
+    public Storage<ItemVariant> getStorage(Direction localDirection)
+    {
+        return getStorageCache(localDirection).find(localDirection.getOpposite());
     }
 
     public int getCurrentOutput(Set<Direction> connections)

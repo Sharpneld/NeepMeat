@@ -216,15 +216,26 @@ public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvi
         if (beIn instanceof ItemPipeBlockEntity be)
         {
             int initialOut = be.getCurrentOutput(connections);
-//            for (int outId = be.nextOutput(connections); outId != initialOut; outId = be.nextOutput(connections))
             int outId;
             do
             {
                 outId = be.nextOutput(connections);
-
                 Direction outDir = Direction.values()[outId];
 
-                Storage<ItemVariant> storage = be.getStorage(outDir);
+                var cache = be.getStorageCache(outDir);
+                BlockState adjState = world.getBlockState(cache.getPos());
+                ItemPipe pipe = ItemPipe.find(adjState);
+                if (pipe != null && pipe.prioritise())
+                {
+                    boolean inserted = pipe.canItemEnter(item.toResourceAmount(), world, cache.getPos(), adjState, outDir.getOpposite());
+                    if (inserted)
+                        return outDir;
+
+                    excluded.add(outDir);
+                    continue;
+                }
+
+                Storage<ItemVariant> storage = cache.find(outDir);
                 if (storage != null)
                 {
                     long inserted = MeatlibStorageUtil.simulateInsert(storage, item.resource(), item.amount(), transaction);

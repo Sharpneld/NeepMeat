@@ -34,6 +34,14 @@ public interface ItemPipe
         return false;
     }
 
+    @Nullable
+    static ItemPipe find(BlockState state)
+    {
+        if (state.getBlock() instanceof ItemPipe pipe)
+            return pipe;
+        return null;
+    }
+
     default EnumSet<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
     {
         EnumSet<Direction> set = EnumSet.noneOf(Direction.class);
@@ -111,6 +119,11 @@ public interface ItemPipe
     }
 
     default boolean supportsRouting()
+    {
+        return false;
+    }
+
+    default boolean prioritise()
     {
         return false;
     }

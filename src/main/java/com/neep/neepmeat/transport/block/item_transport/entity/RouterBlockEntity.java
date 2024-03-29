@@ -5,6 +5,7 @@ import com.neep.neepmeat.init.NMBlockEntities;
 import com.neep.neepmeat.screen_handler.RouterScreenHandler;
 import com.neep.neepmeat.transport.item_network.ItemInPipe;
 import com.neep.neepmeat.transport.machine.item.RouterInventory;
+import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -62,7 +63,7 @@ public class RouterBlockEntity extends BlockEntity implements NamedScreenHandler
     }
 
     @Nullable
-    public Direction getOutputDirection(ItemInPipe item)
+    public Direction getOutputDirection(ItemVariant item)
     {
         for (int i = 0; i < 6; ++i)
         {
@@ -71,7 +72,7 @@ public class RouterBlockEntity extends BlockEntity implements NamedScreenHandler
                 int index = i * 3 + j;
                 ItemStack filterStack = inventory.getItems().get(index);
 //                System.out.println(filterStack);
-                if (filterStack.isOf(item.getItemStack().getItem()))
+                if (filterStack.isOf(item.getItem()))
                 {
                     return DIRECTIONS[i];
                 }

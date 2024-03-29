@@ -7,13 +7,15 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.ResourceAmount;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -32,9 +34,9 @@ public interface ItemPipe
         return false;
     }
 
-    default Set<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
+    default EnumSet<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
     {
-        Set<Direction> set = new HashSet<>();
+        EnumSet<Direction> set = EnumSet.noneOf(Direction.class);
         for (Direction direction : Direction.values())
         {
             if (state.get(AbstractPipeBlock.DIR_TO_CONNECTION.get(direction)).isConnected()
@@ -68,18 +70,18 @@ public interface ItemPipe
         return true;
     }
 
-    default Direction getOutputDirection(ItemInPipe item, BlockState state, World world, Direction in)
+    default Direction getOutputDirection(ItemInPipe item, BlockPos pos, BlockState state, World world, Direction in, @Nullable BlockEntity be, TransactionContext transaction)
     {
         Set<Direction> connections = ((ItemPipe) state.getBlock()).getConnections(state, direction -> direction != in);
 
         Direction out = item.getPreferredOutputDirection(state, in, this);
-        if (out != null && connections.contains(out)) return out;
+        if (out != null && connections.contains(out))
+            return out;
 
         var rand = world.getRandom();
         if (!connections.isEmpty())
         {
             out = Iterables.get(connections, rand.nextInt(connections.size()));
-//            out = connections.get(rand.nextInt(connections.size()));
         }
         else
         {

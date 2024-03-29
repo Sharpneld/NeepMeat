@@ -1,6 +1,8 @@
 package com.neep.neepmeat.transport.block.item_transport;
 
+import com.google.common.collect.Iterables;
 import com.neep.meatlib.item.ItemSettings;
+import com.neep.meatlib.storage.MeatlibStorageUtil;
 import com.neep.neepmeat.init.NMBlockEntities;
 import com.neep.neepmeat.transport.api.pipe.AbstractPipeBlock;
 import com.neep.neepmeat.transport.api.pipe.ItemPipe;
@@ -11,6 +13,8 @@ import com.neep.neepmeat.util.MiscUtil;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
+import net.fabricmc.fabric.api.transfer.v1.storage.StorageView;
+import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
@@ -31,6 +35,9 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.EnumSet;
+import java.util.Set;
 
 public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvider, ItemPipe
 {
@@ -192,6 +199,52 @@ public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvi
             return transferred;
         }
         return 0;
+    }
+
+    @Override
+    public Direction getOutputDirection(ItemInPipe item, BlockPos pos, BlockState state, World world, Direction in, @Nullable BlockEntity beIn, TransactionContext transaction)
+    {
+//        Set<Direction> connections = ((ItemPipe) state.getBlock()).getConnections(state, direction -> direction != in);
+        EnumSet<Direction> connections = ((ItemPipe) state.getBlock()).getConnections(state, d -> true);
+
+        Direction out = item.getPreferredOutputDirection(state, in, this);
+        if (out != null && connections.contains(out))
+            return out;
+
+        EnumSet<Direction> excluded = EnumSet.noneOf(Direction.class);
+
+        if (beIn instanceof ItemPipeBlockEntity be)
+        {
+            int initialOut = be.getCurrentOutput(connections);
+//            for (int outId = be.nextOutput(connections); outId != initialOut; outId = be.nextOutput(connections))
+            int outId;
+            do
+            {
+                outId = be.nextOutput(connections);
+
+                Direction outDir = Direction.values()[outId];
+
+                Storage<ItemVariant> storage = be.getStorage(outDir);
+                if (storage != null)
+                {
+                    long inserted = MeatlibStorageUtil.simulateInsert(storage, item.resource(), item.amount(), transaction);
+
+                    if (inserted >= item.amount())
+                        return outDir;
+
+                    excluded.add(outDir);
+                }
+            }
+            while (outId != initialOut);
+        }
+
+        connections.remove(in);
+        connections.removeAll(excluded);
+        if (!connections.isEmpty())
+            out = Iterables.get(connections, world.getRandom().nextInt(connections.size()));
+        else
+            out = in;
+        return out;
     }
 
     @Override

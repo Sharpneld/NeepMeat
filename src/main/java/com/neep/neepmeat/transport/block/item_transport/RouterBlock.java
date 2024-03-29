@@ -22,6 +22,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -78,9 +79,17 @@ public class RouterBlock extends BaseBlock implements BlockEntityProvider, ItemP
     }
 
     @Override
-    public Set<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
+    public boolean singleOutput()
     {
-        return Arrays.stream(Direction.values()).collect(Collectors.toSet());
+        return false;
+    }
+
+    @Override
+    public EnumSet<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
+    {
+        var set = EnumSet.allOf(Direction.class);
+        set.removeIf(Predicate.not(forbidden));
+        return set;
     }
 
     @Nullable

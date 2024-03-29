@@ -60,9 +60,9 @@ public class PipeDriverBlock extends BaseBlock implements BlockEntityProvider, I
     }
 
     @Override
-    public Set<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
+    public EnumSet<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
     {
-        return Set.of(Direction.values());
+        return EnumSet.allOf(Direction.class);
     }
 
     @Override

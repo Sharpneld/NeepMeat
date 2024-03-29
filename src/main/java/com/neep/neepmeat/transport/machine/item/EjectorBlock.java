@@ -15,6 +15,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.ActionResult;
@@ -26,6 +27,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -91,9 +93,16 @@ public class EjectorBlock extends BaseFacingBlock implements BlockEntityProvider
     }
 
     @Override
-    public Set<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
+    public EnumSet<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
     {
         Direction facing = state.get(FACING);
-        return Stream.of(facing, facing.getOpposite()).filter(forbidden).collect(Collectors.toSet());
+        if (forbidden.test(facing) && forbidden.test(facing.getOpposite()))
+            return EnumSet.noneOf(Direction.class);
+        else if (!forbidden.test(facing))
+            return EnumSet.of(facing.getOpposite());
+        else
+            return EnumSet.of(facing);
+
+//        return Stream.of(facing, facing.getOpposite()).filter(forbidden).collect(Collectors.toSet());
     }
 }

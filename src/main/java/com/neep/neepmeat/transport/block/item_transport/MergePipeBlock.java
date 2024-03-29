@@ -11,6 +11,7 @@ import com.neep.neepmeat.transport.item_network.ItemInPipe;
 import com.neep.neepmeat.util.MiscUtil;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.ResourceAmount;
+import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -32,10 +33,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class MergePipeBlock extends ItemPipeBlock
@@ -150,7 +148,7 @@ public class MergePipeBlock extends ItemPipeBlock
     }
 
     @Override
-    public Direction getOutputDirection(ItemInPipe item, BlockState state, World world, Direction in)
+    public Direction getOutputDirection(ItemInPipe item, BlockPos pos, BlockState state, World world, Direction in, @Nullable BlockEntity be, TransactionContext transaction)
     {
         return state.get(MergePipeBlock.FACING);
     }
@@ -163,9 +161,9 @@ public class MergePipeBlock extends ItemPipeBlock
     }
 
     @Override
-    public Set<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
+    public EnumSet<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
     {
-        Set<Direction> set = new HashSet<>();
+        EnumSet<Direction> set = EnumSet.noneOf(Direction.class);
         for (Direction direction : Direction.values())
         {
             if (state.get(AbstractPipeBlock.DIR_TO_CONNECTION.get(direction)).isConnected()

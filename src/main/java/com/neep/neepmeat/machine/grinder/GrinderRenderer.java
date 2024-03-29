@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-@Environment(value= EnvType.CLIENT)
+@Environment(EnvType.CLIENT)
 public class GrinderRenderer implements BlockEntityRenderer<GrinderBlockEntity>
 {
     private final Random random = new Random();

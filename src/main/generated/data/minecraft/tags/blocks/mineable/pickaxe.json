@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "neepmeat:test_multiblock_structure",
-    "neepmeat:test_multiblock",
     "neepmeat:smooth_tile_white",
     "neepmeat:smooth_tile_orange",
     "neepmeat:smooth_tile_magenta",

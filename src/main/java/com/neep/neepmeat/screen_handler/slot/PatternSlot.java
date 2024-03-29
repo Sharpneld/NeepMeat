@@ -21,6 +21,12 @@ public class PatternSlot extends Slot
 
     }
 
+    @Override
+    public int getMaxItemCount()
+    {
+        return 0;
+    }
+
     public ItemStack takeStackRange(int min, int max, PlayerEntity player)
     {
         return ItemStack.EMPTY;

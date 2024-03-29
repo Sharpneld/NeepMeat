@@ -225,13 +225,9 @@ public class AssemblerBlockEntity extends SyncableBlockEntity implements NamedSc
         {
             progress = 0;
 
-            if (removeOutputs(target))
-            {
-                syncAnimation();
-                return;
-            }
 
             Inventory inventory = storage.getInventory();
+            boolean moved = false;
             for (int i = 0; i < target.size() && i < PATTERN_SLOTS; ++i)
             {
                 ItemStack patternStack = inventory.getStack(i);
@@ -246,11 +242,21 @@ public class AssemblerBlockEntity extends SyncableBlockEntity implements NamedSc
                     ItemStack transferStack = storage.findIngredient(patternStack);
                     if (!transferStack.isEmpty())
                     {
-                        target.setStack(i, patternStack.copy());
+                        target.setStack(i, transferStack.copy());
                         target.markDirty();
                         syncAnimation();
+                        moved = true;
                         break;
                     }
+                }
+            }
+
+            if (!moved)
+            {
+                if (removeOutputs(target))
+                {
+                    syncAnimation();
+                    return;
                 }
             }
         }

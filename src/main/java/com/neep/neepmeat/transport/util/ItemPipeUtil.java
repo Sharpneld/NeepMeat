@@ -201,7 +201,7 @@ public class ItemPipeUtil
                 transferred = itemToPipe(new ItemInPipe(new ResourceAmount<>(variant, amount), world.getTime()), itemPipe, world, offset, facingState, facing, true, nested);
                 nested.commit();
             }
-            else if ((storage = ItemStorage.SIDED.find(world, offset, facing)) != null)
+            else if ((storage = ItemStorage.SIDED.find(world, offset, facing.getOpposite())) != null)
             {
                 transferred = storage.insert(variant, amount, nested);
                 nested.commit();

@@ -221,6 +221,8 @@ public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvi
             {
                 outId = be.nextOutput(connections);
                 Direction outDir = Direction.values()[outId];
+                if (outDir == in)
+                    continue;
 
                 var cache = be.getStorageCache(outDir);
                 BlockState adjState = world.getBlockState(cache.getPos());

@@ -31,8 +31,8 @@ public class AssemblerStorage implements NbtSerialisable
     };
 
     protected InventoryStorage inventoryStorage = InventoryStorage.of(inventory, null);
-    Storage<ItemVariant> inBuffer = new CombinedStorage<>(inventoryStorage.getSlots().subList(BUFFER_START, BUFFER_END));
-    Storage<ItemVariant> outBuffer = new CombinedStorage<>(inventoryStorage.getSlots().subList(BUFFER_END, INV_END));
+    protected Storage<ItemVariant> inBuffer = new CombinedStorage<>(inventoryStorage.getSlots().subList(BUFFER_START, BUFFER_END));
+    protected Storage<ItemVariant> outBuffer = new CombinedStorage<>(inventoryStorage.getSlots().subList(BUFFER_END, INV_END));
 
     protected SyncableBlockEntity parent;
     protected int outputSlots = 0; // Each bit represents a slot
@@ -55,8 +55,8 @@ public class AssemblerStorage implements NbtSerialisable
             ItemStack foundStack = inventory.getStack(i);
             if (foundStack.isItemEqualIgnoreDamage(pattern) && foundStack.getCount() >= count)
             {
-                foundStack.decrement(count);
-                return pattern.copy();
+                return foundStack.split(count);
+//                return pattern.copy();
             }
         }
         return ItemStack.EMPTY;
@@ -70,7 +70,8 @@ public class AssemblerStorage implements NbtSerialisable
 
     public Storage<ItemVariant> getStorage(Direction dir, boolean top)
     {
-        if (top) return null;
+        if (top)
+            return null;
 
         Direction facing = parent.getCachedState().get(AssemblerBlock.FACING);
         if (dir == facing)

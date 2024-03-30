@@ -239,13 +239,13 @@ public class AssemblerBlockEntity extends SyncableBlockEntity implements NamedSc
                         break;
                     }
 
+                    moved = true;
                     ItemStack transferStack = storage.findIngredient(patternStack);
                     if (!transferStack.isEmpty())
                     {
                         target.setStack(i, transferStack.copy());
                         target.markDirty();
                         syncAnimation();
-                        moved = true;
                         break;
                     }
                 }

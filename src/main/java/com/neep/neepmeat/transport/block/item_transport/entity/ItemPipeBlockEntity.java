@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
@@ -92,7 +93,7 @@ public class ItemPipeBlockEntity extends SyncableBlockEntity
             {
                 try (Transaction transaction = Transaction.openOuter())
                 {
-                    long transferred = ItemPipeUtil.pipeToAny(item, blockPos, item.out, world, transaction, false);
+                    long transferred = be.pipeToAny(item, blockPos, item.out, world, transaction);
                     if (transferred == item.amount() || item.getItemStack().isEmpty())
                     {
                         it.remove();
@@ -106,6 +107,36 @@ public class ItemPipeBlockEntity extends SyncableBlockEntity
             }
         }
         be.sync();
+    }
+
+    private long pipeToAny(ItemInPipe item, BlockPos pos, Direction out, World world, TransactionContext transaction)
+    {
+        BlockPos toPos = pos.offset(out);
+        BlockState toState = world.getBlockState(toPos);
+        Block toBlock = toState.getBlock();
+
+        long amountInserted = 0;
+        Storage<ItemVariant> storage;
+        if (toBlock instanceof ItemPipe pipe)
+        {
+            amountInserted = ItemPipeUtil.itemToPipe(item, pipe, world, toPos, toState, out, false, transaction);
+        }
+        else if (toState.isAir())
+        {
+            amountInserted = ItemPipeUtil.itemToWorld(item.getItemStack(), 0.2, item.speed, world, toPos, out, transaction);
+        }
+        else if ((storage = getStorage(out)) != null)
+        {
+            amountInserted = ItemPipeUtil.itemToStorage(item, storage, transaction);
+        }
+
+        // TODO: is this condition necessary?
+        if (amountInserted != item.amount())
+        {
+            item.decrement((int) amountInserted);
+        }
+
+        return amountInserted;
     }
 
     public long insert(ItemInPipe item, World world, BlockState state, BlockPos pos, Direction in, TransactionContext transaction)

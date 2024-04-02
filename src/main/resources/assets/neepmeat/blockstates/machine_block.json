@@ -1,7 +1,14 @@
 {
   "variants": {
-    "": {
-      "model": "neepmeat:block/machine_block"
-    }
+    "": [
+      {
+        "model": "neepmeat:block/machine_block",
+        "weight": 4
+      },
+      {
+        "model": "neepmeat:block/machine_block_1",
+        "weight": 1
+      }
+    ]
   }
 }

@@ -24,7 +24,6 @@ public class BaseBlock extends Block implements MeatlibBlock
         super(settings);
         this.blockItem = itemSettings.getFactory().create(this, registryName, itemSettings);
         this.registryName = registryName;
-        addTags();
     }
 
     public Item getBlockItem()

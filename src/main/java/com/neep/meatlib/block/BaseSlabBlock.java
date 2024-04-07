@@ -3,7 +3,9 @@ package com.neep.meatlib.block;
 import com.neep.meatlib.item.ItemSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SlabBlock;
+import net.minecraft.data.server.BlockLootTableGenerator;
 import net.minecraft.item.BlockItem;
+import net.minecraft.loot.LootTable;
 
 public class BaseSlabBlock extends SlabBlock implements MeatlibBlock
 {
@@ -21,5 +23,11 @@ public class BaseSlabBlock extends SlabBlock implements MeatlibBlock
     public String getRegistryName()
     {
         return registryName;
+    }
+
+    @Override
+    public LootTable.Builder genLoot(BlockLootTableGenerator generator)
+    {
+        return BlockLootTableGenerator.slabDrops(this);
     }
 }

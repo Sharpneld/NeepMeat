@@ -6,9 +6,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.util.Identifier;
-
-import java.util.Map;
+import net.minecraft.loot.LootTable;
 
 public class BlockLootTableProvider extends FabricBlockLootTableProvider
 {
@@ -24,9 +22,22 @@ public class BlockLootTableProvider extends FabricBlockLootTableProvider
         {
             if (entry instanceof MeatlibBlock meatBlock)
             {
-                ItemConvertible like = meatBlock.dropsLike();
-                if (meatBlock.autoGenDrop() && like != null)
-                    this.addDrop(entry, like);
+                if (meatBlock.autoGenDrop())
+                {
+                    LootTable.Builder builder = meatBlock.genLoot(this);
+                    if (builder != null)
+                    {
+                        addDrop(entry, builder);
+                    }
+                    else
+                    {
+                        ItemConvertible like = meatBlock.dropsLike();
+                        if (like != null)
+                        {
+                            this.addDrop(entry, like);
+                        }
+                    }
+                }
             }
         }
     }

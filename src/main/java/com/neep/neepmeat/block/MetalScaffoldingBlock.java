@@ -11,6 +11,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
@@ -27,21 +28,20 @@ import java.util.function.Consumer;
 
 public class MetalScaffoldingBlock extends BaseBlock implements MeatlibBlock, Waterloggable
 {
-    private final String registryName;
-
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     public static final BooleanProperty BOTTOM = Properties.BOTTOM;
     public final MeatlibBlock stairs;
     public final MeatlibBlock slab;
+    private final String registryName;
 
     public MetalScaffoldingBlock(String registryName, ItemSettings itemSettings, Settings settings)
     {
         super(registryName, itemSettings, settings.nonOpaque());
 
-        stairs = new BaseStairsBlock(this.getDefaultState(),registryName + "_stairs", itemSettings, settings);
+        stairs = new BaseStairsBlock(this.getDefaultState(), registryName + "_stairs", itemSettings, settings);
         BlockRegistry.queue(stairs);
 
-        slab = new BaseSlabBlock(this.getDefaultState(),registryName + "_slab", itemSettings, settings);
+        slab = new BaseSlabBlock(this.getDefaultState(), registryName + "_slab", itemSettings, settings);
         BlockRegistry.queue(slab);
 
         this.registryName = registryName;
@@ -79,11 +79,17 @@ public class MetalScaffoldingBlock extends BaseBlock implements MeatlibBlock, Wa
         {
             world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        if (!world.isClient())
-        {
-            world.createAndScheduleBlockTick(pos, this, 1);
-        }
+//        if (!world.isClient())
+//        {
+//            world.scheduleBlockTick(pos, this, 1);
+//        }
         return state;
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state)
+    {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     @Override

@@ -9,9 +9,9 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeItem;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.item.Item;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.DyeColor;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class SmoothTileBlock
     public static class PaintedBlock extends Block implements MeatlibBlock
     {
         protected final String registryName;
-        public final BlockItem blockItem;
+        public final net.minecraft.item.BlockItem blockItem;
         public final DyeColor col;
 
         public PaintedBlock(String registryName, DyeColor col, Settings settings)
@@ -68,9 +68,9 @@ public class SmoothTileBlock
             this.col = col;
         }
 
-        protected BlockItem makeItem()
+        protected net.minecraft.item.BlockItem makeItem()
         {
-            return new Item(this, registryName, ItemSettings.block());
+            return new BlockItem(this, registryName, ItemSettings.block());
         }
 
         @Override
@@ -96,9 +96,9 @@ public class SmoothTileBlock
         }
     }
 
-    private static class Item extends BaseBlockItem
+    private static class BlockItem extends BaseBlockItem
     {
-        public Item(Block block, String registryName, ItemSettings itemSettings)
+        public BlockItem(Block block, String registryName, ItemSettings itemSettings)
         {
             super(block, registryName, itemSettings);
         }

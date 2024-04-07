@@ -41,6 +41,5 @@
     "recipes": [
       "neepmeat:smooth_tile_magenta_dyeing"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -2,10 +2,8 @@ package com.neep.meatlib.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.tag.TagKey;
 import org.jetbrains.annotations.Nullable;
-
-import net.minecraft.item.Item;
-import net.minecraft.registry.tag.TagKey;
 
 import java.util.function.Consumer;
 

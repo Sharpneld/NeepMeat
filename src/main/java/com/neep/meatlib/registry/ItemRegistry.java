@@ -10,7 +10,8 @@ import java.util.*;
 
 public class ItemRegistry
 {
-    public static Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
+    public static final Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
+    public static final List<Item> REGISTERED_ITEMS = new ArrayList<>();
 
     public static Item queue(String namespace, MeatlibItem item)
     {

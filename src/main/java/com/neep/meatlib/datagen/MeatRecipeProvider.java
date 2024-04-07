@@ -1,10 +1,10 @@
 package com.neep.meatlib.datagen;
 
 import com.neep.meatlib.block.BaseBuildingBlock;
-import com.neep.meatlib.block.BasePaintedBlock;
+import com.neep.meatlib.block.SmoothTileBlock;
 import com.neep.meatlib.registry.BlockRegistry;
 import com.neep.neepmeat.block.MetalScaffoldingBlock;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.RecipeProvider;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
@@ -14,6 +14,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.tag.TagKey;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +69,7 @@ public class MeatRecipeProvider extends FabricRecipeProvider
 
     public static void offerEightDyeingRecipe(Consumer<RecipeJsonProvider> exporter, String suffix, ItemConvertible output, ItemConvertible dye, TagKey<Item> input)
     {
-        Identifier outputId = Registries.ITEM.getId(output.asItem());
+        Identifier outputId = Registry.ITEM.getId(output.asItem());
         Identifier id = new Identifier(outputId.getNamespace(), outputId.getPath() + suffix);
         createEightDyeingRecipe(output, Ingredient.ofItems(dye), Ingredient.fromTag(input))
                 .criterion("has_dye", RecipeProvider.conditionsFromTag(input))

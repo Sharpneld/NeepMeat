@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
   "key": {
     "d": {
       "item": "minecraft:green_dye"
@@ -17,6 +16,5 @@
   "result": {
     "count": 8,
     "item": "neepmeat:smooth_tile_green"
-  },
-  "show_notification": true
+  }
 }

@@ -2,18 +2,14 @@ package com.neep.meatlib.item;
 
 import com.neep.meatlib.registry.ItemRegistry;
 import com.neep.neepmeat.NMItemGroups;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
 
 import java.util.List;
-import java.util.function.Consumer;
 
 public class BaseBlockItem extends BlockItem implements MeatlibItem
 {
@@ -46,11 +42,5 @@ public class BaseBlockItem extends BlockItem implements MeatlibItem
     public String getRegistryName()
     {
         return name;
-    }
-
-    @Override
-    public void appendTags(Consumer<TagKey<Item>> consumer)
-    {
-        MeatlibItem.super.appendTags(consumer);
     }
 }

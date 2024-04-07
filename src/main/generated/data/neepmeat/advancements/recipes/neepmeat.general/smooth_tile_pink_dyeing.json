@@ -41,6 +41,5 @@
     "recipes": [
       "neepmeat:smooth_tile_pink_dyeing"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

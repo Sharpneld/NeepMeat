@@ -41,6 +41,5 @@
     "recipes": [
       "neepmeat:blue_rough_concrete_dyeing"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

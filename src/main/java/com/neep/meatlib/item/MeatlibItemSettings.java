@@ -7,13 +7,7 @@ import net.fabricmc.fabric.impl.item.FabricItemInternals;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.util.Rarity;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 // HAHAHHAHAHAHA I'M BRINGING BACK Settings::group! YOU CAN'T STOP ME!
 public class MeatlibItemSettings extends FabricItemSettings

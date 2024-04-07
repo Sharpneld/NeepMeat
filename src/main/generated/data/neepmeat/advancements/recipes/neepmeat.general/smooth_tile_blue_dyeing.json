@@ -41,6 +41,5 @@
     "recipes": [
       "neepmeat:smooth_tile_blue_dyeing"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

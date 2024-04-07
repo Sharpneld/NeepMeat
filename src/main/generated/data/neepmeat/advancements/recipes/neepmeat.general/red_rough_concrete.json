@@ -1,24 +1,22 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_red_concrete": {
+    "has_dye": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:red_concrete"
-            ]
+            "tag": "neepmeat:rough_concrete"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_sand": {
+    "has_red_dye": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:sand"
+              "minecraft:red_dye"
             ]
           }
         ]
@@ -34,8 +32,8 @@
   },
   "requirements": [
     [
-      "has_red_concrete",
-      "has_sand",
+      "has_dye",
+      "has_red_dye",
       "has_the_recipe"
     ]
   ],

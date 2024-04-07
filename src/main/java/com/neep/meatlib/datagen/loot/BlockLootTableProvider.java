@@ -20,13 +20,13 @@ public class BlockLootTableProvider extends FabricBlockLootTableProvider
     @Override
     protected void generateBlockLootTables()
     {
-        for (Map.Entry<Identifier, Block> entry : BlockRegistry.REGISTERED_BLOCKS.entrySet())
+        for (Block entry : BlockRegistry.REGISTERED_BLOCKS)
         {
-            if (entry.getValue() instanceof MeatlibBlock meatBlock)
+            if (entry instanceof MeatlibBlock meatBlock)
             {
                 ItemConvertible like = meatBlock.dropsLike();
                 if (meatBlock.autoGenDrop() && like != null)
-                    this.addDrop(entry.getValue(), like);
+                    this.addDrop(entry, like);
             }
         }
     }

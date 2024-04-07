@@ -25,7 +25,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "neepmeat:blue_rough_concrete"
+        "recipe": "neepmeat:blue_rough_concrete_dyeing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -39,7 +39,8 @@
   ],
   "rewards": {
     "recipes": [
-      "neepmeat:blue_rough_concrete"
+      "neepmeat:blue_rough_concrete_dyeing"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

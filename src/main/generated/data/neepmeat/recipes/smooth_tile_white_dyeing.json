@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "d": {
+      "item": "minecraft:white_dye"
+    },
+    "i": {
+      "tag": "neepmeat:smooth_tile"
+    }
+  },
+  "pattern": [
+    "iii",
+    "idi",
+    "iii"
+  ],
+  "result": {
+    "count": 8,
+    "item": "neepmeat:smooth_tile_white"
+  },
+  "show_notification": true
+}

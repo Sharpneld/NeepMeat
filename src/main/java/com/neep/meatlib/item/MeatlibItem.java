@@ -4,6 +4,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import org.jetbrains.annotations.Nullable;
 
+import net.minecraft.item.Item;
+import net.minecraft.registry.tag.TagKey;
+
+import java.util.function.Consumer;
+
 public interface MeatlibItem
 {
     // 1.19.2 backport insanity. Ignore.
@@ -19,5 +24,9 @@ public interface MeatlibItem
     {
         MeatItemGroups.queueItem(group, (Item) this);
         return (Item) this;
+    }
+
+    default void appendTags(Consumer<TagKey<Item>> consumer)
+    {
     }
 }

@@ -6,9 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ItemRegistry
 {
@@ -44,8 +42,12 @@ public class ItemRegistry
         for (Iterator<Map.Entry<Identifier, Item>> it = ITEMS.entrySet().iterator(); it.hasNext();)
         {
             Map.Entry<Identifier, Item> entry = it.next();
+
             // TODO: Remove the jank
             Registry.register(Registry.ITEM, entry.getKey(), entry.getValue());
+
+            REGISTERED_ITEMS.add(entry.getValue());
+
             it.remove();
         }
         ITEMS.clear();

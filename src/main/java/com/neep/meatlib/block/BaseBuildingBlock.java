@@ -7,19 +7,27 @@ import com.neep.meatlib.registry.BlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.RecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeProvider;
+import net.minecraft.item.Item;
+import net.minecraft.recipe.book.RecipeCategory;
 
 import java.util.function.Consumer;
 
 public class BaseBuildingBlock extends Block implements MeatlibBlock
 {
-    BaseBlockItem blockItem;
-    String registryName;
+    private final Item blockItem;
+    private final String registryName;
 
     public final MeatlibBlock slab;
     public final MeatlibBlock stairs;
     public MeatlibBlock wall = null;
 
     public BaseBuildingBlock(String blockName, boolean makeWall, Settings settings)
+    {
+        this(blockName, makeWall, ItemSettings.block(), settings);
+    }
+
+    public BaseBuildingBlock(String blockName, boolean makeWall, ItemSettings itemSettings, Settings settings)
     {
         super(settings);
 
@@ -36,7 +44,7 @@ public class BaseBuildingBlock extends Block implements MeatlibBlock
         }
 
         this.registryName = blockName;
-        this.blockItem = new BaseBlockItem(this, blockName, ItemSettings.block());
+        this.blockItem = itemSettings.create(this, blockName, ItemSettings.block());
         BlockRegistry.queue(this);
 
     }

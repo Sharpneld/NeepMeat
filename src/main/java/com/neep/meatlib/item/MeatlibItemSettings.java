@@ -7,13 +7,20 @@ import net.fabricmc.fabric.impl.item.FabricItemInternals;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.util.Rarity;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 // HAHAHHAHAHAHA I'M BRINGING BACK Settings::group! YOU CAN'T STOP ME!
 public class MeatlibItemSettings extends FabricItemSettings
 {
     public ItemGroup group;
     public boolean supportsGuideLookup = true; // For minimal extra boilerplate in item declarations, this is the default behaviour.
+//    public Set<TagKey<Item>> tags = new HashSet<>();
 
     public MeatlibItemSettings equipmentSlot(EquipmentSlotProvider equipmentSlotProvider) {
         FabricItemInternals.computeExtraData(this).equipmentSlot(equipmentSlotProvider);
@@ -72,6 +79,19 @@ public class MeatlibItemSettings extends FabricItemSettings
 //    @Override
 //    public MeatlibItemSettings requires(FeatureFlag... features) {
 //        super.requires(features);
+//        return this;
+//    }
+
+//    public MeatlibItemSettings tag(TagKey<Item> tag)
+//    {
+//        this.tags.add(tag);
+//        return this;
+//    }
+
+    // I would like to use varargs here, but it gives an ugly warning.
+//    public MeatlibItemSettings tag(List<TagKey<Item>> tags)
+//    {
+//        this.tags.addAll(tags);
 //        return this;
 //    }
 

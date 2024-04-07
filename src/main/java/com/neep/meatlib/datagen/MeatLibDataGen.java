@@ -12,5 +12,6 @@ public class MeatLibDataGen implements DataGeneratorEntrypoint
         fabricDataGenerator.addProvider(BlockLootTableProvider::new);
         fabricDataGenerator.addProvider(BlockTagProvider::new);
         fabricDataGenerator.addProvider(MeatRecipeProvider::new);
+        fabricDataGenerator.addProvider(ItemTagProvider::new);
     }
 }

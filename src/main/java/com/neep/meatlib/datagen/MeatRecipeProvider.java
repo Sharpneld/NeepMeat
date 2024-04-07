@@ -4,7 +4,7 @@ import com.neep.meatlib.block.BaseBuildingBlock;
 import com.neep.meatlib.block.BasePaintedBlock;
 import com.neep.meatlib.registry.BlockRegistry;
 import com.neep.neepmeat.block.MetalScaffoldingBlock;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.RecipeProvider;
 import net.minecraft.data.server.recipe.CraftingRecipeJsonBuilder;
@@ -29,15 +29,15 @@ public class MeatRecipeProvider extends FabricRecipeProvider
     @Override
     protected void generateRecipes(Consumer<RecipeJsonProvider> exporter)
     {
-        BlockRegistry.REGISTERED_BLOCKS.values().stream()
+        BlockRegistry.REGISTERED_BLOCKS.stream()
                 .filter(block -> block instanceof BaseBuildingBlock)
                 .forEach(block -> ((BaseBuildingBlock) block).generateRecipes(exporter));
 
-        BlockRegistry.REGISTERED_BLOCKS.values().stream()
-                .filter(block -> block instanceof BasePaintedBlock.PaintedBlock)
-                .forEach(block -> ((BasePaintedBlock.PaintedBlock) block).generateRecipe(exporter));
+        BlockRegistry.REGISTERED_BLOCKS.stream()
+                .filter(block -> block instanceof SmoothTileBlock.PaintedBlock)
+                .forEach(block -> ((SmoothTileBlock.PaintedBlock) block).generateRecipe(exporter));
 
-        BlockRegistry.REGISTERED_BLOCKS.values().stream()
+        BlockRegistry.REGISTERED_BLOCKS.stream()
                 .filter(block -> block instanceof MetalScaffoldingBlock)
                 .forEach(block -> ((MetalScaffoldingBlock) block).generateRecipe(exporter));
 
@@ -63,6 +63,16 @@ public class MeatRecipeProvider extends FabricRecipeProvider
                 .criterion("has_dye", RecipeProvider.conditionsFromTag(input))
                 .criterion(RecipeProvider.hasItem(dye), RecipeProvider.conditionsFromItem(dye))
                 .offerTo(exporter);
+    }
+
+    public static void offerEightDyeingRecipe(Consumer<RecipeJsonProvider> exporter, String suffix, ItemConvertible output, ItemConvertible dye, TagKey<Item> input)
+    {
+        Identifier outputId = Registries.ITEM.getId(output.asItem());
+        Identifier id = new Identifier(outputId.getNamespace(), outputId.getPath() + suffix);
+        createEightDyeingRecipe(output, Ingredient.ofItems(dye), Ingredient.fromTag(input))
+                .criterion("has_dye", RecipeProvider.conditionsFromTag(input))
+                .criterion(RecipeProvider.hasItem(dye), RecipeProvider.conditionsFromItem(dye))
+                .offerTo(exporter, id);
     }
 
     public static CraftingRecipeJsonBuilder createEightDyeingRecipe(ItemConvertible output, Ingredient dye, Ingredient input)

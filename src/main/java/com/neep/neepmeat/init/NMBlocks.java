@@ -9,7 +9,6 @@ import com.neep.neepmeat.api.NMSoundGroups;
 import com.neep.neepmeat.api.big_block.BigBlock;
 import com.neep.neepmeat.api.multiblock.MultiBlock;
 import com.neep.neepmeat.api.multiblock2.Multiblock2ControllerBlock;
-import com.neep.neepmeat.api.multiblock2.TestMultiblock;
 import com.neep.neepmeat.block.*;
 import com.neep.neepmeat.block.entity.CandleCronenCakeBlock;
 import com.neep.neepmeat.block.entity.CronenCakeBlock;
@@ -107,7 +106,7 @@ public class NMBlocks
 
 //    public static Block TEST_MULTIBLOCK = BlockRegistry.queue(new TestMultiblock("test_multiblock", FabricBlockSettings.of(Material.METAL)));
 
-    public static BasePaintedBlock SMOOTH_TILE = new BasePaintedBlock("smooth_tile", FabricBlockSettings.of(Material.STONE).hardness(5.0f));
+    public static BasePaintedBlock SMOOTH_TILE = new SmoothTileBlock("smooth_tile", FabricBlockSettings.of(Material.STONE).hardness(3.0f));
 
     public static Block MACHINE_BLOCK = BlockRegistry.queue(new BaseBlock("machine_block", FabricBlockSettings.copyOf(MACHINE_SETTINGS)));
 
@@ -116,11 +115,11 @@ public class NMBlocks
     public static BaseBuildingBlock POLISHED_METAL = new BaseBuildingBlock("polished_metal", true, FabricBlockSettings.of(Material.METAL).strength(3.0f).sounds(NMSoundGroups.METAL));
     public static Block BLUE_IRON_BLOCK = new BaseBuildingBlock("blue_polished_metal", true, FabricBlockSettings.of(Material.METAL).strength(3.0f).sounds(NMSoundGroups.METAL));
     public static Block RUSTY_METAL_BLOCK = new BaseBuildingBlock("rusty_metal", false, FabricBlockSettings.of(Material.METAL).strength(3.0f).sounds(NMSoundGroups.METAL));
-    public static Block WHITE_ROUGH_CONCRETE = new BaseBuildingBlock("white_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
-    public static Block GREY_ROUGH_CONCRETE = new BaseBuildingBlock("grey_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
-    public static Block YELLOW_ROUGH_CONCRETE = new BaseBuildingBlock("yellow_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
-    public static Block RED_ROUGH_CONCRETE = new BaseBuildingBlock("red_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
-    public static Block BLUE_ROUGH_CONCRETE = new BaseBuildingBlock("blue_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
+    public static Block WHITE_ROUGH_CONCRETE = new RoughConcreteBlock("white_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
+    public static Block GREY_ROUGH_CONCRETE = new RoughConcreteBlock("grey_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
+    public static Block YELLOW_ROUGH_CONCRETE = new RoughConcreteBlock("yellow_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
+    public static Block RED_ROUGH_CONCRETE = new RoughConcreteBlock("red_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
+    public static Block BLUE_ROUGH_CONCRETE = new RoughConcreteBlock("blue_rough_concrete", false, FabricBlockSettings.of(Material.STONE).strength(1.8f).sounds(BlockSoundGroup.STONE));
     public static Block YELLOW_TILES = new BaseBuildingBlock("yellow_tiles", false, FabricBlockSettings.of(Material.AGGREGATE).strength(1.8f).sounds(BlockSoundGroup.STONE));
     public static Block CAUTION_BLOCK = new BaseBuildingBlock("caution_block", false, FabricBlockSettings.of(Material.AGGREGATE).strength(1.8f).sounds(BlockSoundGroup.STONE));
     public static Block DIRTY_RED_TILES = new BaseBuildingBlock("dirty_red_tiles", false, FabricBlockSettings.of(Material.AGGREGATE).strength(1.8f).sounds(BlockSoundGroup.STONE));

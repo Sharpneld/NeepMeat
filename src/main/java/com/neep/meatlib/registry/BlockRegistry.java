@@ -19,13 +19,12 @@ import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class BlockRegistry
 {
-    public static final Map<Identifier, Block> BLOCKS = new LinkedHashMap<>();
-    public static final Map<Identifier, Block> REGISTERED_BLOCKS = new LinkedHashMap<>();
+    public static final Map<Identifier, Block> BLOCKS = new LinkedHashMap<>(); // Preserve order
+    public static final List<Block> REGISTERED_BLOCKS = new ArrayList<>();
 
     public static <T extends Block & MeatlibBlock> T queue(T block)
     {
@@ -80,7 +79,7 @@ public class BlockRegistry
         {
             Registry.register(Registry.BLOCK, entry.getKey(), entry.getValue());
 
-            REGISTERED_BLOCKS.put(entry.getKey(), entry.getValue());
+            REGISTERED_BLOCKS.add(entry.getValue());
         }
         BLOCKS.clear();
     }

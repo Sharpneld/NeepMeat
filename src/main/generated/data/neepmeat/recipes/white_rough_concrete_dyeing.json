@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "d": {
+      "item": "minecraft:white_dye"
+    },
+    "i": {
+      "tag": "neepmeat:rough_concrete"
+    }
+  },
+  "pattern": [
+    "iii",
+    "idi",
+    "iii"
+  ],
+  "result": {
+    "count": 8,
+    "item": "neepmeat:white_rough_concrete"
+  },
+  "show_notification": true
+}

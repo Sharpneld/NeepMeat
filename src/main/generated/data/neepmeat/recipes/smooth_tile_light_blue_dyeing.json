@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "d": {
+      "item": "minecraft:light_blue_dye"
+    },
+    "i": {
+      "tag": "neepmeat:smooth_tile"
+    }
+  },
+  "pattern": [
+    "iii",
+    "idi",
+    "iii"
+  ],
+  "result": {
+    "count": 8,
+    "item": "neepmeat:smooth_tile_light_blue"
+  },
+  "show_notification": true
+}

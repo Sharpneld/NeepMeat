@@ -62,7 +62,7 @@ public class HeaterBlockEntity extends SyncableBlockEntity implements BloodAccep
         if (heatable != null)
         {
             double runningRate = getPUPower();
-            if (this.getPUPower() > 0.039)
+            if (this.getPUPower() >= 0.04)
             {
                 heatable.setBurning();
                 heatable.setHeat((float) runningRate);

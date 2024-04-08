@@ -98,7 +98,7 @@ public class FluidRationerBlockEntity extends SyncableBlockEntity implements Ext
 
         if (cache == null) return;
 
-        if (state == State.IDLE)
+        if (state == State.IDLE && world.getTime() % 2 == 0)
         {
             try (Transaction transaction = Transaction.openOuter())
             {

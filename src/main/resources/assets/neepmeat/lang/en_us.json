@@ -298,7 +298,7 @@
   "block.neepmeat.casting_basin": "Pressing Basin",
   "block.neepmeat.hydraulic_press": "Hydraulic Press",
   "block.neepmeat.heater": "Heater",
-  "block.neepmeat.heater.lore_0": "Heats the furnace or furnace-like block it faces. Cooking speed is proportional to the power supplied. Can also oxidise copper that is exposed to Patina Treatment.",
+  "block.neepmeat.heater.lore_0": "Heats the furnace or furnace-like block it faces. Cooking speed increases by 1x base with every 60eJ/t supplied. Can also oxidise copper that is exposed to Patina Treatment.",
   "block.neepmeat.trommel": "Blasphemous Trommel",
   "block.neepmeat.integrator_egg": "Integrator Egg",
   "block.neepmeat.integrator_egg.lore_0": "It pulsates, inexplicably communicating a desire for blood.",

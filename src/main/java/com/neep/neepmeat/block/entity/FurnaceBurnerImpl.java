@@ -1,6 +1,7 @@
 package com.neep.neepmeat.block.entity;
 
 import com.neep.neepmeat.api.Burner;
+import com.neep.neepmeat.machine.HeatableFurnace;
 import com.neep.neepmeat.mixin.FurnaceAccessor;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
@@ -23,6 +24,14 @@ public class FurnaceBurnerImpl implements Burner
     public void tickPowerConsumption()
     {
         Burner.super.tickPowerConsumption();
+
+        // Prevent overunity
+        if (((HeatableFurnace) furnace).neepMeat$getHeat() > 0)
+        {
+            outputPower = 0;
+            return;
+        }
+
         if (furnace.getBurnTime() == 0)
         {
             ItemStack itemStack = furnace.getInventory().get(1);
@@ -44,7 +53,7 @@ public class FurnaceBurnerImpl implements Burner
             updateBlockstate();
         }
         furnace.setCookTime(0);
-        outputPower = furnace.getBurnTime() > 0 ? 40 : 0;
+        outputPower = furnace.getBurnTime() > 0 ? 80 : 0;
     }
 
     @Override

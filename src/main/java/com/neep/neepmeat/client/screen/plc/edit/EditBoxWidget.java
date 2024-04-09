@@ -257,7 +257,6 @@ public class EditBoxWidget extends ScrollableWidget
         float k = 0;
         float l = getY() + this.getPadding();
 
-        int var10002;
         int numLines = 0;
         for (Iterator<EditBox.LineEntry> it = this.editBox.getLines().iterator(); it.hasNext(); l += lineHeight())
         {
@@ -352,10 +351,11 @@ public class EditBoxWidget extends ScrollableWidget
                             o = this.textRenderer.getWidth(string.substring(substring3.beginIndex(), substring2.endIndex()));
                         }
 
-                        var10002 = m + selWidth;
+                        int selLeft = (int) (m + selWidth + lineNumberWidth);
+                        int selRight = (int) (m + o + lineNumberWidth);
                         matrices.push();
                         matrices.translate(0, l, 0);
-                        this.drawSelection(matrices, var10002, 0, (int) (m + o), 9);
+                        this.drawSelection(matrices, selLeft, 0, selRight, 9);
                         matrices.pop();
                     }
 

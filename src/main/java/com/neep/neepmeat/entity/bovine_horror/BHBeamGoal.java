@@ -40,7 +40,7 @@ public class BHBeamGoal extends AnimatedGoal<BovineHorrorEntity, BHBeamGoal>
         {
             mob.syncNearby("animation.horror.beam");
             mob.playSound(NMSounds.BH_CHARGE, 1, 0.9f);
-            mob.world.playSound(null, mob.getX(), mob.getY(), mob.getZ(), NMSounds.BH_PHASE2, SoundCategory.HOSTILE, 5, 1);
+            mob.getWorld().playSound(null, mob.getX(), mob.getY(), mob.getZ(), NMSounds.BH_PHASE2, SoundCategory.HOSTILE, 3, 1);
         }
 
         mob.setVisibility(1);

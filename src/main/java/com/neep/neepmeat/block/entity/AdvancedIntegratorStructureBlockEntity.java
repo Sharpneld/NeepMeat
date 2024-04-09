@@ -69,7 +69,7 @@ public class AdvancedIntegratorStructureBlockEntity extends BigBlockStructureEnt
     public void spawnBeam(World world, BlockPos pos)
     {
         Integrator.spawnBeam((ServerWorld) world, getControllerPos().up(4), pos);
-        world.playSound(null, pos, NMSounds.ADVANCED_INTEGRATOR_CHARGE, SoundCategory.BLOCKS, 20, 0.8f);
+        world.playSound(null, pos, NMSounds.ADVANCED_INTEGRATOR_CHARGE, SoundCategory.BLOCKS, 2, 0.8f);
     }
 
     @Override

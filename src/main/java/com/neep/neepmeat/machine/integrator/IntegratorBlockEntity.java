@@ -286,7 +286,7 @@ public class IntegratorBlockEntity extends SyncableBlockEntity implements Integr
     public void spawnBeam(World world, BlockPos pos)
     {
         Integrator.spawnBeam((ServerWorld) world, getPos().up(), pos);
-        world.playSound(null, pos, NMSounds.COSMIC_BEAM, SoundCategory.BLOCKS, 10, 0.8f);
+        world.playSound(null, pos, NMSounds.COSMIC_BEAM, SoundCategory.BLOCKS, 1, 0.8f);
     }
 
     @Override

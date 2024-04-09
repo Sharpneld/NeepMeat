@@ -237,7 +237,7 @@ public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvi
                     continue;
                 }
 
-                Storage<ItemVariant> storage = cache.find(outDir);
+                Storage<ItemVariant> storage = cache.find(outDir.getOpposite());
                 if (storage != null)
                 {
                     long inserted = MeatlibStorageUtil.simulateInsert(storage, item.resource(), item.amount(), transaction);

@@ -352,8 +352,7 @@
   "block.neepmeat.synthesiser": "Oviparous Synthesiser",
 
   "block.neepmeat.fluid_rationer": "Fluid Rationer",
-  "block.neepmeat.fluid_rationer.lore_0": "Ejects discrete fluid amounts from the facing",
-  "block.neepmeat.fluid_rationer.lore_1": "storage into a pipe network.",
+  "block.neepmeat.fluid_rationer.lore_0": "Ejects discrete fluid amounts from the facing storage into a pipe network.\nCan also extract buckets of fluid from full cauldrons.",
 
   "block.neepmeat.plc": "PLC",
   "block.neepmeat.surgery_platform": "Surgery Platform",

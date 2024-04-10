@@ -48,12 +48,6 @@ public class PowerFlowerGrowthBlock extends BaseBlock implements PowerFlower
     }
 
     @Override
-    public TagKey<Block> getPreferredTool()
-    {
-        return BlockTags.AXE_MINEABLE;
-    }
-
-    @Override
     public boolean autoGenDrop()
     {
         return false;

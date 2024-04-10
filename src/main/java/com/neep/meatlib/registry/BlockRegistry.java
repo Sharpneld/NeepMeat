@@ -4,22 +4,23 @@ import com.neep.meatlib.MeatLib;
 import com.neep.meatlib.block.BaseColumnBlock;
 import com.neep.meatlib.block.BaseLeavesBlock;
 import com.neep.meatlib.block.MeatlibBlock;
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.item.BaseBlockItem;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.item.TooltipSupplier;
 import net.fabricmc.fabric.api.mininglevel.v1.FabricMineableTags;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BlockRegistry
 {
@@ -86,19 +87,12 @@ public class BlockRegistry
 
     public static BaseColumnBlock createLogBlock(String name, TooltipSupplier tooltipSupplier)
     {
-        return new BaseColumnBlock(name, ItemSettings.block(), FabricBlockSettings.of(Material.WOOD).strength(2.0f).sounds(BlockSoundGroup.WOOD))
-        {
-            @Override
-            public TagKey<Block> getPreferredTool()
-            {
-                return BlockTags.AXE_MINEABLE;
-            }
-        };
+        return new BaseColumnBlock(name, ItemSettings.block(), MeatlibBlockSettings.create(Material.WOOD, BlockTags.AXE_MINEABLE).strength(2.0f).sounds(BlockSoundGroup.WOOD));
     }
 
     public static BaseLeavesBlock createLeavesBlock(String name, BlockSoundGroup soundGroup)
     {
-        return new BaseLeavesBlock(name, AbstractBlock.Settings.of(Material.LEAVES)
+        return new BaseLeavesBlock(name, MeatlibBlockSettings.create(Material.LEAVES, FabricMineableTags.SHEARS_MINEABLE)
                 .strength(0.2f)
                 .ticksRandomly()
                 .sounds(soundGroup)
@@ -106,12 +100,6 @@ public class BlockRegistry
                 .allowsSpawning((p1, p2, p3, p4) -> false)
                 .suffocates((p1, p2, p3) -> false).blockVision(((state, world, pos) -> false)))
         {
-            @Override
-            public TagKey<Block> getPreferredTool()
-            {
-                return FabricMineableTags.SHEARS_MINEABLE;
-            }
-
             @Override
             public ItemConvertible dropsLike()
             {

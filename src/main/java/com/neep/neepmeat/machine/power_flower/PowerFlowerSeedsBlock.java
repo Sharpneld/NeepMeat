@@ -36,12 +36,6 @@ public class PowerFlowerSeedsBlock extends BaseBlock
     }
 
     @Override
-    public TagKey<Block> getPreferredTool()
-    {
-        return BlockTags.HOE_MINEABLE;
-    }
-
-    @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context)
     {
         return false;

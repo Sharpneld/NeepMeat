@@ -1,6 +1,7 @@
 package com.neep.neepmeat.api.multiblock2;
 
 import com.neep.meatlib.block.MeatlibBlock;
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.item.BaseBlockItem;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.item.MeatlibItemSettings;
@@ -49,7 +50,7 @@ public class TestMultiblock extends Multiblock2ControllerBlock<TestMultiblock.TM
     @Override
     protected TMStructureBlock registerStructureBlock()
     {
-        return BlockRegistry.queue(new TMStructureBlock(this, FabricBlockSettings.copyOf(settings)), "test_multiblock_structure");
+        return BlockRegistry.queue(new TMStructureBlock(this, MeatlibBlockSettings.copyOf(settings)), "test_multiblock_structure");
     }
 
     @Override

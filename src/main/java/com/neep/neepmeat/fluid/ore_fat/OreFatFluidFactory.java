@@ -1,6 +1,6 @@
 package com.neep.neepmeat.fluid.ore_fat;
 
-import com.neep.neepmeat.NMItemGroups;
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.neepmeat.fluid.BaseFluid;
 import com.neep.neepmeat.item.BaseBucketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -64,7 +64,7 @@ public class OreFatFluidFactory
 
     public Block registerBlock()
     {
-        block = Registry.register(Registry.BLOCK, new Identifier(namespace, baseName), new FluidBlock(still, FabricBlockSettings.copy(Blocks.WATER)){});
+        block = Registry.register(Registry.BLOCK, new Identifier(namespace, baseName), new FluidBlock(still, MeatlibBlockSettings.copyOf(Blocks.WATER)){});
         return block;
     }
 

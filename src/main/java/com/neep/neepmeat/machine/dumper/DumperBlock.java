@@ -41,12 +41,6 @@ public class DumperBlock extends BaseBlock implements BlockEntityProvider
     }
 
     @Override
-    public TagKey<Block> getPreferredTool()
-    {
-        return BlockTags.AXE_MINEABLE;
-    }
-
-    @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
         return OUTLINE_SHAPE;

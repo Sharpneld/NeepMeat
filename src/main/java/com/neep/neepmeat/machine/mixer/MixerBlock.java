@@ -1,9 +1,9 @@
 package com.neep.neepmeat.machine.mixer;
 
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.block.multi.TallBlock;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.registry.BlockRegistry;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -23,7 +23,7 @@ public class MixerBlock extends TallBlock implements BlockEntityProvider
     @Override
     protected Structure createStructure()
     {
-        return BlockRegistry.queue(new Structure(getRegistryName() + "_structure", FabricBlockSettings.copyOf(settings)));
+        return BlockRegistry.queue(new Structure(getRegistryName() + "_structure", MeatlibBlockSettings.copyOf(settings)));
     }
 
     @Override

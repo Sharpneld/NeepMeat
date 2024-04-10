@@ -25,12 +25,6 @@ public class BloodBubbleLeavesBlock extends BaseLeavesBlock
     }
 
     @Override
-    public TagKey<Block> getPreferredTool()
-    {
-        return FabricMineableTags.SHEARS_MINEABLE;
-    }
-
-    @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
     {
         if (random.nextInt(12) != 1)

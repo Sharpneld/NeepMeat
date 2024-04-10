@@ -30,12 +30,6 @@ public class PowerFlowerControllerBlock extends BaseBlock implements BlockEntity
     }
 
     @Override
-    public TagKey<Block> getPreferredTool()
-    {
-        return BlockTags.AXE_MINEABLE;
-    }
-
-    @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context)
     {
         return false;

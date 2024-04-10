@@ -37,12 +37,6 @@ public class BufferBlock extends BaseBlock implements BlockEntityProvider
         this.setDefaultState(getDefaultState().with(POWERED, false));
     }
 
-    @Override
-    public TagKey<Block> getPreferredTool()
-    {
-        return BlockTags.AXE_MINEABLE;
-    }
-
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state)

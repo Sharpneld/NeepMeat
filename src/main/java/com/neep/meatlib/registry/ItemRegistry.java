@@ -2,9 +2,11 @@ package com.neep.meatlib.registry;
 
 import com.neep.meatlib.MeatLib;
 import com.neep.meatlib.item.MeatlibItem;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -12,6 +14,15 @@ public class ItemRegistry
 {
     public static final Map<Identifier, Item> ITEMS = new LinkedHashMap<>();
     public static final List<Item> REGISTERED_ITEMS = new ArrayList<>();
+
+    /**
+     * @return An item whose ID matches the block, hopefully the block's corresponding BlockItem.
+     */
+    @Nullable
+    public static Item getMatchingItem(Block block)
+    {
+        return Registry.ITEM.getOrEmpty(Registry.BLOCK.getId(block)).orElse(null);
+    }
 
     public static Item queue(String namespace, MeatlibItem item)
     {

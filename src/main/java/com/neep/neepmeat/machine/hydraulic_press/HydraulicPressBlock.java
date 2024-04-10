@@ -1,5 +1,6 @@
 package com.neep.neepmeat.machine.hydraulic_press;
 
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.block.multi.TallBlock;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.registry.BlockRegistry;
@@ -55,7 +56,7 @@ public class HydraulicPressBlock extends TallBlock implements BlockEntityProvide
     @Override
     protected Structure createStructure()
     {
-        return BlockRegistry.queue(new Structure(getRegistryName() + "_structure", FabricBlockSettings.copyOf(settings)));
+        return BlockRegistry.queue(new Structure(getRegistryName() + "_structure", MeatlibBlockSettings.copyOf(settings)));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.neep.neepmeat.machine.well_head;
 
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.block.multi.TallBlock;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.registry.BlockRegistry;
@@ -34,7 +35,7 @@ public class WellHeadBlock extends TallBlock implements BlockEntityProvider
     @Override
     protected Structure createStructure()
     {
-        return BlockRegistry.queue(new Structure(getRegistryName() + "_structure", FabricBlockSettings.copyOf(this.settings))
+        return BlockRegistry.queue(new Structure(getRegistryName() + "_structure", MeatlibBlockSettings.copyOf(this.settings))
         {
             @Override
             public BlockRenderType getRenderType(BlockState state)

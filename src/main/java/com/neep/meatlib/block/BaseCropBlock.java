@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
-public class BaseCropBlock extends CropBlock implements MeatlibBlock
+public class BaseCropBlock extends CropBlock implements MeatlibBlock, MeatlibBlockExtension
 {
     protected final String registryName;
     protected final Item seedsItem;
@@ -32,6 +32,7 @@ public class BaseCropBlock extends CropBlock implements MeatlibBlock
         this.seedsItem = new BaseSeedsItem(this, seedsName, itemMaxStack, lore);
         this.registryName = registryName;
     }
+
     public BaseCropBlock(String registryName, int itemMaxStack, int lore, Settings settings)
     {
         this(registryName, registryName + "_seeds", itemMaxStack, lore, settings);
@@ -71,5 +72,11 @@ public class BaseCropBlock extends CropBlock implements MeatlibBlock
     public String getRegistryName()
     {
         return registryName;
+    }
+
+    @Override
+    public void neepmeat$appendTags(TagConsumer<Block> consumer)
+    {
+        MeatlibBlockExtension.super.neepmeat$appendTags(consumer);
     }
 }

@@ -34,10 +34,10 @@ public interface MeatlibBlock extends ItemConvertible
         }
     }
 
-    default TagKey<Block> getPreferredTool()
-    {
-        return BlockTags.PICKAXE_MINEABLE;
-    }
+//    default TagKey<Block> getPreferredTool()
+//    {
+//        return BlockTags.PICKAXE_MINEABLE;
+//    }
 
     default boolean autoGenDrop()
     {

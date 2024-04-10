@@ -34,12 +34,6 @@ public class PowerFlowerFluidPortBlock extends BaseBlock implements BlockEntityP
     }
 
     @Override
-    public TagKey<Block> getPreferredTool()
-    {
-        return BlockTags.AXE_MINEABLE;
-    }
-
-    @Override
     public boolean canReplace(BlockState state, ItemPlacementContext context)
     {
         return false;

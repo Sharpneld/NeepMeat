@@ -2,6 +2,7 @@ package com.neep.neepmeat.machine.large_motor;
 
 import com.google.common.collect.ImmutableMap;
 import com.neep.meatlib.block.MeatlibBlock;
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.item.BaseBlockItem;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.registry.BlockRegistry;
@@ -69,7 +70,7 @@ public class LargeMotorBlock extends BigBlock<LargeMotorStructureBlock> implemen
     @Override
     protected LargeMotorStructureBlock registerStructureBlock()
     {
-        return BlockRegistry.queue(new LargeMotorStructureBlock(this, FabricBlockSettings.copyOf(this)), "large_motor_structure");
+        return BlockRegistry.queue(new LargeMotorStructureBlock(this, MeatlibBlockSettings.copyOf(this)), "large_motor_structure");
     }
 
     @Override

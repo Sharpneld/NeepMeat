@@ -1,5 +1,6 @@
 package com.neep.neepmeat.machine.pylon;
 
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.block.multi.TallBlock;
 import com.neep.meatlib.registry.BlockRegistry;
 import com.neep.neepmeat.init.NMBlockEntities;
@@ -37,7 +38,7 @@ public class PylonBlock extends TallBlock implements BlockEntityProvider, DataCa
     @Override
     protected Structure createStructure()
     {
-        return BlockRegistry.queue(new PylonStructure(getRegistryName() + "_structure", FabricBlockSettings.copyOf(this.settings)));
+        return BlockRegistry.queue(new PylonStructure(getRegistryName() + "_structure", MeatlibBlockSettings.copyOf(this.settings)));
     }
 
     @Nullable

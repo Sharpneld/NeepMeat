@@ -12,10 +12,4 @@ public class ContaminatedDirtBlock extends BaseBlock
     {
         super(registryName, itemSettings, settings);
     }
-
-    @Override
-    public TagKey<Block> getPreferredTool()
-    {
-        return BlockTags.SHOVEL_MINEABLE;
-    }
 }

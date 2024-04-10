@@ -1,5 +1,6 @@
 package com.neep.neepmeat.machine.synthesiser;
 
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.block.multi.TallBlock;
 import com.neep.meatlib.registry.BlockRegistry;
 import com.neep.neepmeat.init.NMBlockEntities;
@@ -86,7 +87,7 @@ public class SynthesiserBlock extends TallBlock implements BlockEntityProvider
     @Override
     protected Structure createStructure()
     {
-        return BlockRegistry.queue(new Structure(getRegistryName() + "_structure", FabricBlockSettings.copyOf(this.settings)));
+        return BlockRegistry.queue(new Structure(getRegistryName() + "_structure", MeatlibBlockSettings.copyOf(this.settings)));
     }
 
     @Nullable

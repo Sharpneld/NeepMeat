@@ -1,9 +1,9 @@
 package com.neep.neepmeat.fluid;
 
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.neepmeat.NMItemGroups;
 import com.neep.neepmeat.item.BaseBucketItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -78,7 +78,7 @@ public class FluidFactory
 
     public Block registerBlock()
     {
-        block = Registry.register(Registry.BLOCK, new Identifier(namespace, baseName), new FluidBlock(still, FabricBlockSettings.copy(Blocks.WATER)){});
+        block = Registry.register(Registry.BLOCK, new Identifier(namespace, baseName), new FluidBlock(still, MeatlibBlockSettings.copy(Blocks.WATER)){});
         return block;
     }
 

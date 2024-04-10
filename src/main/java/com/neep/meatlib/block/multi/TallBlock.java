@@ -2,6 +2,7 @@ package com.neep.meatlib.block.multi;
 
 import com.neep.meatlib.block.BaseBlock;
 import com.neep.meatlib.block.BaseDummyBlock;
+import com.neep.meatlib.block.MeatlibBlockExtension;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.neepmeat.machine.mixer.MixerBlockEntity;
 import net.minecraft.block.Block;
@@ -90,7 +91,7 @@ public abstract class TallBlock extends BaseBlock
         return 1;
     }
     
-    public class Structure extends BaseDummyBlock
+    public class Structure extends BaseDummyBlock implements MeatlibBlockExtension
     {
         public Structure(String registryName, Settings settings)
         {

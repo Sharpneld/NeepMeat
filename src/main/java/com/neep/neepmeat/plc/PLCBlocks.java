@@ -1,5 +1,6 @@
 package com.neep.neepmeat.plc;
 
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.item.TooltipSupplier;
 import com.neep.meatlib.registry.BlockRegistry;
@@ -15,7 +16,6 @@ import com.neep.neepmeat.plc.block.RedstoneInterface;
 import com.neep.neepmeat.plc.block.entity.ExecutorBlockEntity;
 import com.neep.neepmeat.plc.block.entity.PLCBlockEntity;
 import com.neep.neepmeat.plc.instruction.gui.InstructionAttributes;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
@@ -26,10 +26,10 @@ public class PLCBlocks
     public static BlockEntityType<RoboticArmBlockEntity> ROBOTIC_ARM_ENTITY;
     public static BlockEntityType<ExecutorBlockEntity> EXECUTOR_ENTITY;
 
-    public static final Block ROBOTIC_ARM = BlockRegistry.queue(new RoboticArmBlock("robotic_arm", ItemSettings.block().tooltip(TooltipSupplier.hidden(1)).requiresMotor().plcActuator(), FabricBlockSettings.of(Material.METAL)));;
-    public static final Block REDSTONE_INTERFACE = BlockRegistry.queue(new PLCRedstoneInterface("redstone_interface", FabricBlockSettings.of(Material.METAL)));
-    public static final Block EXECUTOR = BlockRegistry.queue(new ExecutorBlock("executor", ItemSettings.block().tooltip(TooltipSupplier.hidden(1)), FabricBlockSettings.of(Material.METAL).nonOpaque()));
-    public static final Block PLC = BlockRegistry.queue(new PLCBlock("plc", NMBlocks.block(), FabricBlockSettings.copyOf(NMBlocks.MACHINE_SETTINGS)));
+    public static final Block ROBOTIC_ARM = BlockRegistry.queue(new RoboticArmBlock("robotic_arm", ItemSettings.block().tooltip(TooltipSupplier.hidden(1)).requiresMotor().plcActuator(), MeatlibBlockSettings.create(Material.METAL).hardness(3)));;
+    public static final Block REDSTONE_INTERFACE = BlockRegistry.queue(new PLCRedstoneInterface("redstone_interface", MeatlibBlockSettings.create(Material.METAL).hardness(2)));
+    public static final Block EXECUTOR = BlockRegistry.queue(new ExecutorBlock("executor", ItemSettings.block().tooltip(TooltipSupplier.hidden(1)), MeatlibBlockSettings.create(Material.METAL).nonOpaque().hardness(2)));
+    public static final Block PLC = BlockRegistry.queue(new PLCBlock("plc", NMBlocks.block(), MeatlibBlockSettings.copyOf(NMBlocks.MACHINE_SETTINGS)));
     public static BlockEntityType<PLCBlockEntity> PLC_ENTITY;
 
     public static void init()

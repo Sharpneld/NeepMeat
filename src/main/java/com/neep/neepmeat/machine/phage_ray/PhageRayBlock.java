@@ -2,6 +2,7 @@ package com.neep.neepmeat.machine.phage_ray;
 
 import com.neep.meatlib.MeatLib;
 import com.neep.meatlib.block.MeatlibBlock;
+import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.item.BaseBlockItem;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.item.MeatlibItem;
@@ -55,7 +56,7 @@ public class PhageRayBlock extends BigBlock<PhageRayBlock.PhageRayStructureBlock
     @Override
     protected PhageRayStructureBlock registerStructureBlock()
     {
-        return BlockRegistry.queue(new PhageRayStructureBlock(this, FabricBlockSettings.copyOf(this)), "phage_ray_structure");
+        return BlockRegistry.queue(new PhageRayStructureBlock(this, MeatlibBlockSettings.copyOf(this)), "phage_ray_structure");
     }
 
     @Override

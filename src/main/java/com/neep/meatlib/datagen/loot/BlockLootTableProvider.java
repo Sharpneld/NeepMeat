@@ -25,6 +25,7 @@ public class BlockLootTableProvider extends FabricBlockLootTableProvider
             {
                 if (meatBlock.autoGenDrop())
                 {
+                    // True by default for MeatlibBlock
                     LootTable.Builder builder = meatBlock.genLoot(this);
                     if (builder != null)
                     {
@@ -43,7 +44,7 @@ public class BlockLootTableProvider extends FabricBlockLootTableProvider
             }
             else if (entry instanceof MeatlibBlockExtension extension)
             {
-                // Allow specifying drops using settings
+                // The default behaviour injected into Item delegates to MeatlibItemSettings if applicable.
                 ItemConvertible drop = extension.neepmeat$simpleDrop();
                 if (drop != null)
                 {

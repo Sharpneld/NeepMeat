@@ -5,7 +5,6 @@ import com.neep.neepmeat.init.NMBlockEntities;
 import com.neep.neepmeat.transport.FluidTransport;
 import com.neep.neepmeat.transport.api.pipe.AbstractPipeBlock;
 import com.neep.neepmeat.transport.api.pipe.FluidPipe;
-import com.neep.neepmeat.transport.block.fluid_transport.entity.FilterPipeBlockEntity;
 import com.neep.neepmeat.transport.fluid_network.PipeConnectionType;
 import com.neep.neepmeat.transport.fluid_network.node.BlockPipeVertex;
 import com.neep.neepmeat.transport.machine.fluid.FluidPipeBlockEntity;
@@ -23,19 +22,16 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.DyeItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ColorHelper;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
@@ -44,14 +40,23 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.util.Color;
 
 @SuppressWarnings("UnstableApiUsage")
-public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProvider, FluidPipe
+public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProvider, FluidPipe, Waterloggable
 {
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+
     public final PipeCol col;
 
     public FluidPipeBlock(String itemName, FluidPipe.PipeCol col, ItemSettings itemSettings, Settings settings)
     {
         super(itemName, itemSettings, settings);
         this.col = col;
+        setDefaultState(getDefaultState().with(WATERLOGGED, false));
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state)
+    {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     @Override
@@ -79,7 +84,9 @@ public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProv
     @Override
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify)
     {
-        Direction direction = Direction.fromVector(fromPos.subtract(pos));
+
+        BlockPos subtracted = fromPos.subtract(pos);
+        Direction direction = Direction.fromVector(subtracted.getX(), subtracted.getY(), subtracted.getZ());
         BlockState nextState = getStateForNeighborUpdate(state, direction, world.getBlockState(fromPos), world, pos, fromPos);
 
         // Block state change must be applied to the world in order for PipeNetwork::discoverNodes to pick it up
@@ -126,8 +133,20 @@ public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProv
     }
 
     @Override
+    public BlockState getPlacementState(ItemPlacementContext ctx)
+    {
+        return super.getPlacementState(ctx)
+                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
+    }
+
+    @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
     {
+        if (state.get(WATERLOGGED))
+        {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+
         PipeConnectionType type = state.get(DIR_TO_CONNECTION.get(direction));
         boolean forced = type == PipeConnectionType.FORCED;
         boolean otherConnected = false;
@@ -291,5 +310,12 @@ public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProv
 //            return mixed.getColor();
         }
         return 0xFFFFFF;
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
+    {
+        super.appendProperties(builder);
+        builder.add(WATERLOGGED);
     }
 }

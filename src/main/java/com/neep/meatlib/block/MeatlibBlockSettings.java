@@ -5,37 +5,42 @@ import net.fabricmc.fabric.mixin.object.builder.AbstractBlockAccessor;
 import net.fabricmc.fabric.mixin.object.builder.AbstractBlockSettingsAccessor;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.Material;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.TagKey;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class MeatlibBlockSettings extends FabricBlockSettings
 {
-    //    public final List<TagKey<Block>> tags = new ArrayList<>(Collections.singleton(BlockTags.PICKAXE_MINEABLE));
     public static final Set<TagKey<Block>> DEFAULT_TAGS = Set.of(BlockTags.PICKAXE_MINEABLE);
 
     private Set<TagKey<Block>> tags = DEFAULT_TAGS;
     @Nullable private Function<Block, ItemConvertible> simpleDrop;
 
-    protected MeatlibBlockSettings()
+    protected MeatlibBlockSettings(Material material, MapColor mapColor)
     {
-
+        super(material, mapColor);
     }
 
     // Copied from FabricBlockSettings
     protected MeatlibBlockSettings(AbstractBlock.Settings settings)
     {
-        this();
+//        this(((AbstractBlockSettingsAccessor) settings).getMaterial(), ((AbstractBlockSettingsAccessor) settings).getMapColorProvider());
+        // FabricBlockSettings doesn't have a constructor with map colour function
+        this(((AbstractBlockSettingsAccessor) settings).getMaterial(), ((AbstractBlockSettingsAccessor) settings).getMaterial().getColor());
+
         // Mostly Copied from vanilla's copy method
         AbstractBlockSettingsAccessor thisAccessor = (AbstractBlockSettingsAccessor) this;
         AbstractBlockSettingsAccessor otherAccessor = (AbstractBlockSettingsAccessor) settings;
 
         // Copied in vanilla: sorted by vanilla copy order
+        thisAccessor.setMaterial(otherAccessor.getMaterial());
         this.hardness(otherAccessor.getHardness());
         this.resistance(otherAccessor.getResistance());
         this.collidable(otherAccessor.getCollidable());
@@ -45,25 +50,22 @@ public class MeatlibBlockSettings extends FabricBlockSettings
         this.sounds(otherAccessor.getSoundGroup());
         this.slipperiness(otherAccessor.getSlipperiness());
         this.velocityMultiplier(otherAccessor.getVelocityMultiplier());
+        this.jumpVelocityMultiplier(otherAccessor.getJumpVelocityMultiplier());
         thisAccessor.setDynamicBounds(otherAccessor.getDynamicBounds());
         thisAccessor.setOpaque(otherAccessor.getOpaque());
         thisAccessor.setIsAir(otherAccessor.getIsAir());
-        thisAccessor.setBurnable(otherAccessor.getBurnable());
-        thisAccessor.setLiquid(otherAccessor.getLiquid());
-        thisAccessor.setForceNotSolid(otherAccessor.getForceNotSolid());
-        thisAccessor.setForceSolid(otherAccessor.getForceSolid());
-        this.pistonBehavior(otherAccessor.getPistonBehavior());
         thisAccessor.setToolRequired(otherAccessor.isToolRequired());
-        thisAccessor.setOffsetter(otherAccessor.getOffsetter());
-        thisAccessor.setBlockBreakParticles(otherAccessor.getBlockBreakParticles());
-        thisAccessor.setRequiredFeatures(otherAccessor.getRequiredFeatures());
+        this.allowsSpawning(otherAccessor.getAllowsSpawningPredicate());
+        this.solidBlock(otherAccessor.getSolidBlockPredicate());
+        this.suffocates(otherAccessor.getSuffocationPredicate());
+        this.blockVision(otherAccessor.getBlockVisionPredicate());
+        this.postProcess(otherAccessor.getPostProcessPredicate());
         this.emissiveLighting(otherAccessor.getEmissiveLightingPredicate());
-        this.instrument(otherAccessor.getInstrument());
-        thisAccessor.setReplaceable(otherAccessor.getReplaceable());
+        this.offsetType(otherAccessor.getOffsetType());
 
         // Not copied in vanilla: field definition order
         this.jumpVelocityMultiplier(otherAccessor.getJumpVelocityMultiplier());
-        this.drops(otherAccessor.getLootTableId());
+//        this.drops(otherAccessor.getLootTableId());
         this.allowsSpawning(otherAccessor.getAllowsSpawningPredicate());
         this.solidBlock(otherAccessor.getSolidBlockPredicate());
         this.suffocates(otherAccessor.getSuffocationPredicate());
@@ -76,14 +78,14 @@ public class MeatlibBlockSettings extends FabricBlockSettings
         }
     }
 
-    public static MeatlibBlockSettings create()
+    public static MeatlibBlockSettings create(Material material)
     {
-        return new MeatlibBlockSettings();
+        return new MeatlibBlockSettings(material, material.getColor());
     }
 
-    public static MeatlibBlockSettings create(TagKey<Block> tagKey)
+    public static MeatlibBlockSettings create(Material material, TagKey<Block> tagKey)
     {
-        var settings = new MeatlibBlockSettings();
+        var settings = new MeatlibBlockSettings(material, material.getColor());
         settings.tags = new HashSet<>();
         settings.tags.add(tagKey);
         return settings;

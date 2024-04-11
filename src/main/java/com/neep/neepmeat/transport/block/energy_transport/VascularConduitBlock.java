@@ -12,11 +12,17 @@ import com.neep.neepmeat.transport.fluid_network.PipeConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -26,13 +32,20 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-import java.sql.SQLSyntaxErrorException;
-
 public class VascularConduitBlock extends AbstractPipeBlock implements BlockEntityProvider, VascularConduit
 {
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
+
     public VascularConduitBlock(String itemName, ItemSettings itemSettings, Settings settings)
     {
         super(itemName, itemSettings, settings);
+        setDefaultState(getDefaultState().with(WATERLOGGED, false));
+    }
+
+    @Override
+    public FluidState getFluidState(BlockState state)
+    {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     public static boolean matches(ItemStack stackInHand)
@@ -56,6 +69,11 @@ public class VascularConduitBlock extends AbstractPipeBlock implements BlockEnti
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
     {
+        if (state.get(WATERLOGGED))
+        {
+            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+
         PipeConnectionType type = state.get(DIR_TO_CONNECTION.get(direction));
         boolean forced = type == PipeConnectionType.FORCED;
         boolean otherConnected = false;
@@ -91,7 +109,9 @@ public class VascularConduitBlock extends AbstractPipeBlock implements BlockEnti
     {
         super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
 
-        Direction dir = Direction.fromVector(sourcePos.subtract(pos));
+
+        BlockPos diff = sourcePos.subtract(pos);
+        Direction dir = Direction.fromVector(diff.getX(), diff.getY(), diff.getZ());
 
         if (isConnectedIn(world, pos, state, dir)
                 && VascularConduit.find(world, sourcePos, world.getBlockState(sourcePos)) == null
@@ -169,5 +189,12 @@ public class VascularConduitBlock extends AbstractPipeBlock implements BlockEnti
     public VascularConduitEntity getEntity(World world, BlockPos pos, BlockState state)
     {
         return VascularConduitEntity.find(world, pos);
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
+    {
+        super.appendProperties(builder);
+        builder.add(WATERLOGGED);
     }
 }

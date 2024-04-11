@@ -21,12 +21,19 @@ blocks = [
     'duat_stone',
     'duat_cobblestone',
     'bloody_bricks',
-    'bloody_tiles'
+    'bloody_tiles',
+    'asbestos',
+    'asbestos_shingle'
 ]
 
 wood_blocks = [
     # 'blood_bubble_planks',
 ]
+
+# bl = rm.block('asbestos')
+# bl.with_blockstate()
+# bl.with_block_model()
+# bl.with_item_model()
 
 for name in blocks:
     bl = rm.block(name)

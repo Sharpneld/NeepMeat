@@ -132,6 +132,18 @@
   "block.neepmeat.meat_steel_block_stairs": "Meat Steel Stairs",
   "block.neepmeat.meat_steel_block_wall": "Meat Steel Stairs",
 
+  "block.neepmeat.asbestos": "Asbestos",
+  "block.neepmeat.asbestos_slab": "Asbestos Slab",
+  "block.neepmeat.asbestos_stairs": "Asbestos Stairs",
+
+  "block.neepmeat.corrugated_asbestos": "Corrugated Asbestos",
+  "block.neepmeat.corrugated_asbestos_slab": "Corrugated Asbestos Slab",
+  "block.neepmeat.corrugated_asbestos_stairs": "Corrugated Asbestos Stairs",
+
+  "block.neepmeat.asbestos_shingle": "Asbestos Shingle",
+  "block.neepmeat.asbestos_shingle_slab": "Asbestos Shingle Slab",
+  "block.neepmeat.asbestos_shingle_stairs": "Asbestos Shingle Stairs",
+
   "block.neepmeat.smooth_tile_black": "Black Smooth Tile",
   "block.neepmeat.smooth_tile_red": "Red Smooth Tile",
   "block.neepmeat.smooth_tile_green": "Green Smooth Tile",

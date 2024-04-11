@@ -1,0 +1,14 @@
+{
+  "__comment__": "This file was automatically created by mcresources",
+  "variants": {
+    "type=bottom": {
+      "model": "neepmeat:block/asbestos_shingle_slab"
+    },
+    "type=top": {
+      "model": "neepmeat:block/asbestos_shingle_slab_top"
+    },
+    "type=double": {
+      "model": "neepmeat:block/asbestos_shingle"
+    }
+  }
+}

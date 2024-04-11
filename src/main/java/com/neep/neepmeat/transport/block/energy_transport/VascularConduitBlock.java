@@ -20,6 +20,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -34,18 +35,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class VascularConduitBlock extends AbstractPipeBlock implements BlockEntityProvider, VascularConduit
 {
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-
     public VascularConduitBlock(String itemName, ItemSettings itemSettings, Settings settings)
     {
         super(itemName, itemSettings, settings);
-        setDefaultState(getDefaultState().with(WATERLOGGED, false));
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state)
-    {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     public static boolean matches(ItemStack stackInHand)
@@ -109,7 +101,6 @@ public class VascularConduitBlock extends AbstractPipeBlock implements BlockEnti
     {
         super.neighborUpdate(state, world, pos, sourceBlock, sourcePos, notify);
 
-
         BlockPos diff = sourcePos.subtract(pos);
         Direction dir = Direction.fromVector(diff.getX(), diff.getY(), diff.getZ());
 
@@ -167,7 +158,7 @@ public class VascularConduitBlock extends AbstractPipeBlock implements BlockEnti
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
 //        return super.onUse(state, world, pos, player, hand, hit);
-        if (player.getStackInHand(hand).isEmpty())
+        if (player.getStackInHand(hand).isOf(Items.STICK))
         {
             if (!world.isClient() && world.getBlockEntity(pos) instanceof VascularConduitBlockEntity be)
             {
@@ -189,12 +180,5 @@ public class VascularConduitBlock extends AbstractPipeBlock implements BlockEnti
     public VascularConduitEntity getEntity(World world, BlockPos pos, BlockState state)
     {
         return VascularConduitEntity.find(world, pos);
-    }
-
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
-    {
-        super.appendProperties(builder);
-        builder.add(WATERLOGGED);
     }
 }

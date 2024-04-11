@@ -23,14 +23,9 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -43,23 +38,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 
-public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvider, ItemPipe, Waterloggable
+public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvider, ItemPipe
 {
-    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
-
     public ItemPipeBlock(String itemName, ItemSettings itemSettings, Settings settings)
     {
         super(itemName, itemSettings, settings);
-        setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }
 
     @Override
-    public FluidState getFluidState(BlockState state)
-    {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
-    }
-
-    @Override
+    @SuppressWarnings("deprecation")
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved)
     {
         if (!state.isOf(newState.getBlock()))
@@ -76,14 +63,9 @@ public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvi
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify)
     {
-
-        if (!(world.getBlockState(fromPos).getBlock() instanceof ItemPipeBlock))
-        {
-//            createStorageNodes(world, pos, state2);
-        }
-
         if (world instanceof ServerWorld serverWorld)
         {
             onAdded(pos, state, serverWorld);
@@ -100,7 +82,6 @@ public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvi
     {
         BlockState updatedState = enforceApiConnections(world, pos, state);
         world.setBlockState(pos, updatedState,  Block.NOTIFY_ALL);
-//        createStorageNodes(world, pos, updatedState);
 
         if (world instanceof ServerWorld serverWorld)
             onAdded(pos, state, serverWorld);
@@ -139,13 +120,6 @@ public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvi
                 : canConnect ? PipeConnectionType.SIDE : PipeConnectionType.NONE;
 
         return state.with(DIR_TO_CONNECTION.get(direction), finalConnection);
-    }
-
-    @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx)
-    {
-        return super.getPlacementState(ctx)
-                .with(WATERLOGGED, ctx.getWorld().getFluidState(ctx.getBlockPos()).getFluid() == Fluids.WATER);
     }
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
@@ -214,19 +188,11 @@ public class ItemPipeBlock extends AbstractPipeBlock implements BlockEntityProvi
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
-    {
-        super.appendProperties(builder);
-        builder.add(WATERLOGGED);
-    }
-
-    @Override
     public long insert(World world, BlockPos pos, BlockState state, Direction direction, ItemInPipe item, TransactionContext transaction)
     {
         if (world.getBlockEntity(pos) instanceof ItemPipeBlockEntity be)
         {
-            long transferred = be.insert(item, world, state, pos, direction, transaction);
-            return transferred;
+            return be.insert(item, world, state, pos, direction, transaction);
         }
         return 0;
     }

@@ -8,15 +8,16 @@ import com.neep.neepmeat.transport.fluid_network.PipeConnectionType;
 import com.neep.neepmeat.transport.fluid_network.PipeProperties;
 import com.neep.neepmeat.util.NMMaths;
 import com.neep.neepmeat.util.NMVec2f;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -31,7 +32,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Map;
 
-public abstract class AbstractPipeBlock extends BaseBlock
+public abstract class AbstractPipeBlock extends BaseBlock implements Waterloggable
 {
     public static final EnumProperty<PipeConnectionType> NORTH_CONNECTION = EnumProperty.of("north", PipeConnectionType.class);
     public static final EnumProperty<PipeConnectionType> EAST_CONNECTION = PipeProperties.EAST_CONNECTION;
@@ -39,6 +40,8 @@ public abstract class AbstractPipeBlock extends BaseBlock
     public static final EnumProperty<PipeConnectionType> WEST_CONNECTION = PipeProperties.WEST_CONNECTION;
     public static final EnumProperty<PipeConnectionType> UP_CONNECTION = PipeProperties.UP_CONNECTION;
     public static final EnumProperty<PipeConnectionType> DOWN_CONNECTION = PipeProperties.DOWN_CONNECTION;
+
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     private final Map<BlockState, VoxelShape> shapes = Maps.newHashMap();
 
@@ -69,7 +72,9 @@ public abstract class AbstractPipeBlock extends BaseBlock
                 .with(SOUTH_CONNECTION, PipeConnectionType.NONE)
                 .with(WEST_CONNECTION, PipeConnectionType.NONE)
                 .with(UP_CONNECTION, PipeConnectionType.NONE)
-                .with(DOWN_CONNECTION, PipeConnectionType.NONE));
+                .with(DOWN_CONNECTION, PipeConnectionType.NONE)
+                .with(WATERLOGGED, false)
+        );
 
         for (BlockState state : this.getStateManager().getStates())
         {
@@ -96,18 +101,21 @@ public abstract class AbstractPipeBlock extends BaseBlock
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public BlockRenderType getRenderType(BlockState state)
     {
         return BlockRenderType.MODEL;
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getCameraCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
         return shapes.get(state);
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext context)
     {
 //        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.0f, 1f);
@@ -118,20 +126,20 @@ public abstract class AbstractPipeBlock extends BaseBlock
     public BlockState getPlacementState(ItemPlacementContext ctx)
     {
         World world = ctx.getWorld();
-        BlockState state = this.getDefaultState();
         BlockPos pos = ctx.getBlockPos();
 
-        boolean bl = isNotConnected(state);
-        state = this.getConnectedState(world, this.getDefaultState(), pos);
-        if (bl && isNotConnected(state))
-        {
-            return state;
-        }
-
-        return state;
+        return this.getConnectedState(world, this.getDefaultState(), pos);
     }
 
     @Override
+    @SuppressWarnings("deprecation")
+    public FluidState getFluidState(BlockState state)
+    {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
     {
         boolean connection = canConnectTo(neighborState, direction.getOpposite(), (World) world, neighborPos);
@@ -147,29 +155,6 @@ public abstract class AbstractPipeBlock extends BaseBlock
 
     public abstract boolean canConnectTo(BlockState toState, Direction toFace, World world, BlockPos toPos);
 
-    protected static boolean isNotConnected(BlockState state)
-    {
-        return
-                state.get(NORTH_CONNECTION) != PipeConnectionType.SIDE
-                && state.get(SOUTH_CONNECTION) != PipeConnectionType.SIDE
-                && state.get(EAST_CONNECTION) != PipeConnectionType.SIDE
-                && state.get(WEST_CONNECTION) != PipeConnectionType.SIDE
-                && state.get(UP_CONNECTION) != PipeConnectionType.SIDE
-                && state.get(DOWN_CONNECTION) != PipeConnectionType.SIDE
-                ;
-    }
-
-    protected static boolean isFullyConnected(BlockState state)
-    {
-        return state.get(NORTH_CONNECTION) == PipeConnectionType.SIDE
-                && state.get(SOUTH_CONNECTION) == PipeConnectionType.SIDE
-                && state.get(EAST_CONNECTION) == PipeConnectionType.SIDE
-                && state.get(WEST_CONNECTION) == PipeConnectionType.SIDE
-                && state.get(UP_CONNECTION) == PipeConnectionType.SIDE
-                && state.get(DOWN_CONNECTION) == PipeConnectionType.SIDE
-                ;
-    }
-
     protected BlockState getConnectedState(BlockView world, BlockState state, BlockPos pos)
     {
         for (Direction direction : Direction.values())
@@ -181,10 +166,11 @@ public abstract class AbstractPipeBlock extends BaseBlock
             BlockState adjState = world.getBlockState(adjPos);
             state = state.with(DIR_TO_CONNECTION.get(direction), canConnectTo(adjState, direction.getOpposite(), (World) world, adjPos) ? PipeConnectionType.SIDE : PipeConnectionType.NONE);
         }
-        return state;
+        return state.with(WATERLOGGED, world.getFluidState(pos).getFluid() == Fluids.WATER);
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit)
     {
         if (hand == Hand.OFF_HAND || !player.getStackInHand(hand).isEmpty())
@@ -242,7 +228,15 @@ public abstract class AbstractPipeBlock extends BaseBlock
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {
-        builder.add(NORTH_CONNECTION, EAST_CONNECTION, SOUTH_CONNECTION, WEST_CONNECTION, UP_CONNECTION, DOWN_CONNECTION);
+        builder.add(
+                NORTH_CONNECTION,
+                EAST_CONNECTION,
+                SOUTH_CONNECTION,
+                WEST_CONNECTION,
+                UP_CONNECTION,
+                DOWN_CONNECTION,
+                WATERLOGGED
+        );
     }
 
     public void onConnectionUpdate(World world, BlockState state, BlockState newState, BlockPos pos, PlayerEntity entity)
@@ -251,12 +245,7 @@ public abstract class AbstractPipeBlock extends BaseBlock
     }
 
     @Override
-    public boolean canReplace(BlockState state, ItemPlacementContext context)
-    {
-        return super.canReplace(state, context);
-    }
-
-    @Override
+    @SuppressWarnings("deprecation")
     public boolean canBucketPlace(BlockState state, Fluid fluid)
     {
         return false;

@@ -178,7 +178,7 @@ public class NMBlocks
     public static Block RUSTY_GRATE = BlockRegistry.queue(new BaseBlock("rusty_vent", MeatlibBlockSettings.copyOf(RUSTY_METAL_BLOCK)));
 
     // Decorations
-    public static Block DIRTY_SINK = BlockRegistry.queue(new BaseBlock("dirty_sink", block(), MeatlibBlockSettings.copyOf(RUSTY_METAL_BLOCK).nonOpaque()));
+    public static Block DIRTY_SINK = BlockRegistry.queue(new BaseBlock("dirty_sink", block(), MeatlibBlockSettings.copyOf(RUSTY_METAL_BLOCK).solid().nonOpaque()));
     public static Block SMALL_SINK = BlockRegistry.queue(new SinkBlock("small_sink", block(), MeatlibBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
     public static Block TELEVISION_OFF = BlockRegistry.queue(new TelevisionBlock("television_off", block(), MeatlibBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
     public static Block TELEVISION_STATIC = BlockRegistry.queue(new TelevisionBlock("television_static", block(), MeatlibBlockSettings.copyOf(Blocks.STONE).nonOpaque()));

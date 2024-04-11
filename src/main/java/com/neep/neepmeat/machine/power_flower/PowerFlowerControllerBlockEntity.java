@@ -184,6 +184,8 @@ public class PowerFlowerControllerBlockEntity extends SyncableBlockEntity
                     }
                     else if (nextState.isOf(NMBlocks.POWER_FLOWER_CONTROLLER))
                     {
+                        blocks = 0;
+                        topPanels = 0;
                         return;
                     }
                     else if (world.getBlockEntity(mutable) instanceof PowerFlowerFluidPortBlock.PFPortBlockEntity port)

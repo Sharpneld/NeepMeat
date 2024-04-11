@@ -6,6 +6,7 @@
 //import com.neep.neepmeat.init.NMFluids;
 //import com.neep.neepmeat.init.NMItems;
 //import com.neep.neepmeat.plc.PLCBlocks;
+//import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 //import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 //import net.minecraft.advancement.Advancement;
 //import net.minecraft.advancement.AdvancementFrame;
@@ -33,7 +34,7 @@
 //                .display(
 //                        NMItems.RAW_MEAT_BRICK,
 //                        Text.translatable("advancements.neepmeat.main.root.title"),
-//                        Text.translatable("advancements.neepmeat.main.root.description"),
+//                        Text.translatable("advancements.neepmeat.main.root.desc"),
 //                        new Identifier("neepmeat:textures/gui/advancements/backgrounds/main.png"),
 //                        AdvancementFrame.TASK,
 //                        false,

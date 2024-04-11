@@ -325,8 +325,7 @@
   "block.neepmeat.small_trommel": "Small Trommel",
 
   "block.neepmeat.assembler": "Assembler",
-  "block.neepmeat.assembler.lore_0": "Enforces a pattern of items in the inventory below.",
-  "block.neepmeat.assembler.lore_1": "Place above Persistent Crafting Table for auto-crafting.",
+  "block.neepmeat.assembler.lore_0": "Replicates a pattern of items in the inventory below. Place above Persistent Crafting Table for auto-crafting.",
 
   "block.neepmeat.workstation": "Persistent Crafting Table",
   "block.neepmeat.workstation.lore_0": "Keeps items in the grid.",
@@ -334,7 +333,7 @@
 
   "block.neepmeat.pedestal": "Pedestal",
   "block.neepmeat.death_blades": "Death Blades",
-  "block.neepmeat.death_blades.lore_0": "Macerates mobs, producing meat in drains below.",
+  "block.neepmeat.death_blades.lore_0": "Macerates mobs, producing Tissue Slurry in drains below.",
 
   "block.neepmeat.mincer": "Mincer",
   "block.neepmeat.item_mincer": "Item Mincer",
@@ -485,8 +484,8 @@
   "item.neepmeat.pinkdrink.lore_0": "It's pink and it's refreshing so don't ask what's in it.",
 
   "item.neepmeat.can": "Can",
-  "item.neepmeat.carton": "Pasteurised Milk Carton",
-  "item.neepmeat.milk_carton": "Milk Carton",
+  "item.neepmeat.carton": "Carton",
+  "item.neepmeat.milk_carton": "Pasteurised Milk Carton",
   "item.neepmeat.milk_carton.lore_0": "Clears effects and is stackable.",
   "item.neepmeat.meat_carton": "Meat Carton",
   "item.neepmeat.meat_carton.hunger": "Hunger: %s",
@@ -633,7 +632,7 @@
   "instruction.neepmeat.sub.desc": "Pops the last two stack entries.\nSubtracts the first from the last. \nThe result is pushed to the stack.",
   "instruction.neepmeat.mul.desc": "Pops the last two stack entries.\nMultiplies them. \nThe result is pushed to the stack.",
   "instruction.neepmeat.div.desc": "Pops the last two stack entries.\nDivides the first by the last. \nThe result is pushed to the stack.",
-  "instruction.neepmeat.not.desc": "Computes the bitwise §6compliment§f of the last stack entry.",
+  "instruction.neepmeat.not.desc": "Computes the bitwise §6complement§f of the last stack entry.",
   "instruction.neepmeat.and.desc": "Pops the last two stack entries.\nComputes their bitwise §6AND§f.\nThe result is pushed to the stack.",
   "instruction.neepmeat.or.desc": "Pops the last two stack entries.\nComputes their bitwise §6OR§f.\nThe result is pushed to the stack.",
   "instruction.neepmeat.nand.desc": "Pops the last two stack entries.\nComputes their bitwise §6NAND§f.\nThe result is pushed to the stack.",
@@ -725,7 +724,8 @@
   "stat.neepmeat.enlightenment": "Enlightenment",
 
   "advancements.neepmeat.main.root.title": "NEEPMeat",
-  "advancements.neepmeat.main.root.description": "Rusty machinery, cosmic horror and meat.",
+  "advancements.neepmeat.main.root.desc": "Conquer nature, usurp the Divine.",
+  "advancements.neepmeat.main.root.description": "Conquer nature, usurp the Divine.",
 
   "advancements.neepmeat.main.obtain_guide.title": "RTFM",
   "advancements.neepmeat.main.obtain_guide.description": "Craft your Owner's Manual with Rotten Flesh and a book.",

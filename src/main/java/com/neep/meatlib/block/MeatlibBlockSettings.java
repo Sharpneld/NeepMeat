@@ -143,4 +143,10 @@ public class MeatlibBlockSettings extends FabricBlockSettings
         this.tags = Set.copyOf(tags);
         return this;
     }
+
+    // Masks a method from 1.20 for easier backports
+    public MeatlibBlockSettings solid()
+    {
+        return this;
+    }
 }

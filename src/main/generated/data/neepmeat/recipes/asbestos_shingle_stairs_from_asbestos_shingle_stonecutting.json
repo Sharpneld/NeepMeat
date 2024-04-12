@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "neepmeat:asbestos_shingle"
+  },
+  "result": "neepmeat:asbestos_shingle_stairs"
+}

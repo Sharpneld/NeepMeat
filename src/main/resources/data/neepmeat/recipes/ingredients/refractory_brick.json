@@ -10,11 +10,11 @@
       "item": "minecraft:clay_ball"
     },
     "s": {
-      "item": "minecraft:sand"
+      "item": "neepmeat:asbestos"
     }
   },
   "result": {
     "item": "neepmeat:refractory_brick",
-    "count": 1
+    "count": 2
   }
 }

@@ -23,6 +23,7 @@ blocks = [
     'bloody_bricks',
     'bloody_tiles',
     'asbestos',
+    'asbestos_tile',
     'asbestos_shingle'
 ]
 

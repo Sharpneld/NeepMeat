@@ -130,7 +130,8 @@ public class NMBlocks
     public static Block SAND_BRICKS = new BaseBuildingBlock("sandy_bricks", true, MeatlibBlockSettings.copyOf(Blocks.BRICKS));
     public static Block MEAT_STEEL_BLOCK = new BaseBuildingBlock("meat_steel_block", true, MeatlibBlockSettings.copyOf(Blocks.NETHERITE_BLOCK));
     public static Block ASBESTOS = new BaseBuildingBlock("asbestos", false, MeatlibBlockSettings.copyOf(Blocks.STONE));
-    public static Block CORRUGATED_ASBESTOS = new BaseBuildingBlock("corrugated_asbestos", false, MeatlibBlockSettings.copyOf(ASBESTOS));
+    public static Block ASBESTOS_TILE = new BaseBuildingBlock("asbestos_tile", false, MeatlibBlockSettings.copyOf(ASBESTOS));
+    public static Block CORRUGATED_ASBESTOS = new BaseBuildingBlock("corrugated_asbestos", true, MeatlibBlockSettings.copyOf(ASBESTOS));
     public static Block ASBESTOS_SHINGLE = new BaseBuildingBlock("asbestos_shingle", false, MeatlibBlockSettings.copyOf(ASBESTOS));
 
     public static Block BLOODY_BRICKS = new BaseBuildingBlock("bloody_bricks", true, MeatlibBlockSettings.copyOf(Blocks.BRICKS));

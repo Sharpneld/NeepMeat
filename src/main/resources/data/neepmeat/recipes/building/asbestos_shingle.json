@@ -6,11 +6,11 @@
   ],
   "key": {
     "a": {
-      "item": "neepmeat:asbestos_tile"
+      "item": "neepmeat:corrugated_asbestos"
     }
   },
   "result": {
-    "item": "neepmeat:corrugated_asbestos",
+    "item": "neepmeat:asbestos_shingle",
     "count": 4
   }
 }

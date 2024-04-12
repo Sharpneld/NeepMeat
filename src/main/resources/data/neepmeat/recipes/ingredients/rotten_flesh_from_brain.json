@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "neepmeat:brain_rough"
+    }
+  ],
+  "result": {
+    "item": "minecraft:rotten_flesh",
+    "count": 2
+  }
+}

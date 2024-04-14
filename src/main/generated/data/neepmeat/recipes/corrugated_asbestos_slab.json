@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
   "key": {
     "#": {
       "item": "neepmeat:corrugated_asbestos"
@@ -12,6 +11,5 @@
   "result": {
     "count": 6,
     "item": "neepmeat:corrugated_asbestos_slab"
-  },
-  "show_notification": true
+  }
 }

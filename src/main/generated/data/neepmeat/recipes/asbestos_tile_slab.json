@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "neepmeat:asbestos"
+      "item": "neepmeat:asbestos_tile"
     }
   },
   "pattern": [
@@ -10,6 +10,6 @@
   ],
   "result": {
     "count": 6,
-    "item": "neepmeat:asbestos_slab"
+    "item": "neepmeat:asbestos_tile_slab"
   }
 }

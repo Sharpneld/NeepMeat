@@ -2,7 +2,7 @@ package com.neep.meatlib.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemConvertible;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.tag.TagKey;
 import org.jetbrains.annotations.Nullable;
 
 public interface MeatlibBlockExtension

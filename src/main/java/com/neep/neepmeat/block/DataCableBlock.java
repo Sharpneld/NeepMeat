@@ -40,7 +40,7 @@ public class DataCableBlock extends AbstractPipeBlock implements DataCable
     {
         if (state.get(WATERLOGGED))
         {
-            world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+            world.createAndScheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         PipeConnectionType type = state.get(DIR_TO_CONNECTION.get(direction));

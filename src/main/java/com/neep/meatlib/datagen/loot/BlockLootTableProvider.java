@@ -23,6 +23,7 @@ public class BlockLootTableProvider extends FabricBlockLootTableProvider
         {
             if (entry instanceof MeatlibBlock meatBlock)
             {
+                // True by default for MeatlibBlock
                 if (meatBlock.autoGenDrop())
                 {
                     // True by default for MeatlibBlock

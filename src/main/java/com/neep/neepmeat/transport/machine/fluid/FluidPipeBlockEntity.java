@@ -7,6 +7,7 @@ import com.neep.meatlib.util.NbtSerialisable;
 import com.neep.neepmeat.init.NMBlockEntities;
 import com.neep.neepmeat.transport.api.pipe.FluidPipe;
 import com.neep.neepmeat.transport.fluid_network.FluidNodeManager;
+import com.neep.neepmeat.transport.fluid_network.FluidNodeManagerImpl;
 import com.neep.neepmeat.transport.fluid_network.PipeVertex;
 import com.neep.neepmeat.transport.fluid_network.node.BlockPipeVertex;
 import it.unimi.dsi.fastutil.Pair;
@@ -242,11 +243,6 @@ public class FluidPipeBlockEntity<T extends PipeVertex & NbtSerialisable> extend
         replaced = true;
     }
 
-    public boolean isCreatedDynamically()
-    {
-        return false;
-    }
-
     public T getPipeVertex()
     {
         return vertex;
@@ -254,7 +250,7 @@ public class FluidPipeBlockEntity<T extends PipeVertex & NbtSerialisable> extend
 
     public void onUnload(ServerWorld world)
     {
-        FluidNodeManager.getInstance(world).entityUnloaded(getPos());
+        FluidNodeManagerImpl.getInstance(world).entityUnloaded(getPos());
     }
 
     public void onLoad(ServerWorld world)
@@ -264,7 +260,7 @@ public class FluidPipeBlockEntity<T extends PipeVertex & NbtSerialisable> extend
     public void onRemove(ServerWorld world)
     {
         vertex.erase();
-        FluidNodeManager.getInstance(world).entityRemoved(getPos());
+        FluidNodeManagerImpl.getInstance(world).entityRemoved(getPos());
 
     }
 

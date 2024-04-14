@@ -29,12 +29,6 @@ public class FilterPipeBlockEntity extends FluidPipeBlockEntity implements Block
     }
 
     @Override
-    public boolean isCreatedDynamically()
-    {
-        return false;
-    }
-
-    @Override
     public void readNbt(NbtCompound nbt)
     {
         super.readNbt(nbt);

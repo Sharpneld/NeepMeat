@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import com.neep.neepmeat.transport.fluid_network.FluidNodeManager;
+import com.neep.neepmeat.transport.fluid_network.FluidNodeManagerImpl;
 import com.neep.neepmeat.transport.fluid_network.PipeVertex;
 import com.neep.neepmeat.transport.fluid_network.node.AcceptorModes;
 import com.neep.neepmeat.transport.fluid_network.node.NodePos;
@@ -173,7 +174,7 @@ public interface FluidPipe
 
     default void removePipe(ServerWorld world, BlockState state, BlockPos pos)
     {
-        FluidNodeManager.removeStorageNodes(world, pos);
+        FluidNodeManagerImpl.removeStorageNodes(world, pos);
 //        updateNetwork(world, pos, state, PipeNetwork.UpdateReason.PIPE_REMOVED);
 
     }

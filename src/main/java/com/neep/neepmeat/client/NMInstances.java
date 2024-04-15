@@ -1,6 +1,7 @@
 package com.neep.neepmeat.client;
 
 import com.jozufozu.flywheel.backend.instancing.InstancedRenderRegistry;
+import com.neep.neepmeat.client.instance.LargeFanInstance;
 import com.neep.neepmeat.client.instance.RoboticArmInstance;
 import com.neep.neepmeat.client.renderer.LinearOscillatorInstance;
 import com.neep.neepmeat.client.renderer.RoboticArmRenderer;
@@ -49,8 +50,11 @@ public class NMInstances
         InstancedRenderRegistry.configure(PLCBlocks.PLC_ENTITY).alwaysSkipRender().factory(PLCInstance::new).apply();
         InstancedRenderRegistry.configure(NMBlockEntities.LINEAR_OSCILLATOR).alwaysSkipRender().factory(LinearOscillatorInstance::new).apply();
 
+        InstancedRenderRegistry.configure(NMBlockEntities.LARGE_FAN).alwaysSkipRender().factory(LargeFanInstance::new).apply();
+
         InstancedRenderRegistry.configure(NMEntities.PHAGE_RAY).alwaysSkipRender().factory(PhageRayInstance::new).apply();
 
         InstancedRenderRegistry.configure(NMEntities.LIMB).factory(LimbEntityInstance::new).apply();
+
     }
 }

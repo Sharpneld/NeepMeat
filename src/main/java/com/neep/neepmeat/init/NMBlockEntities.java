@@ -119,6 +119,7 @@ public class NMBlockEntities
     public static BlockEntityType<FluidGaugeBlockEntity<ItemVariant>> ITEM_GAUGE;
 
     public static BlockEntityType<MetalBarrelBlockEntity> METAL_BARREL;
+    public static BlockEntityType<LargeFanBlockEntity> LARGE_FAN;
 
     public static BlockEntityType<DisplayPlatformBlockEntity> ITEM_BUFFER_BLOCK_ENTITY;
     public static BlockEntityType<InventoryDetectorBlockEntity> INVENTORY_DETECTOR;
@@ -285,6 +286,7 @@ public class NMBlockEntities
         BloodAcceptor.SIDED.registerForBlockEntity(VSCBlockEntity::getBloodAcceptor, VSC);
 
         METAL_BARREL = register("metal_barrel", (pos, state) -> new MetalBarrelBlockEntity(METAL_BARREL, pos, state), NMBlocks.METAL_BARREL);
+        LARGE_FAN = register("large_fan", (pos, state) -> new LargeFanBlockEntity(LARGE_FAN, pos, state), NMBlocks.LARGE_FAN);
 
         // --- Surgery Machine ---
 //        MOB_PLATFORM = registerBlockEntity("mob_platform", MobPlatformBlockEntity::new, NMBlocks.MOB_PLATFORM);

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rrr",
+    "rsr",
+    "rrr"
+  ],
+  "key": {
+    "r": {
+      "item": "neepmeat:rusty_metal"
+    },
+    "s": {
+      "item": "neepmeat:rusted_metal_scaffold"
+    }
+  },
+  "result": {
+    "item": "neepmeat:large_fan",
+    "count": 1
+  }
+}

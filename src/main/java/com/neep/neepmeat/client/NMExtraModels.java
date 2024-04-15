@@ -31,6 +31,8 @@ public class NMExtraModels implements ExtraModelProvider
     public static PartialModel ROBOTIC_ARM_SEGMENT_1 = new PartialModel(new Identifier(NeepMeat.NAMESPACE, "block/robotic_arm/segment_1"));
     public static PartialModel ROBOTIC_ARM_SEGMENT_2 = new PartialModel(new Identifier(NeepMeat.NAMESPACE, "block/robotic_arm/segment_2"));
 
+    public static PartialModel LARGE_FAN_VANES = new PartialModel(new Identifier(NeepMeat.NAMESPACE, "block/large_fan/vanes"));
+
     public static final PartialModel COW_LIMB = new PartialModel(new Identifier(NeepMeat.NAMESPACE, "entity/parts/cow_limb"));
     public static final PartialModel COW_HEAD = new PartialModel(new Identifier(NeepMeat.NAMESPACE, "entity/parts/cow_head"));
     public static final PartialModel PIG_HEAD = new PartialModel(new Identifier(NeepMeat.NAMESPACE, "entity/parts/pig_head"));

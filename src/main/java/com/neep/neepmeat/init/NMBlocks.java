@@ -186,6 +186,7 @@ public class NMBlocks
     public static Block SMALL_SINK = BlockRegistry.queue(new SinkBlock("small_sink", block(), MeatlibBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
     public static Block TELEVISION_OFF = BlockRegistry.queue(new TelevisionBlock("television_off", block(), MeatlibBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
     public static Block TELEVISION_STATIC = BlockRegistry.queue(new TelevisionBlock("television_static", block(), MeatlibBlockSettings.copyOf(Blocks.STONE).nonOpaque()));
+    public static BigBlock<?> LARGE_FAN = BlockRegistry.queue(new LargeFanBlock("large_fan", block().tooltip(TooltipSupplier.simple(1)), MeatlibBlockSettings.copyOf(RUSTY_METAL_BLOCK).nonOpaque()));
 
 //    public static Block SLOPE_TEST = BlockRegistry.queue(new BaseStairsBlock(CAUTION_BLOCK.getDefaultState(), "slope_test", 64, MeatlibBlockSettings.of(Material.METAL).nonOpaque()));
 

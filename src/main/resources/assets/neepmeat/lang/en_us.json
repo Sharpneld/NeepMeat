@@ -302,6 +302,8 @@
   "block.neepmeat.dirty_toilet": "Dirty Toilet",
   "block.neepmeat.television_off": "Television",
   "block.neepmeat.television_static": "Static Television",
+  "block.neepmeat.large_fan": "Large Fan",
+  "block.neepmeat.large_fan.lore_0": "3x3 Decoration block.",
 
   "block.neepmeat.big_lever": "Big Lever",
 

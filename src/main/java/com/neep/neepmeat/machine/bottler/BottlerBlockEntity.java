@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.StorageUtil;
 import net.fabricmc.fabric.api.transfer.v1.transaction.Transaction;
 import net.fabricmc.fabric.api.transfer.v1.transaction.TransactionContext;
+import net.fabricmc.fabric.impl.transfer.TransferApiImpl;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.nbt.NbtCompound;
@@ -114,7 +115,7 @@ public class BottlerBlockEntity extends MotorisedMachineBlockEntity
                 case EJECTING:
                 {
                     Direction facing = getCachedState().get(BaseHorFacingBlock.FACING);
-                    if (ItemPipeUtil.storageToAny((ServerWorld) world, storage.getItemStorage(), pos, facing, transaction))
+                    if (storage.getItemStorage().isEmpty() || ItemPipeUtil.storageToAny((ServerWorld) world, storage.getItemStorage(), pos, facing, transaction))
                     {
                         state = State.IDLE;
                     }
@@ -159,7 +160,7 @@ public class BottlerBlockEntity extends MotorisedMachineBlockEntity
     {
         Storage<FluidVariant> inputStorage = getInputStorage();
         Storage<FluidVariant> outputStorage = storage.getFluidStorage();
-        if (inputStorage != null && outputStorage != null)
+        if (inputStorage != null && outputStorage != TransferApiImpl.EMPTY_STORAGE)
         {
             return StorageUtil.move(inputStorage, outputStorage, v -> true, Long.MAX_VALUE, transaction);
         }

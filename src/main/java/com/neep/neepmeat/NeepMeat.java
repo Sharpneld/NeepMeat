@@ -28,12 +28,14 @@ import com.neep.neepmeat.plc.recipe.PLCRecipes;
 import com.neep.neepmeat.potion.NMPotions;
 import com.neep.neepmeat.transport.FluidTransport;
 import com.neep.neepmeat.transport.ItemTransport;
+import com.neep.neepmeat.transport.block.fluid_transport.TankBlock;
 import com.neep.neepmeat.transport.blood_network.BloodNetworkManager;
 import com.neep.neepmeat.transport.fluid_network.FluidNodeManagerImpl;
 import com.neep.neepmeat.util.Bezier;
 import com.neep.neepmeat.world.NMFeatures;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.minecraft.block.Blocks;
@@ -153,6 +155,10 @@ public class NeepMeat implements ModInitializer
 			EnlightenmentEventManager.init();
 			EnlightenmentUtil.init();
 		}
+
+		FluidStorage.ITEM.registerForItems(TankBlock.createStorageProvider(8 * FluidConstants.BUCKET), FluidTransport.BASIC_GLASS_TANK.asItem());
+		FluidStorage.ITEM.registerForItems(TankBlock.createStorageProvider(8 * FluidConstants.BUCKET), FluidTransport.BASIC_TANK.asItem());
+		FluidStorage.ITEM.registerForItems(TankBlock.createStorageProvider(16 * FluidConstants.BUCKET), FluidTransport.ADVANCED_TANK.asItem());
 	}
 
 	public static void cowThingy(CowEntity cow, PlayerEntity player, Hand hand)

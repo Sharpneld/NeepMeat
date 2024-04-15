@@ -40,7 +40,9 @@ public class BottlerStorage implements NbtSerialisable
     public void updateFillingStorage()
     {
         fillingStorage = FluidStorage.ITEM.find(itemStorage.getAsStack(), ContainerItemContext.ofSingleSlot(itemStorage));
-        if (fillingStorage == null) fillingStorage = Storage.empty();
+
+        if (fillingStorage == null)
+            fillingStorage = Storage.empty();
     }
 
     public WritableStackStorage getItemStorage()
@@ -50,7 +52,8 @@ public class BottlerStorage implements NbtSerialisable
 
     public Storage<FluidVariant> getFluidStorage()
     {
-        if (fillingStorage == null) updateFillingStorage();
+        if (fillingStorage == null)
+            updateFillingStorage();
 
         return fillingStorage;
     }

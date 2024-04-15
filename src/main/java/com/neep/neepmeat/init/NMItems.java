@@ -105,4 +105,8 @@ public class NMItems
     public static Item DOSIMETER = new DosimeterItem("dosimeter", TooltipSupplier.hidden(1), new MeatlibItemSettings().group(NMItemGroups.GENERAL));
 
     public static Item DEBUG_ITEM = ItemRegistry.queue(new DebugItem("debug", new MeatlibItemSettings().group(NMItemGroups.GENERAL)));
+
+    public static void init()
+    {
+    }
 }

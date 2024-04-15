@@ -24,7 +24,7 @@ public class NMItems
 
     public static Item COMPOUND_INJECTOR = new CompoundInjectorItem("compound_injector", new MeatlibItemSettings().group(MeatWeapons.WEAPONS));
 
-    public static Item SACRIFICIAL_SCALPEL = new DaggerItem("sacrificial_dagger", new MeatlibItemSettings().group(MeatWeapons.WEAPONS));
+    public static Item SACRIFICIAL_SCALPEL = new ScalpelItem("sacrificial_dagger", new MeatlibItemSettings().group(MeatWeapons.WEAPONS));
     public static Item CHEESE_CLEAVER = new CheeseCleaverItem("cheese_cleaver", new MeatlibItemSettings().group(MeatWeapons.WEAPONS));
     public static Item SLASHER = new SlasherItem("slasher", new MeatlibItemSettings().group(MeatWeapons.WEAPONS));
 

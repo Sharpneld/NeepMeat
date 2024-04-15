@@ -204,5 +204,9 @@
   "vivisection_complete": { "subtitle": "subtitles.neepmeat.vivisection.complete",
     "sounds": [
       "neepmeat:vivisection_complete"
+    ]},
+  "scalpel_hit": { "subtitle": "subtitles.neepmeat.scalpel.hit",
+    "sounds": [
+      "neepmeat:scalpel_hit"
     ]}
 }

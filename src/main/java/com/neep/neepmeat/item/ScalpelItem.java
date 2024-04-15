@@ -38,13 +38,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class DaggerItem extends BaseSwordItem
+public class ScalpelItem extends BaseSwordItem
 {
-    public static final float MAX_HEALTH = 3;
-
-    public DaggerItem(String registryName, Settings settings)
+    public ScalpelItem(String registryName, Settings settings)
     {
-        super(registryName, ToolMaterials.GOLD, 4, 1f, settings.maxDamage(128));
+        super(registryName, ToolMaterials.GOLD, 4, 1f, settings.maxDamage(256));
     }
 
     @Override
@@ -53,20 +51,28 @@ public class DaggerItem extends BaseSwordItem
         super.postHit(stack, target, attacker);
 
         World world = target.getEntityWorld();
-        if (target.isDead() && !world.isClient)
+
+        if (!world.isClient())
         {
             BlockPos pos = target.getBlockPos();
             if (world.getBlockEntity(pos.down()) instanceof FluidDrainBlockEntity be)
             {
-//                RealisticFluid.incrementLevel(world, pos, world.getBlockState(pos), NMFluids.FLOWING_BLOOD);
-                try (Transaction transaction = Transaction.openOuter())
+                Vec3d soundPos = target.getPos();
+                world.playSound(null, soundPos.x, soundPos.y, soundPos.z, NMSounds.SCALPEL_HIT, SoundCategory.PLAYERS, 1, 1);
+
+                if (target.isDead())
                 {
-                    be.getBuffer(Direction.UP).insert(FluidVariant.of(NMFluids.STILL_BLOOD), 20250, transaction);
-                    transaction.commit();
-                    spawnBloodParticles(target.getPos(), (ServerWorld) world);
+//                RealisticFluid.incrementLevel(world, pos, world.getBlockState(pos), NMFluids.FLOWING_BLOOD);
+                    try (Transaction transaction = Transaction.openOuter())
+                    {
+                        be.getBuffer(Direction.UP).insert(FluidVariant.of(NMFluids.STILL_BLOOD), 20250, transaction);
+                        transaction.commit();
+                        spawnBloodParticles(target.getPos(), (ServerWorld) world);
+                    }
                 }
             }
         }
+
         return true;
     }
 

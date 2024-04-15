@@ -86,6 +86,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 
+import java.util.Set;
+
 import static net.minecraft.tag.BlockTags.*;
 
 @SuppressWarnings("unused")
@@ -215,7 +217,6 @@ public class NMBlocks
     public static Block CRUSHER = BlockRegistry.queue(new GrinderBlock("grinder", block().requiresMotor(), MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
     public static Multiblock2ControllerBlock<LargeCrusherStructureBlock> LARGE_CRUSHER = BlockRegistry.queue(new LargeCrusherBlock("large_crusher", block().requiresMotor(), MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
     public static Block ALLOY_KILN = BlockRegistry.queue(new AlloyKilnBlock("alloy_kiln", block(), MeatlibBlockSettings.copyOf(NMBlocks.SAND_BRICKS)));
-
     public static Block CRUCIBLE = BlockRegistry.queue(new CrucibleBlock("crucible", block(), FLUID_PIPE_SETTINGS));
     public static Block COLLECTOR = BlockRegistry.queue(new FatCollectorBlock("collector", block(), FLUID_PIPE_SETTINGS));
     public static AssemblerBlock ASSEMBLER = BlockRegistry.queue(new AssemblerBlock("assembler", block().requiresVascular(), MACHINE_SETTINGS));
@@ -304,18 +305,19 @@ public class NMBlocks
     public static BaseCropBlock WHISPER_WHEAT = BlockRegistry.queue(new BaseCropBlock("whisper_wheat", 64, 0, MeatlibBlockSettings.copyOf(Blocks.WHEAT).tags()));
     public static BaseCropBlock FLESH_POTATO = BlockRegistry.queue(new BaseCropBlock("flesh_potato", "flesh_potato", 64, 2, MeatlibBlockSettings.copyOf(Blocks.POTATOES).tags()));
 //    public static Block ROCKWART = BlockRegistry.queue(new BaseCropBlock("rockwart", 64, true, AbstractBlock.Settings.copy(Blocks.WHEAT)));
-    public static Block BLOOD_BUBBLE_SAPLING = BlockRegistry.queue(new BaseSaplingBlock("blood_bubble_sapling", new BloodBubbleTreeGenerator(), block(), MeatlibBlockSettings.copyOf(Blocks.WARPED_FUNGUS).tags()));
+    public static Block BLOOD_BUBBLE_SAPLING = BlockRegistry.queue(new BaseSaplingBlock("blood_bubble_sapling", new BloodBubbleTreeGenerator(), block(), MeatlibBlockSettings.copyOf(Blocks.WARPED_FUNGUS).tags().ticksRandomly()));
 
+//    public static final AbstractBlock.Settings BB_SETTINGS = MeatlibBlockSettings.create().strength(1.1f).sounds(BlockSoundGroup.METAL);
     public static Block BLOOD_BUBBLE_LOG = BlockRegistry.queue(BlockRegistry.createLogBlock("blood_bubble_log", TooltipSupplier.blank()));
     public static Block BLOOD_BUBBLE_WOOD = BlockRegistry.queue(BlockRegistry.createLogBlock("blood_bubble_wood", TooltipSupplier.blank()));
-    public static Block BLOOD_BUBBLE_LEAVES = BlockRegistry.queue(new BloodBubbleLeavesBlock("blood_bubble_leaves", MeatlibBlockSettings.copyOf(Blocks.AZALEA_LEAVES).tags(FabricMineableTags.SHEARS_MINEABLE).sounds(BlockSoundGroup.AZALEA_LEAVES)));
-    public static Block BLOOD_BUBBLE_LEAVES_FLOWERING = BlockRegistry.queue(new BloodBubbleLeavesBlock.FruitingBloodBubbleLeavesBlock("blood_bubble_leaves_flowering", MeatlibBlockSettings.copyOf(Blocks.AZALEA_LEAVES).sounds(BlockSoundGroup.SLIME)));
+    public static Block BLOOD_BUBBLE_LEAVES = BlockRegistry.queue(new BloodBubbleLeavesBlock("blood_bubble_leaves", MeatlibBlockSettings.copyOf(Blocks.AZALEA_LEAVES).tags(Set.of(FabricMineableTags.SHEARS_MINEABLE, LEAVES)).sounds(BlockSoundGroup.AZALEA_LEAVES)));
+    public static Block BLOOD_BUBBLE_LEAVES_FLOWERING = BlockRegistry.queue(new BloodBubbleLeavesBlock.FruitingBloodBubbleLeavesBlock("blood_bubble_leaves_flowering", MeatlibBlockSettings.copyOf(BLOOD_BUBBLE_LEAVES).sounds(BlockSoundGroup.SLIME)));
     public static Block BLOOD_BUBBLE_PLANKS = new BaseBuildingBlock("blood_bubble_planks", true, MeatlibBlockSettings.create(Material.WOOD, AXE_MINEABLE).strength(2.0f).sounds(BlockSoundGroup.WOOD));
     public static Block BLOOD_BUBBLE_TRAPDOOR = BlockRegistry.queueWithItem(new TrapdoorBlock(MeatlibBlockSettings.create(Material.WOOD, AXE_MINEABLE).simpleDrop(ItemRegistry::getMatchingItem).strength(2.0f).sounds(BlockSoundGroup.WOOD)), "blood_bubble_planks_trapdoor");
     public static Block BLOOD_BUBBLE_DOOR = BlockRegistry.queueWithItem(new DoorBlock(MeatlibBlockSettings.create(Material.WOOD, AXE_MINEABLE).simpleDrop(ItemRegistry::getMatchingItem).strength(2.0f).sounds(BlockSoundGroup.WOOD).nonOpaque()), "blood_bubble_planks_door");
     public static Block BLOOD_BUBBLE_BUTTON = BlockRegistry.queueWithItem(new WoodenButtonBlock(MeatlibBlockSettings.create(Material.WOOD, AXE_MINEABLE).simpleDrop(ItemRegistry::getMatchingItem).strength(1.0f).sounds(BlockSoundGroup.WOOD)), "blood_bubble_planks_button");
     public static Block BLOOD_BUBBLE_FENCE_GATE = BlockRegistry.queueWithItem(new FenceGateBlock(MeatlibBlockSettings.create(Material.WOOD, AXE_MINEABLE).simpleDrop(ItemRegistry::getMatchingItem).strength(2.0f).sounds(BlockSoundGroup.WOOD)), "blood_bubble_planks_fence_gate");
-    public static Block BLOOD_BUBBLE_PRESSURE_PLATE = BlockRegistry.queueWithItem(new BloodBubblePressurePlate(PressurePlateBlock.ActivationRule.EVERYTHING, MeatlibBlockSettings.create(Material.WOOD, AXE_MINEABLE).simpleDrop(ItemRegistry::getMatchingItem).strength(1.0f).sounds(BlockSoundGroup.WOOD)), "blood_bubble_planks_pressure_plate", block().tooltip(TooltipSupplier.simple(1)));
+    public static Block BLOOD_BUBBLE_PRESSURE_PLATE = BlockRegistry.queueWithItem(new BloodBubblePressurePlate(PressurePlateBlock.ActivationRule.EVERYTHING, MeatlibBlockSettings.create(Material.WOOD, AXE_MINEABLE).simpleDrop(ItemRegistry::getMatchingItem).solid().strength(1.0f).sounds(BlockSoundGroup.WOOD)), "blood_bubble_planks_pressure_plate", block().tooltip(TooltipSupplier.simple(1)));
 
     // --- Assembly ---
 //    public static Block LINEAR_RAIL = BlockRegistry.queue(new LinearRailBlock("linear_rail", 64, false, MeatlibBlockSettings.of(Material.METAL).strength(4.0f)));

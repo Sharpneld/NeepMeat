@@ -37,7 +37,7 @@ public class NMFeatures
 
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> BLOOD_BUBBLE_TREE = ConfiguredFeatures.register("blood_bubble_tree", Feature.TREE,
             new TreeFeatureConfig.Builder(BlockStateProvider.of(NMBlocks.BLOOD_BUBBLE_LOG),
-                    new BendingTrunkPlacer(5, 2, 0, 3, UniformIntProvider.create(0, 1)),
+                    new BendingTrunkPlacer(5, 2, 0, 3, UniformIntProvider.create(1, 2)),
                     new WeightedBlockStateProvider(DataPool.<BlockState>builder()
                             .add(NMBlocks.BLOOD_BUBBLE_LEAVES.getDefaultState(), 3)
                             .add(NMBlocks.BLOOD_BUBBLE_LEAVES_FLOWERING.getDefaultState(), 1)),

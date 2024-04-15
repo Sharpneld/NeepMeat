@@ -17,10 +17,7 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BlockRegistry
 {
@@ -87,12 +84,13 @@ public class BlockRegistry
 
     public static BaseColumnBlock createLogBlock(String name, TooltipSupplier tooltipSupplier)
     {
-        return new BaseColumnBlock(name, ItemSettings.block(), MeatlibBlockSettings.create(Material.WOOD, BlockTags.AXE_MINEABLE).strength(2.0f).sounds(BlockSoundGroup.WOOD));
+        return new BaseColumnBlock(name, ItemSettings.block(), MeatlibBlockSettings.create(Material.WOOD).tags(Set.of(BlockTags.AXE_MINEABLE, BlockTags.LOGS)).strength(2.0f).sounds(BlockSoundGroup.WOOD));
     }
 
     public static BaseLeavesBlock createLeavesBlock(String name, BlockSoundGroup soundGroup)
     {
-        return new BaseLeavesBlock(name, MeatlibBlockSettings.create(Material.LEAVES, FabricMineableTags.SHEARS_MINEABLE)
+        return new BaseLeavesBlock(name, MeatlibBlockSettings.create(Material.LEAVES)
+                .tags(Set.of(FabricMineableTags.SHEARS_MINEABLE, BlockTags.LEAVES))
                 .strength(0.2f)
                 .ticksRandomly()
                 .sounds(soundGroup)

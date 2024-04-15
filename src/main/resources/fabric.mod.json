@@ -76,7 +76,7 @@
       "net/minecraft/entity/player/PlayerEntity": ["com/neep/meatlib/attachment/player/MeatPlayerEntity", "com/neep/meatweapons/interfaces/MWPlayerEntity"],
       "net/minecraft/item/ItemStack": ["com/neep/meatlib/attachment/itemstack/MeatItemStack"],
       "net/minecraft/item/Item": ["com/neep/meatlib/item/MeatlibItemExtension"],
-      "net/minecraft/block/Block": ["com/neep/meatlib/item/MeatlibBlockExtension"]
+      "net/minecraft/block/Block": ["com/neep/meatlib/block/MeatlibBlockExtension"]
     },
     "cardinal-components": [
       "neepmeat:blood_network_chunk",

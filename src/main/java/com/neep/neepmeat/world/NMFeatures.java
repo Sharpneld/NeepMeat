@@ -26,6 +26,7 @@ import net.minecraft.world.gen.placementmodifier.*;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.trunk.BendingTrunkPlacer;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class NMFeatures
 
     public static final RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>> BLOOD_BUBBLE_TREE = ConfiguredFeatures.register("blood_bubble_tree", Feature.TREE,
             new TreeFeatureConfig.Builder(BlockStateProvider.of(NMBlocks.BLOOD_BUBBLE_LOG),
+//                    new StraightTrunkPlacer(3, 2, 0),
                     new BendingTrunkPlacer(5, 2, 0, 3, UniformIntProvider.create(1, 2)),
                     new WeightedBlockStateProvider(DataPool.<BlockState>builder()
                             .add(NMBlocks.BLOOD_BUBBLE_LEAVES.getDefaultState(), 3)

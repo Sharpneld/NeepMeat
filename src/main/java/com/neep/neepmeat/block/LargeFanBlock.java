@@ -20,14 +20,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumMap;
@@ -106,7 +105,7 @@ public class LargeFanBlock extends BigBlock<LargeFanBlock.LargeFanStructureBlock
         protected BlockEntityType<LargeFanStructureEntity> registerBlockEntity()
         {
             return Registry.register(
-                    Registries.BLOCK_ENTITY_TYPE, new Identifier(NeepMeat.NAMESPACE, "large_fan_structure"),
+                    Registry.BLOCK_ENTITY_TYPE, new Identifier(NeepMeat.NAMESPACE, "large_fan_structure"),
                     FabricBlockEntityTypeBuilder.create(
                             (p, s) -> new LargeFanStructureEntity(getBlockEntityType(), p, s),
                             this).build());

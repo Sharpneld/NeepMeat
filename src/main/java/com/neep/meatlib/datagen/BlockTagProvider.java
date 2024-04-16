@@ -28,11 +28,8 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider
 //                this.getOrCreateTagBuilder(meatBlock.getPreferredTool()).add(entry);
 //            }
 
-            if (entry instanceof MeatlibBlockExtension extension)
-            {
-                MeatlibBlockExtension.TagConsumer<Block> consumer = t -> getOrCreateTagBuilder(t).add(entry);
-                extension.neepmeat$appendTags(consumer);
-            }
+            MeatlibBlockExtension.TagConsumer<Block> consumer = t -> getOrCreateTagBuilder(t).add(entry);
+            entry.neepmeat$appendTags(consumer);
 
             if (entry instanceof BaseWallBlock wall)
             {

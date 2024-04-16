@@ -35,7 +35,7 @@ public class TankBlock extends BaseColumnBlock implements BlockEntityProvider
 {
     public TankBlock(String itemName, ItemSettings itemSettings, Settings settings)
     {
-        super(itemName, itemSettings.maxCount(4), settings);
+        super(itemName, itemSettings.maxCount(1), settings);
     }
 
     @Override

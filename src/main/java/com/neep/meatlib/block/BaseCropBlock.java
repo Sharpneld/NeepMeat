@@ -77,6 +77,6 @@ public class BaseCropBlock extends CropBlock implements MeatlibBlock, MeatlibBlo
     @Override
     public void neepmeat$appendTags(TagConsumer<Block> consumer)
     {
-        MeatlibBlockExtension.super.neepmeat$appendTags(consumer);
+        super.neepmeat$appendTags(consumer);
     }
 }

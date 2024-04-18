@@ -46,6 +46,8 @@ import software.bernie.geckolib3.core.util.Color;
 
 import java.util.Collection;
 
+import java.util.Collection;
+
 @SuppressWarnings("UnstableApiUsage")
 public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProvider, FluidPipe
 {

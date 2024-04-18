@@ -85,6 +85,7 @@ public interface FluidPipe
         return false;
     }
 
+    // TODO: Replace with EnumSet
     default Iterable<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
     {
         if (state.getBlock() instanceof AbstractPipeBlock)

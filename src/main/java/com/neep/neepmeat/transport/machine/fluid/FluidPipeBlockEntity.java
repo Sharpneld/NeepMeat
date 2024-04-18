@@ -73,6 +73,11 @@ public class FluidPipeBlockEntity<T extends PipeVertex & NbtSerialisable> extend
         if (connections > 2 || !vertex.canSimplify())
         {
             findAdjacent(pipe);
+//
+//            if (vertex.canSimplify())
+//            {
+//                linkVertices(pipe);
+//            }
         }
         else if (connections == 2)
         {

@@ -5,10 +5,7 @@ import com.neep.neepmeat.init.NMBlockEntities;
 import com.neep.neepmeat.transport.FluidTransport;
 import com.neep.neepmeat.transport.api.pipe.AbstractPipeBlock;
 import com.neep.neepmeat.transport.api.pipe.FluidPipe;
-import com.neep.neepmeat.transport.fluid_network.FluidNodeManager;
 import com.neep.neepmeat.transport.fluid_network.PipeConnectionType;
-import com.neep.neepmeat.transport.fluid_network.node.BlockPipeVertex;
-import com.neep.neepmeat.transport.fluid_network.node.FluidNode;
 import com.neep.neepmeat.transport.machine.fluid.FluidPipeBlockEntity;
 import com.neep.neepmeat.util.MiscUtil;
 import net.fabricmc.api.EnvType;
@@ -24,7 +21,6 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.DyeItem;
@@ -43,8 +39,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.util.Color;
-
-import java.util.Collection;
 
 import java.util.Collection;
 
@@ -72,6 +66,7 @@ public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProv
         if (!state.isOf(newState.getBlock()))
         {
             removePipe((ServerWorld) world, state, pos);
+//            updateNeighbourPipes(world, pos, state);
         }
     }
 
@@ -86,19 +81,22 @@ public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProv
         world.setBlockState(pos, nextState, Block.NOTIFY_LISTENERS);
 
         BlockState fromState = world.getBlockState(fromPos);
-        boolean foundPipe = FluidPipe.findFluidPipe(world, fromPos, fromState) != null;
+
+        // Neighbour state changes have already been applied, so there is no way of knowing if the update came from a
+        // destroyed pipe.
+        boolean foundPipe = FluidPipe.findFluidPipe(world, fromPos, fromState) != null || fromState.isAir();
         if (!foundPipe)
         {
             // If the nodes have changed, we need to update the pipe.
             if (createStorageNodes(world, pos, nextState))
             {
-                FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateAdjacent(nextState));
+                FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateHiddenConnections(nextState));
             }
         }
         else if (!state.equals(nextState))
         {
             // The addition of a pipe can change this one's junction status
-            FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateAdjacent(nextState));
+            FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateConnectionChange(state, nextState));
         }
     }
 
@@ -111,7 +109,8 @@ public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProv
         {
             createStorageNodes(world, pos, updatedState);
 
-            FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateAdjacent(updatedState));
+            FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateHiddenConnections(updatedState));
+//            updateNeighbourPipes(world, pos, state);
         }
     }
 
@@ -122,7 +121,9 @@ public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProv
             return;
 
         createStorageNodes(world, pos, newState);
-        FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateAdjacent(newState));
+        FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateConnectionChange(state, newState));
+//        FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateHiddenConnections(newState));
+//        updateNeighbourPipes(world, pos, state);
     }
 
     @Override

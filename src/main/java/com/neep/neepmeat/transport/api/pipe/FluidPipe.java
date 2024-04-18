@@ -46,6 +46,31 @@ public interface FluidPipe
         return null;
     }
 
+//    default void updateNeighbourPipes(World world, BlockPos pos, BlockState oldState)
+//    {
+//        BlockPos.Mutable mutable = pos.mutableCopy();
+//        for (Direction direction : Direction.values())
+//        {
+//            mutable.set(pos, direction);
+//
+//            BlockState adjState = world.getBlockState(mutable);
+//
+//            FluidPipe pipe;
+//            if ((pipe = findFluidPipe(world, mutable, world.getBlockState(mutable))) != null)
+//            {
+//                pipe.onNeighbourPipeUpdate(world, mutable.toImmutable(), adjState, pos);
+//            }
+//        }
+//    }
+//
+//    /**
+//     * Pipe-aware replacement for onNeighborUpdate.
+//     */
+//    default void onNeighbourPipeUpdate(World world, BlockPos pos, BlockState state, BlockPos fromPos)
+//    {
+//        FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateHiddenConnections(state));
+//    }
+
     // Call this first
     static void onStateReplaced(World world, BlockPos pos, BlockState state, BlockState newState, FluidPipe fluidPipe)
     {
@@ -84,8 +109,8 @@ public interface FluidPipe
         }
         return false;
     }
-
     // TODO: Replace with EnumSet
+
     default Iterable<Direction> getConnections(BlockState state, Predicate<Direction> forbidden)
     {
         if (state.getBlock() instanceof AbstractPipeBlock)

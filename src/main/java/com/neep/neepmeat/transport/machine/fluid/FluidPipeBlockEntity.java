@@ -55,13 +55,7 @@ public class FluidPipeBlockEntity<T extends PipeVertex & NbtSerialisable> extend
         return Optional.empty();
     }
 
-    public void updateAdjacent(BlockState newState, Direction fromDirection)
-    {
-//        FluidPipe pipe = (FluidPipe) getCachedState().getBlock();
-        updateAdjacent(newState);
-    }
-
-    public void updateAdjacent(BlockState newState)
+    public void updateHiddenConnections(BlockState newState)
     {
         FluidPipe pipe = (FluidPipe) newState.getBlock();
 
@@ -69,11 +63,10 @@ public class FluidPipeBlockEntity<T extends PipeVertex & NbtSerialisable> extend
         vertex.updateNodes((ServerWorld) world, pos, newState);
 
         int connections = pipe.countConnections(newState);
-
         if (connections > 2 || !vertex.canSimplify())
         {
             findAdjacent(pipe);
-//
+
 //            if (vertex.canSimplify())
 //            {
 //                linkVertices(pipe);
@@ -84,6 +77,36 @@ public class FluidPipeBlockEntity<T extends PipeVertex & NbtSerialisable> extend
             linkVertices(pipe);
         }
         markDirty();
+    }
+
+    public void updateConnectionChange(BlockState state, BlockState newState)
+    {
+        FluidPipe pipe = (FluidPipe) newState.getBlock();
+
+        int connections = pipe.countConnections(newState);
+
+        // If this is a newly created pipe end, we need to break the previous connection.
+        if (vertex.canSimplify() && connections == 1)
+        {
+            vertex.reset();
+            vertex.updateNodes((ServerWorld) world, pos, newState);
+
+            // Using a loop to be safe, but this should only happen once.
+            for (Direction direction : pipe.getConnections(getCachedState(), direction -> true))
+            {
+                var adjacent = findNextVertex(pos, direction);
+                if (adjacent != null)
+                {
+//                    PipeVertex v1 = adjacent.first();
+//                    PipeVertex v2 = adjacent.first().getAdjVertex(adjacent.second().ordinal());
+                    adjacent.first().setAdjVertex(adjacent.second().ordinal(), null);
+                }
+            }
+        }
+        else
+        {
+            updateHiddenConnections(newState);
+        }
     }
 
     private void jankParticles(PipeVertex vertex)

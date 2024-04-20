@@ -11,7 +11,7 @@
   "extra": {
     "resource": "minecraft:emerald",
     "amount": 1,
-    "chance": 0.3
+    "chance": 0.8
   },
   "experience": 5,
   "processtime": 40

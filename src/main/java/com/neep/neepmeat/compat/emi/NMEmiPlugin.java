@@ -77,6 +77,8 @@ public class NMEmiPlugin implements EmiPlugin {
         registry.addWorkstation(ALLOY_SMELTING, ALLOY_SMELTING_WORKSTATION);
         registry.addWorkstation(COMPACTING, COMPACTING_WORKSTATION);
         registry.addWorkstation(ENLIGHTENING, ENLIGHTENING_WORKSTATION);
+        registry.addWorkstation(ENLIGHTENING, INTEGRATOR_WORKSTATION);
+        registry.addWorkstation(ENLIGHTENING, ADV_INTEGRATOR_WORKSTATION);
         registry.addWorkstation(GRINDING, GRINDING_WORKSTATION);
         registry.addWorkstation(GRINDING, LARGE_CRUSHER_WORKSTATION);
         registry.addWorkstation(ADVANCED_CRUSHING, LARGE_CRUSHER_WORKSTATION);

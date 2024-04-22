@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#c:raw_meat",
+      "required": false
+    },
+    {
+      "id": "#chestcavity:salvageable_human_organ_meat",
+      "required": false
+    },
+    {
+      "id": "#chestcavity:salvageable_animal_organ_meat",
+      "required": false
+    },
+    {
+      "id": "#chestcavity:salvageable_rotten_flesh",
+      "required": false
+    }
+  ]
+}

@@ -8,6 +8,8 @@ import com.neep.neepmeat.api.enlightenment.EnlightenmentUtil;
 import com.neep.neepmeat.api.machine.MotorisedBlock;
 import com.neep.neepmeat.api.processing.OreFatRegistry;
 import com.neep.neepmeat.block.entity.FurnaceBurnerImpl;
+import com.neep.neepmeat.datagen.NMAdvancements;
+import com.neep.neepmeat.datagen.NMItemTagProvider;
 import com.neep.neepmeat.datagen.NMRecipeGenerator;
 import com.neep.neepmeat.datagen.tag.NMTags;
 import com.neep.neepmeat.enlightenment.LimbEnlightenmentEvent;
@@ -70,8 +72,13 @@ public class NeepMeat implements ModInitializer
 
 			GeckoLib.initialize();
 
+			// Datagen (not relevant in normal client or server). It probably shouldn't be here but I don't think
+			// it supports multiple entrypoints.
 			NMrecipeTypes.init();
 			NMRecipeGenerator.init();
+			NMItemTagProvider.init();
+			NMAdvancements.init();
+
 			new NMBlocks();
 			NMItems.init();
 			NMLootTables.init();
@@ -89,15 +96,16 @@ public class NeepMeat implements ModInitializer
 			NMPotions.init();
 			NMGraphicsEffects.init();
 
+			NMItemGroups.init();
+			DataType.init();
+
 			// --- Transport module ---
 			ItemTransport.init();
 			FluidTransport.init();
 			BloodNetworkManager.init();
 
-
 //		EnlightenmentUtil.init();
 //		EnlightenmentEventManager.init();
-
 
 			// --- Other misc things ---
 			ToolTransformPacket.registerReceiver();
@@ -178,7 +186,7 @@ public class NeepMeat implements ModInitializer
 			{
 				cow.dropStack(new ItemStack(NMItems.ROUGH_BRAIN), 0.5f);
 			}
-			player.world.playSound(cow.getX(), cow.getY(), cow.getZ(),
+			player.getWorld().playSound(cow.getX(), cow.getY(), cow.getZ(),
 					SoundEvents.ITEM_HONEYCOMB_WAX_ON, SoundCategory.NEUTRAL, 1, 1, false);
 			cow.setDropsLoot(false);
 			cow.kill();

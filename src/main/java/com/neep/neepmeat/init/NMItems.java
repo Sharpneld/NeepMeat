@@ -14,8 +14,10 @@ import com.neep.neepmeat.item.*;
 import com.neep.neepmeat.implant.player.ExtraKneeImplant;
 import com.neep.neepmeat.implant.player.PinealEyeImplant;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
 
 @SuppressWarnings("unused")
 public class NMItems
@@ -108,5 +110,23 @@ public class NMItems
 
     public static void init()
     {
+        registerCompostable(NMBlocks.WHISPER_WHEAT.getSeedsItem(), 0.5f);
+        registerCompostable(NMBlocks.FLESH_POTATO.getSeedsItem(), 0.85f);
+        registerCompostable(WHISPER_FLOUR, 0.5f);
+        registerCompostable(WHISPER_BREAD, 0.85f);
+        registerCompostable(MOB_EGG, 1f);
+        registerCompostable(ANIMAL_HEART, 0.85f);
+        registerCompostable(REANIMATED_HEART, 0.85f);
+        registerCompostable(MEAT_SCRAP, 0.5f);
+        registerCompostable(RAW_MEAT_BRICK, 1f);
+        registerCompostable(COOKED_MEAT_BRICK, 1f);
+        registerCompostable(ROUGH_BRAIN, 0.85f);
+        registerCompostable(ENLIGHTENED_BRAIN, 0.85f);
+        registerCompostable(ASSORTED_BIOMASS, 1f);
+    }
+
+    private static void registerCompostable(ItemConvertible itemConvertible, float chance)
+    {
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(itemConvertible.asItem(), chance);
     }
 }

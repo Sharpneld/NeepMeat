@@ -73,7 +73,7 @@ public class BovineHorrorEntity extends HostileEntity implements IAnimatable, An
     public static DefaultAttributeContainer.Builder createLivingAttributes()
     {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 80)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 140)
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 35.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25f)
                 .add(EntityAttributes.GENERIC_ARMOR_TOUGHNESS, 2.5)

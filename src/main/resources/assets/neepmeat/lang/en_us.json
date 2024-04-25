@@ -802,5 +802,59 @@
   "advancements.neepmeat.main.obtain_power_flower_seeds.description": "Obtain Power Flower Seeds.",
 
   "key.neepmeat.category.neepmeat": "NEEPMeat",
-  "key.neepmeat.transform": "Tool Transform"
+  "key.neepmeat.transform": "Tool Transform",
+
+  "subtitles.neepmeat.click": "UI Clicks",
+  "subtitles.neepmeat.error": "UI Errors",
+
+  "subtitles.neepmeat.fusion_fire": "Fusion Cannon fires",
+
+  "subtitles.neepmeat.cosmic_beam": "Integrator beam",
+
+  "subtitles.neepmeat.compound_injector": "Compound Injector",
+
+  "subtitles.neepmeat.beep": "UI Beep",
+
+  "subtitles.neepmeat.pylon_start": "Pylon starts",
+
+  "subtitles.neepmeat.pylon_active": "Pylon activates",
+
+  "subtitles.neepmeat.cake_scream": "Cake screams",
+  "subtitles.neepmeat.cake_fire": "Cake burns",
+
+  "subtitles.neepmeat.mechanical_machine_place": "Mechanical machine placed",
+  "subtitles.neepmeat.mechanical_machine_break": "Mechanical machine broken",
+  "subtitles.neepmeat.flesh_machine_place": "Flesh machine placed",
+  "subtitles.neepmeat.multiblock_assemble": "Multiblock assembles",
+  "subtitles.neepmeat.multiblock_disassemble": "Multiblock disassembles",
+
+  "subtitles.neepmeat.glome_hit": "Glome hurts",
+  "subtitles.neepmeat.hound_hit": "Hound hurts",
+  "subtitles.neepmeat.hound_death": "Hound dies",
+  "subtitles.neepmeat.bovine_horror_hit": "Bovine Horror dies",
+  "subtitles.neepmeat.bovine_horror_charge": "Bovine Horror charges",
+  "subtitles.neepmeat.bovine_horror_spit": "Bovine Horror spits",
+  "subtitles.neepmeat.bovine_horror_phase_2": "Bovine Horror phase 2",
+  "subtitles.neepmeat.bovine_horror_death": "Bovine Horror dies",
+
+  "subtitles.neepmeat.advanced_integrator_charge": "Advanced Integrator beam",
+  "subtitles.neepmeat.advanced_integrator_ambient": "Advanced Integrator breathes",
+
+  "subtitles.neepmeat.metal_barrel_open": "Metal barrel opened",
+  "subtitles.neepmeat.metal_barrel_close": "Metal barrel closed",
+
+  "subtitles.neepmeat.plc_select_block": "PLC selects",
+  "subtitles.neepmeat.plc_select": "PLC selects block",
+  "subtitles.neepmeat.implant_instruction_apply": "Implant completed",
+  "subtitles.neepmeat.combine_instruction_apply": "Combine completed",
+  "subtitles.neepmeat.inject_instruction_apply": "Inject completed",
+
+  "subtitles.neepmeat.phage_ray_charge": "Phage Ray charges",
+  "subtitles.neepmeat.phage_ray_running": "Phage Ray active",
+
+  "subtitles.neepmeat.vivisection_complete": "Vivisection completes",
+  "subtitles.neepmeat.scalpel_hit": "Scalpel attack",
+
+  "subtitles.neepmeat.big_lever_on": "Big lever clicks on",
+  "subtitles.neepmeat.big_lever_off": "Big lever clicks off"
 }

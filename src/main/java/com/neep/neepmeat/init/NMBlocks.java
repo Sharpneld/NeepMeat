@@ -198,6 +198,8 @@ public class NMBlocks
 
     public static Block SCAFFOLD_TRAPDOOR = BlockRegistry.queue(new ScaffoldTrapdoorBlock("rusted_metal_scaffold_trapdoor", block(), MeatlibBlockSettings.create(Material.METAL).strength(2.0f).sounds(NMSoundGroups.METAL).nonOpaque()));
 
+    public static Block RUSTY_METAL_LADDER = BlockRegistry.queue(new MetalLadderBlock("rusty_metal_ladder", block(), MeatlibBlockSettings.create().strength(2.0f).sounds(NMSoundGroups.METAL).nonOpaque()));
+
 //    public static Block CAUTION_TAPE = BlockRegistry.queue(new CautionTapeBlock("caution_tape", 64, false, MeatlibBlockSettings.of(Material.CARPET).strength(1.0f).sounds(BlockSoundGroup.STONE).nonOpaque()));
 
 

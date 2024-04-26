@@ -610,7 +610,7 @@
 
   "item.neepmeat.compound_injector": "Compound Injector",
   "item.neepmeat.compound_injector_lore_0": "Heals 4 hearts when used.",
-  "item.neepmeat.compound_injector_lore_1": "Click with a %s in inventory to reload.",
+  "item.neepmeat.compound_injector_lore_1": "Click this item with a %s in an inventory slot to reload.",
 
   "effect.neepmeat.ash_preparation": "Ash Preparation",
   "item.minecraft.potion.effect.ash_preparation": "Ash Preparation",

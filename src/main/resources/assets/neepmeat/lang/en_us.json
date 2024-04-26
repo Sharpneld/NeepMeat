@@ -735,6 +735,12 @@
   "screen.neepmeat.upgrade_manager": "Upgrade Manager",
   "screen.neepmeat.upgrade_manager.remove": "Remove",
 
+  "screen.neepmeat.content_detector.stack_condition": "Stack Condition",
+  "screen.neepmeat.content_detector.regulate": "Regulate",
+  "screen.neepmeat.content_detector.absolute": "Absolute",
+  "screen.neepmeat.content_detector.regulate.desc": "Stays powered until all filter items have left",
+  "screen.neepmeat.content_detector.absolute.desc": "Stays powered only while conditions are met",
+
   "category.neepmeat.pressing": "Pressing",
   "category.neepmeat.grinding": "Crushing",
   "category.neepmeat.advanced_crushing": "Advanced Crushing",

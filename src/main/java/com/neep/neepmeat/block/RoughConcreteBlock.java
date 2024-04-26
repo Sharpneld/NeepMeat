@@ -5,6 +5,7 @@ import com.neep.meatlib.datagen.MeatRecipeProvider;
 import com.neep.meatlib.item.BaseBlockItem;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.item.MeatlibItemSettings;
+import com.neep.neepmeat.NMItemGroups;
 import com.neep.neepmeat.datagen.tag.NMTags;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
@@ -34,7 +35,7 @@ public class RoughConcreteBlock extends BaseBuildingBlock
     {
         public Item(Block block, String registryName, ItemSettings itemSettings)
         {
-            super(block, registryName, itemSettings, new MeatlibItemSettings().tags(NMTags.ROUGH_CONCRETE));
+            super(block, registryName, itemSettings, new MeatlibItemSettings().tags(NMTags.ROUGH_CONCRETE).group(NMItemGroups.BUILDING));
         }
     }
 }

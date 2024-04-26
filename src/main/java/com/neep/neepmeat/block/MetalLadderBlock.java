@@ -1,27 +1,27 @@
 package com.neep.neepmeat.block;
 
 import com.neep.meatlib.block.MeatlibBlock;
-import com.neep.meatlib.block.MeatlibBlockSettings;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.registry.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LadderBlock;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 public class MetalLadderBlock extends LadderBlock implements MeatlibBlock
 {
-    private final String name;
-
     public static final BooleanProperty TOP = BooleanProperty.of("top");
+    private final String name;
 
     public MetalLadderBlock(String name, ItemSettings itemSettings, Settings settings)
     {
@@ -29,6 +29,12 @@ public class MetalLadderBlock extends LadderBlock implements MeatlibBlock
         this.name = name;
         ItemRegistry.queue(name, itemSettings.create(this, name, itemSettings));
         setDefaultState(getStateManager().getDefaultState().with(TOP, false));
+    }
+
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
+    {
+        return true;
     }
 
     private BlockState getState(WorldAccess world, BlockPos pos, BlockState state)
@@ -45,23 +51,27 @@ public class MetalLadderBlock extends LadderBlock implements MeatlibBlock
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx)
     {
-        World world = ctx.getWorld();
+        if (!ctx.canReplaceExisting())
+        {
+            BlockState blockState = ctx.getWorld().getBlockState(ctx.getBlockPos().offset(ctx.getSide().getOpposite()));
+            if (blockState.isOf(this) && blockState.get(FACING) == ctx.getSide())
+            {
+                return null;
+            }
+        }
 
-        BlockState superState = super.getPlacementState(ctx);
-        if (superState == null)
-            return null;
+        WorldAccess world = ctx.getWorld();
+        FluidState fluidState = world.getFluidState(ctx.getBlockPos());
 
-        return getState(world, ctx.getBlockPos(), superState);
+        BlockState blockState = this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+
+        return getState(world, ctx.getBlockPos(), blockState);
     }
 
     @Override
     public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos)
     {
-        if (direction.getAxis().isVertical())
-        {
-            return getState(world, pos, state);
-        }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return getState(world, pos, super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos));
     }
 
     @Override

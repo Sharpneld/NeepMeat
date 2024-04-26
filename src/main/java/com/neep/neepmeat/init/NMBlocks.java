@@ -297,7 +297,7 @@ public class NMBlocks
     public static Block BUFFER = BlockRegistry.queue(new BufferBlock("buffer", block().tooltip(TooltipSupplier.simple(1)), MeatlibBlockSettings.copyOf(Blocks.CHEST).tags(AXE_MINEABLE)));
     public static Block CHUTE = BlockRegistry.queue(new ChuteBlock("chute", block().tooltip(TooltipSupplier.simple(1)), MeatlibBlockSettings.copyOf(Blocks.HOPPER)));
     public static Block METAL_BARREL = BlockRegistry.queue(new MetalBarrelBlock("metal_barrel", MeatlibBlockSettings.copyOf(RUSTY_METAL_BLOCK)));
-    public static Block CONTENT_DETECTOR = BlockRegistry.queue(new InventoryDetectorBlock("content_detector", block().tooltip(TooltipSupplier.simple(2)), MeatlibBlockSettings.copyOf(Blocks.OBSERVER)));
+    public static Block CONTENT_DETECTOR = BlockRegistry.queue(new InventoryDetectorBlock("content_detector", block().tooltip(TooltipSupplier.simple(1)), MeatlibBlockSettings.copyOf(Blocks.OBSERVER)));
     public static Block SOLIDITY_DETECTOR = BlockRegistry.queue(new SolidityDetectorBlock("solidity_detector", block().tooltip(TooltipSupplier.simple(1)), MeatlibBlockSettings.copyOf(Blocks.OBSERVER)));
     public static Block DUMPER = BlockRegistry.queue(new DumperBlock("dumper", block().tooltip(TooltipSupplier.simple(1)), MeatlibBlockSettings.copyOf(Blocks.OAK_WOOD).tags(AXE_MINEABLE)));
 

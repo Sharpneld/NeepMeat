@@ -222,9 +222,9 @@
   "block.neepmeat.limiter_valve.lore_1": "Set the maximum flow rate in the GUI.",
   "block.neepmeat.window_fluid_pipe": "Window Fluid pipe",
 
-  "block.neepmeat.item_pipe": "Pneumatic Pipe",
+  "block.neepmeat.item_pipe": "Item Pipe",
   "block.neepmeat.item_pipe.lore_0": "Items must be inserted with an Ejector or Item Pump.",
-  "block.neepmeat.merge_item_pipe": "Merge Pneumatic Pipe",
+  "block.neepmeat.merge_item_pipe": "Merge Item Pipe",
   "block.neepmeat.pipe_driver": "Pipe Driver",
   "block.neepmeat.pipe_driver.lore_0": "Permits advanced item routing in connected item pipes. One Driver is allowed per network.",
   "block.neepmeat.item_requester": "Manual Requester",

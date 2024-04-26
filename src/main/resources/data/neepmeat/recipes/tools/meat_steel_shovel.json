@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c",
+    "b",
+    "i"
+  ],
+  "key": {
+    "c": {
+      "item": "neepmeat:meat_steel_component"
+    },
+    "b": {
+      "item": "neepmeat:whisper_brass_ingot"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "neepmeat:meat_steel_shovel",
+    "count": 1
+  }
+}

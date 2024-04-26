@@ -7,6 +7,8 @@
     "AbstractFurnaceBlockEntityMixin",
     "BrewingRecipeRegistryAccessor",
     "CowEntityMixin",
+    "EnchantmentTargetMixins$Digger",
+    "EnchantmentTargetMixins$Weapon",
     "FurnaceAccessor",
     "LivingEntityMixin",
     "ServerPlayNetworkHandlerMixin",

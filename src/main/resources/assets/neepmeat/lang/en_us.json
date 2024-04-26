@@ -511,6 +511,12 @@
   "item.neepmeat.meat_steel_ingot": "Meat Steel Ingot",
   "item.neepmeat.meat_steel_ingot.lore_0": "Forged from iron and flesh.",
   "item.neepmeat.meat_steel_component": "Meat Steel Component",
+
+  "item.neepmeat.meat_steel_pickaxe": "Meat Steel Pickaxe",
+  "item.neepmeat.meat_steel_axe": "Meat Steel Axe",
+  "item.neepmeat.meat_steel_shovel": "Meat Steel Shovel",
+  "item.neepmeat.meat_steel_hoe": "Meat Steel Hoe",
+
   "item.neepmeat.transforming_tool_base": "Transforming Tool Base",
   "item.neepmeat.transforming_tool_base.lore_0": "Can combine two items into one.",
 

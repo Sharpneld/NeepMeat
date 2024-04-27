@@ -137,7 +137,7 @@ public class NMBlocks
     public static Block ASBESTOS = new BaseBuildingBlock("asbestos", false, MeatlibBlockSettings.copyOf(Blocks.STONE));
     public static Block ASBESTOS_TILE = new BaseBuildingBlock("asbestos_tile", false, MeatlibBlockSettings.copyOf(ASBESTOS));
     public static Block CORRUGATED_ASBESTOS = new BaseBuildingBlock("corrugated_asbestos", true, MeatlibBlockSettings.copyOf(ASBESTOS));
-    public static PaintedBlockManager<?> PAINTED_CORRUGATED_ASBESTOS = new PaintedBlockManager<>("painted_corrugated_asbestos", PaintedCorrugatedAsbestosBlock::new, MeatlibBlockSettings.create(Material.STONE).hardness(3.0f));
+    public static PaintedBlockManager<?> PAINTED_CORRUGATED_ASBESTOS = new PaintedBlockManager<>("painted_corrugated_asbestos", PaintedCorrugatedAsbestosBlock::new, MeatlibBlockSettings.copyOf(CORRUGATED_ASBESTOS));
     public static Block ASBESTOS_SHINGLE = new BaseBuildingBlock("asbestos_shingle", false, MeatlibBlockSettings.copyOf(ASBESTOS));
 
     public static Block BLOODY_BRICKS = new BaseBuildingBlock("bloody_bricks", true, MeatlibBlockSettings.copyOf(Blocks.BRICKS));
@@ -198,8 +198,8 @@ public class NMBlocks
 
     public static Block SCAFFOLD_TRAPDOOR = BlockRegistry.queue(new ScaffoldTrapdoorBlock("rusted_metal_scaffold_trapdoor", block(), MeatlibBlockSettings.create(Material.METAL).strength(2.0f).sounds(NMSoundGroups.METAL).nonOpaque()));
 
-    public static Block RUSTY_METAL_LADDER = BlockRegistry.queue(new MetalLadderBlock("rusty_metal_ladder", block(), MeatlibBlockSettings.create().strength(2.0f).sounds(NMSoundGroups.METAL).nonOpaque()));
-    public static Block RUSTY_METAL_RUNGS = BlockRegistry.queue(new MetalRungsBlock("rusty_metal_rungs", block(), MeatlibBlockSettings.create().strength(2.0f).sounds(NMSoundGroups.METAL).nonOpaque()));
+    public static Block RUSTY_METAL_LADDER = BlockRegistry.queue(new MetalLadderBlock("rusty_metal_ladder", block(), MeatlibBlockSettings.create(Material.METAL).strength(2.0f).sounds(NMSoundGroups.METAL).nonOpaque()));
+    public static Block RUSTY_METAL_RUNGS = BlockRegistry.queue(new MetalRungsBlock("rusty_metal_rungs", block(), MeatlibBlockSettings.create(Material.METAL).strength(2.0f).sounds(NMSoundGroups.METAL).nonOpaque()));
 
 //    public static Block CAUTION_TAPE = BlockRegistry.queue(new CautionTapeBlock("caution_tape", 64, false, MeatlibBlockSettings.of(Material.CARPET).strength(1.0f).sounds(BlockSoundGroup.STONE).nonOpaque()));
 

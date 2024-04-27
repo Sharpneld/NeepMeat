@@ -5,12 +5,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.registry.tag.BlockTags;
 
 public class MeatSteelHoeItem extends HoeItem
 {
-//    private final Multimap<EntityAttribute, EntityAttributeModifier> attributeModifiers;
-
     public MeatSteelHoeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings)
     {
         super(material, attackDamage, attackSpeed, settings);
@@ -22,10 +19,6 @@ public class MeatSteelHoeItem extends HoeItem
         if (state.isOf(Blocks.COBWEB))
         {
             return 15.0f;
-        }
-        else if (state.isIn(BlockTags.SWORD_EFFICIENT))
-        {
-            return 1.5f;
         }
         return super.getMiningSpeedMultiplier(stack, state);
     }

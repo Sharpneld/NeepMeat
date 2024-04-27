@@ -1,7 +1,7 @@
 package com.neep.neepmeat.client;
 
 import com.neep.meatlib.block.BaseBuildingBlock;
-import com.neep.meatlib.block.SmoothTileBlock;
+import com.neep.meatlib.block.PaintedBlockManager;
 import com.neep.meatlib.graphics.client.GraphicsEffectClient;
 import com.neep.meatweapons.particle.PhageRayGraphicsEffect;
 import com.neep.neepmeat.NeepMeat;
@@ -215,7 +215,7 @@ public class NeepMeatClient implements ClientModInitializer
 
 
         // Coloured blocks
-        for (SmoothTileBlock.PaintedBlock block : SmoothTileBlock.COLOURED_BLOCKS)
+        for (PaintedBlockManager.PaintedBlock block : PaintedBlockManager.COLOURED_BLOCKS)
         {
             ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> block.getRawCol(), block);
             ColorProviderRegistry.ITEM.register((stack, tintIndex) -> block.getRawCol(), block.asItem());

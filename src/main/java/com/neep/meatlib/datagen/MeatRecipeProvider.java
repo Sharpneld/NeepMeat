@@ -36,8 +36,8 @@ public class MeatRecipeProvider extends FabricRecipeProvider
                 .forEach(block -> ((BaseBuildingBlock) block).generateRecipes(exporter));
 
         BlockRegistry.REGISTERED_BLOCKS.stream()
-                .filter(block -> block instanceof SmoothTileBlock.PaintedBlock)
-                .forEach(block -> ((SmoothTileBlock.PaintedBlock) block).generateRecipe(exporter));
+                .filter(block -> block instanceof SmoothTileBlock)
+                .forEach(block -> ((SmoothTileBlock) block).generateRecipe(exporter));
 
         BlockRegistry.REGISTERED_BLOCKS.stream()
                 .filter(block -> block instanceof MetalScaffoldingBlock)

@@ -112,7 +112,8 @@ public class NMBlocks
 
 //    public static Block TEST_MULTIBLOCK = BlockRegistry.queue(new TestMultiblock("test_multiblock", MeatlibBlockSettings.create()));
 
-    public static SmoothTileBlock SMOOTH_TILE = new SmoothTileBlock("smooth_tile", MeatlibBlockSettings.create(Material.STONE).hardness(3.0f));
+    public static PaintedBlockManager<?> SMOOTH_TILE = new PaintedBlockManager<>("smooth_tile", SmoothTileBlock::new ,MeatlibBlockSettings.create(Material.STONE).hardness(3.0f));
+    public static PaintedBlockManager<?> PAINTED_CORRUGAED_ASBESTOS = new PaintedBlockManager<>("painted_corrugated_asbestos", PaintedCorrugatedAsbestosBlock::new, MeatlibBlockSettings.create(Material.STONE).hardness(3.0f));
 
     public static Block MACHINE_BLOCK = BlockRegistry.queue(new BaseBlock("machine_block", MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
 

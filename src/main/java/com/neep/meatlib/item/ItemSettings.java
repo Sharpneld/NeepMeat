@@ -4,16 +4,16 @@ import com.neep.meatlib.block.MeatlibBlock;
 import com.neep.neepmeat.NeepMeat;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import java.util.List;
-
 /**
- * An parameter container similar to Item.Settings for use in Block and BlockItem constructors.
+ * A parameter container similar to Item.Settings for use in Block and BlockItem constructors.
  * This exists to ease the addition of new general functionality to every block without having to change
  * constructor arguments.
+ *
+ * This is slightly redundant now that I've decided to extend FabricItemSettings, but this functionality still needs to be
+ * moved over.
  */
 public class ItemSettings implements MeatlibBlock.ItemFactory
 {

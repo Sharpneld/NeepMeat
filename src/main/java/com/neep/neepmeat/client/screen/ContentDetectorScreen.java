@@ -67,7 +67,7 @@ public class ContentDetectorScreen extends HandledScreen<ContentDetectorScreenHa
         },
         (buttonWidget, matrices, mouseX, mouseY) ->
         {
-            renderTooltip(matrices, Text.of("screen.neepmeat.content_detector.stack_condition"), mouseX, mouseY);
+            renderTooltip(matrices, Text.translatable("screen.neepmeat.content_detector.stack_condition"), mouseX, mouseY);
         });
 
         this.countButton = new CyclingButtonWidget(this.x + 20, this.y + 54, 32, 16, 0, 8,
@@ -84,8 +84,8 @@ public class ContentDetectorScreen extends HandledScreen<ContentDetectorScreenHa
                         renderTooltip(matrices, List.of(Text.translatable("screen.neepmeat.content_detector.regulate"),
                                 Text.translatable("screen.neepmeat.content_detector.regulate.desc")), mouseX, mouseY);
                 case 1 ->
-                        renderTooltip(matrices, List.of(Text.translatable("screen.neepmeat.content_detector.regulate"),
-                                Text.of("screen.neepmeat.content_detector.regulate")), mouseX, mouseY);
+                        renderTooltip(matrices, List.of(Text.translatable("screen.neepmeat.content_detector.absolute"),
+                                Text.translatable("screen.neepmeat.content_detector.absolute.desc")), mouseX, mouseY);
             }
         });
 

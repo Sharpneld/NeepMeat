@@ -113,7 +113,6 @@ public class NMBlocks
 //    public static Block TEST_MULTIBLOCK = BlockRegistry.queue(new TestMultiblock("test_multiblock", MeatlibBlockSettings.create()));
 
     public static PaintedBlockManager<?> SMOOTH_TILE = new PaintedBlockManager<>("smooth_tile", SmoothTileBlock::new ,MeatlibBlockSettings.create(Material.STONE).hardness(3.0f));
-    public static PaintedBlockManager<?> PAINTED_CORRUGAED_ASBESTOS = new PaintedBlockManager<>("painted_corrugated_asbestos", PaintedCorrugatedAsbestosBlock::new, MeatlibBlockSettings.create(Material.STONE).hardness(3.0f));
 
     public static Block MACHINE_BLOCK = BlockRegistry.queue(new BaseBlock("machine_block", MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
 
@@ -138,6 +137,7 @@ public class NMBlocks
     public static Block ASBESTOS = new BaseBuildingBlock("asbestos", false, MeatlibBlockSettings.copyOf(Blocks.STONE));
     public static Block ASBESTOS_TILE = new BaseBuildingBlock("asbestos_tile", false, MeatlibBlockSettings.copyOf(ASBESTOS));
     public static Block CORRUGATED_ASBESTOS = new BaseBuildingBlock("corrugated_asbestos", true, MeatlibBlockSettings.copyOf(ASBESTOS));
+    public static PaintedBlockManager<?> PAINTED_CORRUGATED_ASBESTOS = new PaintedBlockManager<>("painted_corrugated_asbestos", PaintedCorrugatedAsbestosBlock::new, MeatlibBlockSettings.create(Material.STONE).hardness(3.0f));
     public static Block ASBESTOS_SHINGLE = new BaseBuildingBlock("asbestos_shingle", false, MeatlibBlockSettings.copyOf(ASBESTOS));
 
     public static Block BLOODY_BRICKS = new BaseBuildingBlock("bloody_bricks", true, MeatlibBlockSettings.copyOf(Blocks.BRICKS));

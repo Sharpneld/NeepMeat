@@ -1,7 +1,7 @@
 package com.neep.meatlib.datagen;
 
 import com.neep.meatlib.block.BaseBuildingBlock;
-import com.neep.meatlib.block.SmoothTileBlock;
+import com.neep.meatlib.block.PaintedBlockManager;
 import com.neep.meatlib.registry.BlockRegistry;
 import com.neep.neepmeat.block.MetalScaffoldingBlock;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -36,8 +36,8 @@ public class MeatRecipeProvider extends FabricRecipeProvider
                 .forEach(block -> ((BaseBuildingBlock) block).generateRecipes(exporter));
 
         BlockRegistry.REGISTERED_BLOCKS.stream()
-                .filter(block -> block instanceof SmoothTileBlock)
-                .forEach(block -> ((SmoothTileBlock) block).generateRecipe(exporter));
+                .filter(block -> block instanceof PaintedBlockManager.PaintedBlock)
+                .forEach(block -> ((PaintedBlockManager.PaintedBlock) block).generateRecipe(exporter));
 
         BlockRegistry.REGISTERED_BLOCKS.stream()
                 .filter(block -> block instanceof MetalScaffoldingBlock)

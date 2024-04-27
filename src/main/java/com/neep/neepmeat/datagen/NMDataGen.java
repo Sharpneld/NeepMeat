@@ -1,14 +1,22 @@
 package com.neep.neepmeat.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-
 public class NMDataGen
 {
+    static
+    {
+    }
+
 //    @Override
 //    public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator)
 //    {
-//        fabricDataGenerator.addProvider(BlockTagProvider::new);
-//        fabricDataGenerator.addProvider(NMRecipeProvider::new);
+//        NeepMeat.LOGGER.info("Initialising NEEPMeat datagen!");
+//    }
+
+//    @Override
+//    public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator)
+//    {
+//        var pack = fabricDataGenerator.createPack();
+//        pack.addProvider(NMItemTagProvider::new);
+//        System.out.println("ooer");
 //    }
 }

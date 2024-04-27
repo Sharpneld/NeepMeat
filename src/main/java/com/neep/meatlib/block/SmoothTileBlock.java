@@ -4,6 +4,7 @@ import com.neep.meatlib.datagen.MeatRecipeProvider;
 import com.neep.meatlib.item.BaseBlockItem;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.item.MeatlibItemSettings;
+import com.neep.neepmeat.NMItemGroups;
 import com.neep.neepmeat.datagen.tag.NMTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -37,7 +38,7 @@ public class SmoothTileBlock extends PaintedBlockManager.PaintedBlock implements
     {
         public Item(Block block, String registryName, ItemSettings itemSettings)
         {
-            super(block, registryName, itemSettings, new MeatlibItemSettings().tags(NMTags.SMOOTH_TILE));
+            super(block, registryName, itemSettings, new MeatlibItemSettings().tags(NMTags.SMOOTH_TILE).group(NMItemGroups.BUILDING));
         }
     }
 }

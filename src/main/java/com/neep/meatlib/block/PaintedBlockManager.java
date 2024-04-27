@@ -4,11 +4,13 @@ import com.google.common.collect.Lists;
 import com.neep.meatlib.registry.BlockRegistry;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.BlockItem;
 import net.minecraft.util.DyeColor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class PaintedBlockManager<T extends PaintedBlockManager.PaintedBlock>
 {
@@ -61,6 +63,11 @@ public class PaintedBlockManager<T extends PaintedBlockManager.PaintedBlock>
         public int getRawCol()
         {
             return col.getFireworkColor();
+        }
+
+        public void generateRecipe(Consumer<RecipeJsonProvider> exporter)
+        {
+
         }
     }
 }

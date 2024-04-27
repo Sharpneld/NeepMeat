@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
   "key": {
     "d": {
       "item": "minecraft:pink_dye"
@@ -17,6 +16,5 @@
   "result": {
     "count": 8,
     "item": "neepmeat:painted_corrugated_asbestos_pink"
-  },
-  "show_notification": true
+  }
 }

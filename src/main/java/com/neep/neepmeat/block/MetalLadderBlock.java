@@ -13,7 +13,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
@@ -63,7 +62,7 @@ public class MetalLadderBlock extends LadderBlock implements MeatlibBlock
         WorldAccess world = ctx.getWorld();
         FluidState fluidState = world.getFluidState(ctx.getBlockPos());
 
-        BlockState blockState = this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
+        BlockState blockState = this.getDefaultState().with(FACING, ctx.getPlayerFacing().getOpposite()).with(WATERLOGGED, fluidState.getFluid() == Fluids.WATER);
 
         return getState(world, ctx.getBlockPos(), blockState);
     }

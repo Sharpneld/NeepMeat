@@ -241,7 +241,7 @@
   "block.neepmeat.encased_vascular_conduit": "Encased Vascular Conduit",
   "block.neepmeat.encased_vascular_conduit.lore_0": "Takes on the model shape of the block it is right-clicked with.",
   "block.neepmeat.vsc": "Vascular Source Converter",
-  "block.neepmeat.vsc.lore_0": "Consumes a configurable amount of power from a vascular network and emits it from the front. Useful for controlling the speed of motors.",
+  "block.neepmeat.vsc.lore_0": "Consumes a configurable amount of power from a vascular network and emits it from the front. Useful for controlling the speed of motors.\nDisabled by redstone by default. Right-click while sneaking to toggle.",
   "screen.neepmeat.vsc.text.power": "Target output power",
 
   "block.neepmeat.power_emitter": "Creative Power Emitter",

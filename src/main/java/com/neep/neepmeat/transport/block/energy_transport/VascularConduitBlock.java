@@ -2,7 +2,6 @@ package com.neep.neepmeat.transport.block.energy_transport;
 
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.neepmeat.init.NMBlockEntities;
-import com.neep.neepmeat.init.NMBlocks;
 import com.neep.neepmeat.transport.api.pipe.AbstractPipeBlock;
 import com.neep.neepmeat.transport.api.pipe.BloodAcceptor;
 import com.neep.neepmeat.transport.api.pipe.VascularConduit;
@@ -12,18 +11,13 @@ import com.neep.neepmeat.transport.fluid_network.PipeConnectionType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -104,7 +98,9 @@ public class VascularConduitBlock extends AbstractPipeBlock implements BlockEnti
         BlockPos diff = sourcePos.subtract(pos);
         Direction dir = Direction.fromVector(diff.getX(), diff.getY(), diff.getZ());
 
+
         if (isConnectedIn(world, pos, state, dir)
+                && BloodAcceptor.SIDED.find(world, sourcePos, dir) != null
                 && VascularConduit.find(world, sourcePos, world.getBlockState(sourcePos)) == null
                 && !sourceBlock.equals(this))
         {

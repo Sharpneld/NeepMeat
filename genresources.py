@@ -31,7 +31,7 @@ wood_blocks = [
 ]
 
 doors = [
-    'rusty_metal'
+    'caution_block'
 ]
 
 # bl = rm.block('asbestos')

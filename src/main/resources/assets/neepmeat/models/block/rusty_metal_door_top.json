@@ -1,5 +1,4 @@
 {
-  "__comment__": "This file was automatically created by mcresources",
   "parent": "block/door_top_left",
   "textures": {
     "top": "neepmeat:block/rusty_metal_door_top",

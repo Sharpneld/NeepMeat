@@ -8,7 +8,6 @@ import com.neep.neepmeat.api.enlightenment.EnlightenmentUtil;
 import com.neep.neepmeat.api.machine.MotorisedBlock;
 import com.neep.neepmeat.api.processing.OreFatRegistry;
 import com.neep.neepmeat.block.entity.FurnaceBurnerImpl;
-import com.neep.neepmeat.datagen.NMAdvancements;
 import com.neep.neepmeat.datagen.NMItemTagProvider;
 import com.neep.neepmeat.datagen.NMRecipeGenerator;
 import com.neep.neepmeat.datagen.tag.NMTags;
@@ -77,7 +76,7 @@ public class NeepMeat implements ModInitializer
 			NMrecipeTypes.init();
 			NMRecipeGenerator.init();
 			NMItemTagProvider.init();
-			NMAdvancements.init();
+//			NMAdvancements.init();
 
 			new NMBlocks();
 			NMItems.init();
@@ -97,7 +96,7 @@ public class NeepMeat implements ModInitializer
 			NMGraphicsEffects.init();
 
 			NMItemGroups.init();
-			DataType.init();
+//			DataType.init();
 
 			// --- Transport module ---
 			ItemTransport.init();

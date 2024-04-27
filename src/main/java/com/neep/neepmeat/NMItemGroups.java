@@ -24,6 +24,11 @@ public interface NMItemGroups
 
     ItemGroup FOOD = GENERAL;
 
+    static void init()
+    {
+
+    }
+
 //    public static final ItemGroup INGREDIENTS = FabricItemGroupBuilder.build( new Identifier(NeepMeat.NAMESPACE, "ingredients"),
 //            () -> new ItemStack(NMItems.INTERNAL_COMPONENTS));
 //

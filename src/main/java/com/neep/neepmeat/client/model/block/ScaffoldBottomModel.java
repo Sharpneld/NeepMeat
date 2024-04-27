@@ -83,7 +83,7 @@ public class ScaffoldBottomModel implements UnbakedModel, BakedModel, FabricBake
         for (Direction direction : Direction.values())
         {
 
-            emitter.square(direction.getOpposite(), 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+            emitter.square(direction.getOpposite(), 0.0f, 0.0f, 1.0f, 1.0f, 0.999f);
             emitter.nominalFace(direction);
             emitter.spriteBake(0, SPRITES[0], MutableQuadView.BAKE_LOCK_UV);
             emitter.spriteColor(0, -1, -1, -1, -1);

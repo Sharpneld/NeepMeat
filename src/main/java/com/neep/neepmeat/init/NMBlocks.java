@@ -221,7 +221,7 @@ public class NMBlocks
     public static Block STIRLING_ENGINE = BlockRegistry.queue(new StirlingEngineBlock("stirling_engine", block(), MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
     public static Block DEPLOYER = BlockRegistry.queue(new DeployerBlock("deployer", block().requiresMotor(), MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
 //    public static Block AGITATOR = BlockRegistry.queue(new AgitatorBlock("agitator", block().requiresMotor(), MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
-    public static Block CRUSHER = BlockRegistry.queue(new GrinderBlock("grinder", block().requiresMotor(), MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
+    public static Block CRUSHER = BlockRegistry.queue(new GrinderBlock("grinder", block().requiresMotor().tooltip(TooltipSupplier.simple(1)), MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
     public static Multiblock2ControllerBlock<LargeCrusherStructureBlock> LARGE_CRUSHER = BlockRegistry.queue(new LargeCrusherBlock("large_crusher", block().requiresMotor(), MeatlibBlockSettings.copyOf(MACHINE_SETTINGS)));
     public static Block ALLOY_KILN = BlockRegistry.queue(new AlloyKilnBlock("alloy_kiln", block(), MeatlibBlockSettings.copyOf(NMBlocks.SAND_BRICKS)));
     public static Block CRUCIBLE = BlockRegistry.queue(new CrucibleBlock("crucible", block(), FLUID_PIPE_SETTINGS));

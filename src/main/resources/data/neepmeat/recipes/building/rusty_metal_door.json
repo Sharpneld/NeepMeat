@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "neepmeat:rusty_metal"
+    }
+  },
+  "pattern": [
+    "## ",
+    "## ",
+    "## "
+  ],
+  "result": {
+    "count": 3,
+    "item": "neepmeat:rusty_metal_door"
+  }
+}

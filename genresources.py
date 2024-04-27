@@ -1,4 +1,4 @@
-#! ~/opt/mcpython/bin/python
+#! ~/opt/mcpython/bin/pythn
 
 import mcresources
 from mcresources import block_states
@@ -30,6 +30,10 @@ wood_blocks = [
     # 'blood_bubble_planks',
 ]
 
+doors = [
+    'rusty_metal'
+]
+
 # bl = rm.block('asbestos')
 # bl.with_blockstate()
 # bl.with_block_model()
@@ -57,3 +61,7 @@ for name in wood_blocks:
     bl.make_button()
     bl.make_pressure_plate()
     bl.make_fence_gate()
+
+for name in doors:
+    bl = rm.block(name)
+    bl.make_door()

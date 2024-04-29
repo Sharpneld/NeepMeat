@@ -9,6 +9,17 @@ import com.neep.meatweapons.client.renderer.BaseGunRenderer;
 import com.neep.meatweapons.damage.MWDamageSources;
 import com.neep.meatweapons.entity.BulletDamageSource;
 import com.neep.neepmeat.api.item.OverrideSwingItem;
+import mod.azure.azurelib.animatable.GeoItem;
+import mod.azure.azurelib.animatable.SingletonGeoAnimatable;
+import mod.azure.azurelib.animatable.client.RenderProvider;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.core.animation.AnimationState;
+import mod.azure.azurelib.core.object.PlayState;
+import mod.azure.azurelib.model.GeoModel;
+import mod.azure.azurelib.util.AzureLibUtil;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
@@ -35,16 +46,6 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
-import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -53,7 +54,7 @@ import java.util.function.Supplier;
 
 public abstract class BaseGunItem extends Item implements MeatlibItem, GunItem, GeoItem, OverrideSwingItem
 {
-    protected final AnimatableInstanceCache instanceCache = GeckoLibUtil.createInstanceCache(this);
+    protected final AnimatableInstanceCache instanceCache = AzureLibUtil.createInstanceCache(this);
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     protected Map<GunSounds, SoundEvent> sounds = new EnumMap<GunSounds, SoundEvent>(GunSounds.class);
@@ -292,7 +293,7 @@ public abstract class BaseGunItem extends Item implements MeatlibItem, GunItem, 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
-        controllers.add(new AnimationController<>(this, controllerName, this::fireController));
+        controllers.add(new AnimationController<GeoAnimatable>(this, controllerName, this::fireController));
     }
 
     @Override
@@ -328,8 +329,7 @@ public abstract class BaseGunItem extends Item implements MeatlibItem, GunItem, 
 
     protected abstract GeoModel<? extends BaseGunItem> createModel();
 
-    protected <P extends BaseGunItem> PlayState fireController(AnimationState<P> event)
-    {
+    public PlayState fireController(AnimationState<GeoAnimatable> geoAnimatableAnimationState) {
         return PlayState.CONTINUE;
     }
 

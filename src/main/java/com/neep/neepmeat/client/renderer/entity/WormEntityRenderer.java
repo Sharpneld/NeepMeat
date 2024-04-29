@@ -3,6 +3,7 @@ package com.neep.neepmeat.client.renderer.entity;
 import com.neep.neepmeat.NeepMeat;
 import com.neep.neepmeat.client.model.entity.WormEntityModel;
 import com.neep.neepmeat.entity.worm.WormEntity;
+import mod.azure.azurelib.renderer.GeoEntityRenderer;
 import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -10,7 +11,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class WormEntityRenderer extends GeoEntityRenderer<WormEntity>
 {

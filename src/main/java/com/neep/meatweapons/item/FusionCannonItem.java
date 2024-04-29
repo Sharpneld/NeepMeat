@@ -10,6 +10,11 @@ import com.neep.meatweapons.entity.WeaponCooldownAttachment;
 import com.neep.meatweapons.network.MWAttackC2SPacket;
 import com.neep.meatweapons.particle.MWGraphicsEffects;
 import com.neep.neepmeat.init.NMSounds;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.core.animation.RawAnimation;
+import mod.azure.azurelib.model.GeoModel;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -26,10 +31,6 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.joml.Vector3f;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.model.GeoModel;
 
 import java.util.Optional;
 
@@ -295,7 +296,7 @@ public class FusionCannonItem extends BaseGunItem implements WeakTwoHanded, Aima
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
-        controllers.add(new AnimationController<>(this, controllerName, 0, this::fireController)
+        controllers.add(new AnimationController<GeoAnimatable>(this, controllerName, 0, this::fireController)
                 .triggerableAnim("fire", RawAnimation.begin().thenPlay("animation.fusion.fire")));
     }
 }

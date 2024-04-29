@@ -4,6 +4,8 @@ import com.neep.neepmeat.NeepMeat;
 import com.neep.neepmeat.client.model.GenericModel;
 import com.neep.neepmeat.entity.bovine_horror.BovineHorrorEntity;
 import com.neep.neepmeat.util.SightUtil;
+import mod.azure.azurelib.core.object.Color;
+import mod.azure.azurelib.renderer.GeoEntityRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -12,8 +14,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
-import software.bernie.geckolib.core.object.Color;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class BovineHorrorRenderer extends GeoEntityRenderer<BovineHorrorEntity>
 {

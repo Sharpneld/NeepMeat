@@ -1,10 +1,10 @@
 package com.neep.neepmeat.client.renderer.entity;
 
 import com.neep.neepmeat.item.GogglesItem;
+import mod.azure.azurelib.model.GeoModel;
+import mod.azure.azurelib.renderer.GeoArmorRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 @Environment(value = EnvType.CLIENT)
 public class GogglesArmourRenderer extends GeoArmorRenderer<GogglesItem>

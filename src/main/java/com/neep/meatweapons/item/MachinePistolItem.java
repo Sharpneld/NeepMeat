@@ -5,6 +5,7 @@ import com.neep.meatweapons.MWItems;
 import com.neep.meatweapons.client.model.PistolItemModel;
 import com.neep.meatweapons.network.MWAttackC2SPacket;
 import com.neep.neepmeat.init.NMSounds;
+import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -12,10 +13,6 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.joml.Vector3f;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.model.GeoModel;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

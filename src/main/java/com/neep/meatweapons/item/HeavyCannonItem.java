@@ -6,13 +6,13 @@ import com.neep.meatweapons.client.model.HeavyCannonItemModel;
 import com.neep.meatweapons.entity.ExplodingShellEntity;
 import com.neep.meatweapons.network.MWAttackC2SPacket;
 import com.neep.neepmeat.init.NMSounds;
+import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import software.bernie.geckolib.model.GeoModel;
 
 public class HeavyCannonItem extends BaseGunItem
 {

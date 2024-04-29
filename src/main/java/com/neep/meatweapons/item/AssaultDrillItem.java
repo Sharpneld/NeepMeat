@@ -14,6 +14,18 @@ import com.neep.meatweapons.client.sound.DrillSoundInstance;
 import com.neep.meatweapons.entity.BulletDamageSource;
 import com.neep.neepmeat.api.item.OverrideSwingItem;
 import com.neep.neepmeat.api.processing.PowerUtils;
+import mod.azure.azurelib.animatable.GeoItem;
+import mod.azure.azurelib.animatable.client.RenderProvider;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.core.animation.AnimationState;
+import mod.azure.azurelib.core.animation.RawAnimation;
+import mod.azure.azurelib.core.object.PlayState;
+import mod.azure.azurelib.network.SerializableDataTicket;
+import mod.azure.azurelib.platform.services.AzureLibNetwork;
+import mod.azure.azurelib.util.AzureLibUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -43,6 +55,7 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.nbt.NbtCompound;
@@ -50,6 +63,7 @@ import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
@@ -64,15 +78,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -82,7 +87,7 @@ import java.util.function.Supplier;
 
 public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, PoweredItem, CustomEnchantable, OverrideSwingItem
 {
-    protected final AnimatableInstanceCache instanceCache = GeckoLibUtil.createInstanceCache(this);
+    protected final AnimatableInstanceCache instanceCache = AzureLibUtil.createInstanceCache(this);
     protected final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     protected String registryName;
@@ -112,6 +117,11 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
     }
 
     @Override
+    public void appendTags(Consumer<TagKey<Item>> consumer) {
+        MeatlibItem.super.appendTags(consumer);
+    }
+
+    @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext)
     {
         tooltip.add(Text.translatable("item." + MeatWeapons.NAMESPACE + "." + registryName + ".lore"));
@@ -122,6 +132,11 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
     public boolean allowNbtUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack)
     {
         return false;
+    }
+
+    @Override
+    public boolean allowContinuingBlockBreaking(PlayerEntity player, ItemStack oldStack, ItemStack newStack) {
+        return super.allowContinuingBlockBreaking(player, oldStack, newStack);
     }
 
     @Override
@@ -170,10 +185,20 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
     }
 
     @Override
+    public boolean isSuitableFor(ItemStack stack, BlockState state) {
+        return super.isSuitableFor(stack, state);
+    }
+
+    @Override
+    public ItemStack getRecipeRemainder(ItemStack stack) {
+        return super.getRecipeRemainder(stack);
+    }
+
+    @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks)
     {
         boolean canUse = true;
-        if (stack.getDamage() >= getMaxDamage(stack))
+        if (stack.getDamage() >= stack.getMaxDamage())
         {
             stack.getOrCreateNbt().putBoolean("using", false);
             canUse = false;
@@ -201,19 +226,14 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
                     }
                 });
             }
-            else
-            {
-            }
 
             // Reduce durability
             if (!(user instanceof PlayerEntity player && player.isCreative())
-                && stack.getDamage() < getMaxDamage(stack))
+                && stack.getDamage() < stack.getMaxDamage())
             {
                 stack.setDamage(stack.getDamage() + 1);
             }
         }
-
-
         super.usageTick(world, user, stack, remainingUseTicks);
     }
 
@@ -221,11 +241,6 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner)
     {
         return true;
-    }
-
-    public int getMaxDamage(ItemStack stack)
-    {
-        return stack.getMaxDamage();
     }
 
 
@@ -331,7 +346,7 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
         stack.getOrCreateNbt().putBoolean("attacking", false);
     }
 
-    protected PlayState controller(AnimationState<AssaultDrillItem> event)
+    protected PlayState controller(AnimationState<GeoAnimatable> event)
     {
         if (event.getController().getAnimationState() == AnimationController.State.STOPPED)
         {
@@ -379,13 +394,80 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
-        controllers.add(new AnimationController<>(this, controllerName, 1, this::controller));
+        controllers.add(new AnimationController<GeoAnimatable>(this, controllerName, 1, this::controller));
     }
+
+
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache()
     {
         return instanceCache;
+    }
+
+    @Override
+    public double getBoneResetTime() {
+        return GeoItem.super.getBoneResetTime();
+    }
+
+    @Override
+    public boolean shouldPlayAnimsWhileGamePaused() {
+        return GeoItem.super.shouldPlayAnimsWhileGamePaused();
+    }
+
+    @Override
+    public @Nullable ItemGroup meatlib$getItemGroup() {
+        return super.meatlib$getItemGroup();
+    }
+
+    @Override
+    public boolean meatlib$supportsGuideLookup() {
+        return super.meatlib$supportsGuideLookup();
+    }
+
+    @Override
+    public double getTick(Object itemStack) {
+        return GeoItem.super.getTick(itemStack);
+    }
+
+    @Override
+    public boolean isPerspectiveAware() {
+        return GeoItem.super.isPerspectiveAware();
+    }
+
+    @Override
+    public <D> @Nullable D getAnimData(long instanceId, SerializableDataTicket<D> dataTicket) {
+        return GeoItem.super.getAnimData(instanceId, dataTicket);
+    }
+
+    @Override
+    public <D> void setAnimData(Entity relatedEntity, long instanceId, SerializableDataTicket<D> dataTicket, D data) {
+        GeoItem.super.setAnimData(relatedEntity, instanceId, dataTicket, data);
+    }
+
+    @Override
+    public <D> void syncAnimData(long instanceId, SerializableDataTicket<D> dataTicket, D data, Entity entityToTrack) {
+        GeoItem.super.syncAnimData(instanceId, dataTicket, data, entityToTrack);
+    }
+
+    @Override
+    public void triggerAnim(Entity relatedEntity, long instanceId, @Nullable String controllerName, String animName) {
+        GeoItem.super.triggerAnim(relatedEntity, instanceId, controllerName, animName);
+    }
+
+    @Override
+    public void triggerAnim(long instanceId, @Nullable String controllerName, String animName, AzureLibNetwork.IPacketCallback packetCallback) {
+        GeoItem.super.triggerAnim(instanceId, controllerName, animName, packetCallback);
+    }
+
+    @Override
+    public @Nullable AnimatableInstanceCache animatableCacheOverride() {
+        return GeoItem.super.animatableCacheOverride();
+    }
+
+    @Override
+    public boolean isEnabled(FeatureSet enabledFeatures) {
+        return super.isEnabled(enabledFeatures);
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -470,7 +552,7 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
             return 0;
         }
     }
-
+/*
     @Environment(EnvType.CLIENT)
     public static class Client
     {
@@ -526,5 +608,5 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
                 }
             }
         }
-    }
+    }*/
 }

@@ -53,7 +53,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import software.bernie.geckolib.GeckoLib;
 
 public class NeepMeat implements ModInitializer
 {
@@ -70,7 +69,7 @@ public class NeepMeat implements ModInitializer
 			LOGGER.info("Hello from NeepMeat!");
 			new Bezier();
 
-			GeckoLib.initialize();
+			//GeckoLib.initialize();
 
 			// Datagen (not relevant in normal client or server)
 			NMrecipeTypes.init();

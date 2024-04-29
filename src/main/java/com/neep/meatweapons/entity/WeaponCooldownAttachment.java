@@ -4,11 +4,11 @@ import com.neep.meatlib.attachment.player.PlayerAttachment;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import mod.azure.azurelib.animatable.GeoItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
-import software.bernie.geckolib.animatable.GeoItem;
 
 // A minimal implementation of ItemCooldownManager that works for individual stacks
 public class WeaponCooldownAttachment implements PlayerAttachment

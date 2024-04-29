@@ -2,8 +2,8 @@ package com.neep.meatweapons.client.model;
 
 import com.neep.meatweapons.MeatWeapons;
 import com.neep.meatweapons.item.HeavyCannonItem;
+import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib.model.GeoModel;
 
 public class HeavyCannonItemModel extends GeoModel<HeavyCannonItem>
 {

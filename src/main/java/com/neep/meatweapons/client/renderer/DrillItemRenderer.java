@@ -2,6 +2,8 @@ package com.neep.meatweapons.client.renderer;
 
 import com.neep.meatweapons.client.model.DrillItemModel;
 import com.neep.meatweapons.item.AssaultDrillItem;
+import mod.azure.azurelib.core.molang.MolangParser;
+import mod.azure.azurelib.renderer.GeoItemRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
@@ -9,8 +11,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.MathHelper;
-import software.bernie.geckolib.core.molang.MolangParser;
-import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 public class DrillItemRenderer extends GeoItemRenderer<AssaultDrillItem>
 {

@@ -2,8 +2,8 @@ package com.neep.neepmeat.client.model.entity;
 
 import com.neep.neepmeat.NeepMeat;
 import com.neep.neepmeat.entity.worm.WormEntity;
+import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib.model.GeoModel;
 
 public class WormEntityModel extends GeoModel<WormEntity>
 {

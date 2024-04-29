@@ -1,11 +1,13 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_dye": {
+    "has_sand": {
       "conditions": {
         "items": [
           {
-            "tag": "neepmeat:rough_concrete"
+            "items": [
+              "minecraft:sand"
+            ]
           }
         ]
       },
@@ -17,12 +19,12 @@
       },
       "trigger": "minecraft:recipe_unlocked"
     },
-    "has_white_dye": {
+    "has_white_concrete": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:white_dye"
+              "minecraft:white_concrete"
             ]
           }
         ]
@@ -32,8 +34,8 @@
   },
   "requirements": [
     [
-      "has_dye",
-      "has_white_dye",
+      "has_white_concrete",
+      "has_sand",
       "has_the_recipe"
     ]
   ],

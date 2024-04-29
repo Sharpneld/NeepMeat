@@ -5,6 +5,10 @@ import com.neep.meatweapons.client.model.HandCannonItemModel;
 import com.neep.meatweapons.entity.CannonBulletEntity;
 import com.neep.meatweapons.network.MWAttackC2SPacket;
 import com.neep.neepmeat.init.NMSounds;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.model.GeoModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,9 +17,6 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.joml.Vector3f;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.model.GeoModel;
 
 public class HandCannonItem extends BaseGunItem implements Aimable
 {
@@ -135,7 +136,7 @@ public class HandCannonItem extends BaseGunItem implements Aimable
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
-        controllers.add(new AnimationController(this, controllerName, 1, this::fireController));
+        controllers.add(new AnimationController<GeoAnimatable>(this, controllerName, 1, this::fireController));
     }
 
 }

@@ -5,6 +5,10 @@ import com.neep.neepmeat.api.DataVariant;
 import com.neep.neepmeat.client.NMExtraModels;
 import com.neep.neepmeat.machine.integrator.IntegratorBlockEntity;
 import com.neep.neepmeat.util.NMMaths;
+import mod.azure.azurelib.cache.object.BakedGeoModel;
+import mod.azure.azurelib.core.object.Color;
+import mod.azure.azurelib.model.GeoModel;
+import mod.azure.azurelib.renderer.GeoBlockRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -21,10 +25,6 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec2f;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.core.object.Color;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 @Environment(value = EnvType.CLIENT)
 public class IntegratorEggRenderer extends GeoBlockRenderer<IntegratorBlockEntity>

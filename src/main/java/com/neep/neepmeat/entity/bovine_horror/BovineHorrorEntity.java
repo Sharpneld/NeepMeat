@@ -4,6 +4,22 @@ import com.neep.neepmeat.entity.AnimationSyncable;
 import com.neep.neepmeat.init.NMParticles;
 import com.neep.neepmeat.init.NMSounds;
 import com.neep.neepmeat.util.SightUtil;
+import dev.onyxstudios.cca.api.v3.component.Component;
+import dev.onyxstudios.cca.api.v3.component.ComponentKey;
+import dev.onyxstudios.cca.api.v3.component.ComponentProvider;
+import dev.onyxstudios.cca.api.v3.component.sync.ComponentPacketWriter;
+import dev.onyxstudios.cca.api.v3.component.sync.PlayerSyncPredicate;
+import mod.azure.azurelib.animatable.GeoEntity;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.core.animation.AnimationState;
+import mod.azure.azurelib.core.animation.RawAnimation;
+import mod.azure.azurelib.core.object.PlayState;
+import mod.azure.azurelib.network.SerializableDataTicket;
+import mod.azure.azurelib.util.AzureLibUtil;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -32,18 +48,13 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
+
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 public class BovineHorrorEntity extends HostileEntity implements AnimationSyncable, GeoEntity
 {
-    private final AnimatableInstanceCache instanceCache = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache instanceCache = AzureLibUtil.createInstanceCache(this);
 
     protected static final TrackedData<Integer> SYNC_ID = DataTracker.registerData(BovineHorrorEntity.class, TrackedDataHandlerRegistry.INTEGER);
     protected static final TrackedData<Float> VISIBILITY = DataTracker.registerData(BovineHorrorEntity.class, TrackedDataHandlerRegistry.FLOAT);
@@ -330,6 +341,11 @@ public class BovineHorrorEntity extends HostileEntity implements AnimationSyncab
     }
 
     @Override
+    public void syncNearby(String name) {
+        AnimationSyncable.super.syncNearby(name);
+    }
+
+    @Override
     public boolean cannotDespawn()
     {
         return true;
@@ -348,7 +364,7 @@ public class BovineHorrorEntity extends HostileEntity implements AnimationSyncab
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
         controllers.add(
-                new AnimationController<>(this, "move", 5, this::moveController),
+                new AnimationController<GeoAnimatable>(this, "move", 5, this::moveController),
                 new AnimationController<>(this, "attack", 5, this::attackControl));
     }
 
@@ -362,7 +378,7 @@ public class BovineHorrorEntity extends HostileEntity implements AnimationSyncab
         return PlayState.CONTINUE;
     }
 
-    private <E extends BovineHorrorEntity> PlayState moveController(final AnimationState<E> event)
+    private <E extends BovineHorrorEntity> PlayState moveController(final AnimationState<GeoAnimatable> event)
     {
         if (event.isMoving())
         {
@@ -375,5 +391,130 @@ public class BovineHorrorEntity extends HostileEntity implements AnimationSyncab
     public AnimatableInstanceCache getAnimatableInstanceCache()
     {
         return instanceCache;
+    }
+
+    @Override
+    public double getBoneResetTime() {
+        return GeoEntity.super.getBoneResetTime();
+    }
+
+    @Override
+    public boolean shouldPlayAnimsWhileGamePaused() {
+        return GeoEntity.super.shouldPlayAnimsWhileGamePaused();
+    }
+
+    @Override
+    public void setDropsLoot(boolean bl) {
+        super.setDropsLoot(bl);
+    }
+
+    @Override
+    public <C extends Component> C getComponent(ComponentKey<C> key) {
+        return super.getComponent(key);
+    }
+
+    @Override
+    public void syncComponent(ComponentKey<?> key) {
+        super.syncComponent(key);
+    }
+
+    @Override
+    public void syncComponent(ComponentKey<?> key, ComponentPacketWriter packetWriter) {
+        super.syncComponent(key, packetWriter);
+    }
+
+    @Override
+    public void syncComponent(ComponentKey<?> key, ComponentPacketWriter packetWriter, PlayerSyncPredicate predicate) {
+        super.syncComponent(key, packetWriter, predicate);
+    }
+
+    @Override
+    public ComponentProvider asComponentProvider() {
+        return super.asComponentProvider();
+    }
+
+    @Override
+    public <D> @Nullable D getAnimData(SerializableDataTicket<D> dataTicket) {
+        return GeoEntity.super.getAnimData(dataTicket);
+    }
+
+    @Override
+    public <D> void setAnimData(SerializableDataTicket<D> dataTicket, D data) {
+        GeoEntity.super.setAnimData(dataTicket, data);
+    }
+
+    @Override
+    public void triggerAnim(@Nullable String controllerName, String animName) {
+        GeoEntity.super.triggerAnim(controllerName, animName);
+    }
+
+    @Override
+    public double getTick(Object entity) {
+        return GeoEntity.super.getTick(entity);
+    }
+
+    @Override
+    public @Nullable AnimatableInstanceCache animatableCacheOverride() {
+        return GeoEntity.super.animatableCacheOverride();
+    }
+
+    @Override
+    public <A> @Nullable A getAttached(AttachmentType<A> type) {
+        return super.getAttached(type);
+    }
+
+    @Override
+    public <A> A getAttachedOrThrow(AttachmentType<A> type) {
+        return super.getAttachedOrThrow(type);
+    }
+
+    @Override
+    public <A> A getAttachedOrSet(AttachmentType<A> type, A defaultValue) {
+        return super.getAttachedOrSet(type, defaultValue);
+    }
+
+    @Override
+    public <A> A getAttachedOrCreate(AttachmentType<A> type, Supplier<A> initializer) {
+        return super.getAttachedOrCreate(type, initializer);
+    }
+
+    @Override
+    public <A> A getAttachedOrCreate(AttachmentType<A> type) {
+        return super.getAttachedOrCreate(type);
+    }
+
+    @Override
+    public <A> A getAttachedOrElse(AttachmentType<A> type, @Nullable A defaultValue) {
+        return super.getAttachedOrElse(type, defaultValue);
+    }
+
+    @Override
+    public <A> A getAttachedOrGet(AttachmentType<A> type, Supplier<A> defaultValue) {
+        return super.getAttachedOrGet(type, defaultValue);
+    }
+
+    @Override
+    public <A> @Nullable A setAttached(AttachmentType<A> type, @Nullable A value) {
+        return super.setAttached(type, value);
+    }
+
+    @Override
+    public boolean hasAttached(AttachmentType<?> type) {
+        return super.hasAttached(type);
+    }
+
+    @Override
+    public <A> @Nullable A removeAttached(AttachmentType<A> type) {
+        return super.removeAttached(type);
+    }
+
+    @Override
+    public <A> @Nullable A modifyAttached(AttachmentType<A> type, UnaryOperator<A> modifier) {
+        return super.modifyAttached(type, modifier);
+    }
+
+    @Override
+    public boolean cannotBeSilenced() {
+        return super.cannotBeSilenced();
     }
 }

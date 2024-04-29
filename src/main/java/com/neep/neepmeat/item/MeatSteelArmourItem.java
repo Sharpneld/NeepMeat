@@ -2,25 +2,25 @@ package com.neep.neepmeat.item;
 
 import com.neep.meatlib.item.MeatlibItem;
 import com.neep.meatlib.registry.ItemRegistry;
+import mod.azure.azurelib.animatable.GeoItem;
+import mod.azure.azurelib.animatable.client.RenderProvider;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.core.animation.AnimationState;
+import mod.azure.azurelib.core.animation.RawAnimation;
+import mod.azure.azurelib.core.object.PlayState;
+import mod.azure.azurelib.renderer.GeoArmorRenderer;
+import mod.azure.azurelib.util.AzureLibUtil;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.animatable.client.RenderProvider;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.renderer.GeoArmorRenderer;
-import software.bernie.geckolib.util.GeckoLibUtil;
-
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class MeatSteelArmourItem extends ArmorItem implements MeatlibItem, GeoItem
 {
-    private AnimatableInstanceCache instanceCache = GeckoLibUtil.createInstanceCache(this);
+    private AnimatableInstanceCache instanceCache = AzureLibUtil.createInstanceCache(this);
     private final Supplier<Object> renderProvider = GeoItem.makeRenderer(this);
 
     protected final String registryName;
@@ -32,7 +32,7 @@ public class MeatSteelArmourItem extends ArmorItem implements MeatlibItem, GeoIt
         ItemRegistry.queue(this);
     }
 
-    private PlayState predicate(AnimationState<MeatSteelArmourItem> event)
+    private PlayState predicate(AnimationState<GeoAnimatable> event)
     {
         event.getController().setAnimation(RawAnimation.begin().thenLoop("animation.meat_steel_armour.idle"));
         return PlayState.CONTINUE;
@@ -74,7 +74,7 @@ public class MeatSteelArmourItem extends ArmorItem implements MeatlibItem, GeoIt
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
-        controllers.add(new AnimationController(this, "controller", 20, this::predicate));
+        controllers.add(new AnimationController<GeoAnimatable>(this, "controller", 20, this::predicate));
     }
 
     @Override

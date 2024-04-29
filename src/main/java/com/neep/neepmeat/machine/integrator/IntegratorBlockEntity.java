@@ -7,6 +7,15 @@ import com.neep.neepmeat.api.data.DataUtil;
 import com.neep.neepmeat.init.NMBlockEntities;
 import com.neep.neepmeat.init.NMItems;
 import com.neep.neepmeat.init.NMSounds;
+import mod.azure.azurelib.animatable.GeoBlockEntity;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.core.animatable.instance.AnimatableInstanceCache;
+import mod.azure.azurelib.core.animation.AnimatableManager;
+import mod.azure.azurelib.core.animation.AnimationController;
+import mod.azure.azurelib.core.animation.AnimationState;
+import mod.azure.azurelib.core.animation.RawAnimation;
+import mod.azure.azurelib.core.object.PlayState;
+import mod.azure.azurelib.util.AzureLibUtil;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidConstants;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
@@ -36,14 +45,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -84,7 +85,7 @@ public class IntegratorBlockEntity extends SyncableBlockEntity implements Integr
         }
     };
 
-    private final AnimatableInstanceCache instanceCache = GeckoLibUtil.createInstanceCache(this);
+    private final AnimatableInstanceCache instanceCache = AzureLibUtil.createInstanceCache(this);
     private boolean hatching;
 
     public IntegratorBlockEntity(BlockPos pos, BlockState state)
@@ -214,9 +215,9 @@ public class IntegratorBlockEntity extends SyncableBlockEntity implements Integr
 
     }
 
-    private <E extends GeoBlockEntity> PlayState predicate(AnimationState<E> event)
+    private <E extends GeoBlockEntity> PlayState predicate(AnimationState<GeoAnimatable> event)
     {
-        event.getController().transitionLength(20);
+        event.getController().setTransitionLength(20);
         if (this.hatching)
         {
             event.getController().setAnimation(RawAnimation.begin().thenPlay("animation.integrator.hatch"));
@@ -303,7 +304,7 @@ public class IntegratorBlockEntity extends SyncableBlockEntity implements Integr
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers)
     {
-        controllers.add(new AnimationController<>(this, "controller", 0, this::predicate));
+        controllers.add(new AnimationController<GeoAnimatable>(this, "controller", 0, this::predicate));
     }
 
     @Override

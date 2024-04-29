@@ -2,6 +2,10 @@ package com.neep.meatweapons.client.renderer;
 
 import com.neep.meatweapons.item.Aimable;
 import com.neep.meatweapons.item.BaseGunItem;
+import mod.azure.azurelib.animatable.GeoItem;
+import mod.azure.azurelib.core.animatable.GeoAnimatable;
+import mod.azure.azurelib.model.GeoModel;
+import mod.azure.azurelib.renderer.GeoItemRenderer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderLayer;
@@ -15,10 +19,6 @@ import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import org.joml.Vector3f;
-import software.bernie.geckolib.animatable.GeoItem;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 public class BaseGunRenderer<T extends BaseGunItem & GeoAnimatable> extends GeoItemRenderer<T>
 {

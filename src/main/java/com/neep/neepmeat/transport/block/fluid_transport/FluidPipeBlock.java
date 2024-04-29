@@ -9,6 +9,7 @@ import com.neep.neepmeat.transport.fluid_network.PipeConnectionType;
 import com.neep.neepmeat.transport.fluid_network.node.BlockPipeVertex;
 import com.neep.neepmeat.transport.machine.fluid.FluidPipeBlockEntity;
 import com.neep.neepmeat.util.MiscUtil;
+import mod.azure.azurelib.core.object.Color;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
@@ -41,7 +42,6 @@ import net.minecraft.world.BlockRenderView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.core.object.Color;
 
 @SuppressWarnings("UnstableApiUsage")
 public class FluidPipeBlock extends AbstractPipeBlock implements BlockEntityProvider, FluidPipe

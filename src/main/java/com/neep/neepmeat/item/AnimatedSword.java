@@ -3,8 +3,8 @@ package com.neep.neepmeat.item;
 import com.neep.meatlib.item.BaseSwordItem;
 import com.neep.neepmeat.api.item.OverrideSwingItem;
 import com.neep.neepmeat.entity.AnimationSyncable;
+import mod.azure.azurelib.animatable.GeoItem;
 import net.minecraft.item.ToolMaterial;
-import software.bernie.geckolib.animatable.GeoItem;
 
 public abstract class AnimatedSword extends BaseSwordItem implements AnimationSyncable, OverrideSwingItem, GeoItem
 {

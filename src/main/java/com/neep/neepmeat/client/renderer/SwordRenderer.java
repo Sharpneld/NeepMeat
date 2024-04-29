@@ -1,14 +1,14 @@
 package com.neep.neepmeat.client.renderer;
 
 import com.neep.neepmeat.item.AnimatedSword;
+import mod.azure.azurelib.model.GeoModel;
+import mod.azure.azurelib.renderer.GeoItemRenderer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 @Environment(value = EnvType.CLIENT)
 public class SwordRenderer<T extends AnimatedSword> extends GeoItemRenderer<T>

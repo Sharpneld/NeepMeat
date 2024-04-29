@@ -2,11 +2,11 @@ package com.neep.neepmeat.client.renderer;
 
 import com.neep.neepmeat.NeepMeat;
 import com.neep.neepmeat.machine.integrator.IntegratorBlockEntity;
+import mod.azure.azurelib.model.GeoModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib.model.GeoModel;
 
 @Environment(value = EnvType.CLIENT)
 public class IntegratorEggModel<I extends BlockEntity> extends GeoModel<IntegratorBlockEntity>

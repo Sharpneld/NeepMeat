@@ -2,10 +2,10 @@ package com.neep.meatweapons.client.renderer;
 
 import com.neep.meatweapons.client.model.HandCannonItemModel;
 import com.neep.meatweapons.item.HandCannonItem;
+import mod.azure.azurelib.renderer.GeoItemRenderer;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 public class HandCannonItemRenderer extends GeoItemRenderer<HandCannonItem>
 {

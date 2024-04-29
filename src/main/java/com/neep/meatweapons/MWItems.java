@@ -21,5 +21,5 @@ public class MWItems
     public static Item HEAVY_CANNON = new HeavyCannonItem();
     public static Item AIRTRUCK_ITEM = new AirtruckItem("airtruck", TooltipSupplier.hidden(2), new MeatlibItemSettings().group(MeatWeapons.WEAPONS));
 
-    public static Item ASSAULT_DRILL = new AssaultDrillItem("assault_drill", 1000, new MeatlibItemSettings().group(MeatWeapons.WEAPONS));
+    //public static Item ASSAULT_DRILL = new AssaultDrillItem("assault_drill", 1000, new MeatlibItemSettings().group(MeatWeapons.WEAPONS));
 }

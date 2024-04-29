@@ -65,7 +65,7 @@ public class MWEnchantments
         @Override
         public boolean isAcceptableItem(ItemStack stack)
         {
-            return stack.isOf(MWItems.ASSAULT_DRILL);
+            return false; //stack.isOf(MWItems.ASSAULT_DRILL);
         }
     }
 }

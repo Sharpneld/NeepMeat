@@ -65,6 +65,6 @@ public class NMComponents implements EntityComponentInitializer, ItemComponentIn
 //        registry.register(NMBlocks.WHISPER_WHEAT.getSeedsItemItem(), WORKPIECE, ItemWorkpiece::new);
         registry.register(item -> true, WORKPIECE, ItemWorkpiece::new);
 
-        registry.register(MWItems.ASSAULT_DRILL, IMPLANT_MANAGER, ItemImplantManager::new);
+        //registry.register(MWItems.ASSAULT_DRILL, IMPLANT_MANAGER, ItemImplantManager::new);
     }
 }

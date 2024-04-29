@@ -74,7 +74,7 @@ public class MWClient implements ClientModInitializer
         MWKeys.registerKeybinds();
         AirtruckSoundInstance.initEvent();
 
-        AssaultDrillItem.Client.init();
+        //AssaultDrillItem.Client.init();
 
         BeamEffect.Client.init();
 

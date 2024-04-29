@@ -6,8 +6,8 @@
   },
   "output": {
     "resource": "minecraft:bone_meal",
-    "min": 1,
-    "max": 6
+    "min": 4,
+    "max": 8
   },
   "processtime": 20
 }

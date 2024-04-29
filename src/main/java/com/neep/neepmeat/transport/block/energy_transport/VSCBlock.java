@@ -3,12 +3,16 @@ package com.neep.neepmeat.transport.block.energy_transport;
 import com.neep.meatlib.block.BaseFacingBlock;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.neepmeat.init.NMBlockEntities;
+import com.neep.neepmeat.init.NMSounds;
 import com.neep.neepmeat.transport.block.energy_transport.entity.VSCBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -18,6 +22,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class VSCBlock extends BaseFacingBlock implements BlockEntityProvider
 {
+    public static final BooleanProperty ACTIVE = BooleanProperty.of("active");
+
     // Vascular Source Converter!
     public VSCBlock(String itemName, ItemSettings itemSettings, Settings settings)
     {
@@ -29,6 +35,16 @@ public class VSCBlock extends BaseFacingBlock implements BlockEntityProvider
     {
         if (VascularConduitBlock.matches(player.getStackInHand(hand)))
             return super.onUse(state, world, pos, player, hand, hit);
+
+        if (player.getStackInHand(hand).isEmpty() && player.isSneaking())
+        {
+            if (!world.isClient() && world.getBlockEntity(pos) instanceof VSCBlockEntity be)
+            {
+                be.changeMode();
+                world.playSound(null, pos, NMSounds.CLICK, SoundCategory.BLOCKS, 1, 1);
+            }
+            return ActionResult.SUCCESS;
+        }
 
         if (world.getBlockEntity(pos) instanceof VSCBlockEntity be)
         {
@@ -51,7 +67,7 @@ public class VSCBlock extends BaseFacingBlock implements BlockEntityProvider
     {
         if (!world.isClient() && world.getBlockEntity(pos) instanceof VSCBlockEntity be)
         {
-            be.updateThing();
+            be.updateState(world.getReceivedRedstonePower(pos));
         }
     }
 
@@ -60,7 +76,14 @@ public class VSCBlock extends BaseFacingBlock implements BlockEntityProvider
     {
         if (!world.isClient() && world.getBlockEntity(pos) instanceof VSCBlockEntity be)
         {
-            be.updateThing();
+            be.updateState(world.getReceivedRedstonePower(pos));
         }
+    }
+
+    @Override
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
+    {
+        super.appendProperties(builder);
+        builder.add(ACTIVE);
     }
 }

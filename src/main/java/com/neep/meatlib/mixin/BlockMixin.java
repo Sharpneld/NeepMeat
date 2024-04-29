@@ -19,6 +19,8 @@ import java.util.function.Function;
 @Mixin(Block.class)
 public abstract class BlockMixin implements MeatlibBlockExtension
 {
+    // Oooooh, storing tags in every block may be a waste of space since they are only used in datagen.
+    // I'm sure it'll be fine.
     @Unique private Set<TagKey<Block>> tags = Set.of();
     @Unique @Nullable private Function<Block, ItemConvertible> simpleDrop;
 

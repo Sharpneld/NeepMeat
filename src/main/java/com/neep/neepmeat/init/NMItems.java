@@ -13,11 +13,8 @@ import com.neep.neepmeat.implant.player.ExtraMouthImplant;
 import com.neep.neepmeat.implant.player.LungExtensionsImplant;
 import com.neep.neepmeat.implant.player.PinealEyeImplant;
 import com.neep.neepmeat.item.*;
-import com.neep.neepmeat.transport.FluidTransport;
-import com.neep.neepmeat.transport.block.fluid_transport.TankBlock;
-import net.fabricmc.fabric.api.transfer.v1.fluid.FluidStorage;
-import net.minecraft.item.ArmorMaterials;
-import net.minecraft.item.Item;
+import net.minecraft.block.ComposterBlock;
+import net.minecraft.item.*;
 
 @SuppressWarnings("unused")
 public class NMItems
@@ -39,6 +36,10 @@ public class NMItems
     public static Item REFRACTORY_BRICKS = new BaseCraftingItem("refractory_brick", 0, new MeatlibItemSettings().group(NMItemGroups.INGREDIENTS));
     public static Item WHISPER_BRASS = new BaseCraftingItem("whisper_brass_ingot", 0, new MeatlibItemSettings().group(NMItemGroups.INGREDIENTS));
     public static Item MEAT_STEEL = new BaseCraftingItem("meat_steel_ingot", 0, new MeatlibItemSettings().group(NMItemGroups.INGREDIENTS));
+    public static Item MEAT_STEEL_SHOVEL = ItemRegistry.queue("meat_steel_shovel", new ShovelItem(NMToolMaterials.EMBOSSED_MEAT_STEEL, 1.5F, -3.0F, new MeatlibItemSettings().group(NMItemGroups.GENERAL)));
+    public static Item MEAT_STEEL_PICKAXE = ItemRegistry.queue("meat_steel_pickaxe", new PickaxeItem(NMToolMaterials.EMBOSSED_MEAT_STEEL, 1, -2.8F, new MeatlibItemSettings().group(NMItemGroups.GENERAL)));
+    public static Item MEAT_STEEL_AXE = ItemRegistry.queue("meat_steel_axe", new AxeItem(NMToolMaterials.EMBOSSED_MEAT_STEEL, 6.0F, -3.1F, new MeatlibItemSettings().group(NMItemGroups.GENERAL)));
+    public static Item MEAT_STEEL_HOE = ItemRegistry.queue("meat_steel_hoe", new MeatSteelHoeItem(NMToolMaterials.EMBOSSED_MEAT_STEEL, 1, 0F, new MeatlibItemSettings().group(NMItemGroups.GENERAL)));
     public static Item BLOOD_BUBBLE = new BaseCraftingItem("blood_bubble", 1, new MeatlibItemSettings().group(NMItemGroups.FOOD).food(NMFoodComponents.BLOOD_BUBBLE));
     public static Item MEAT_STEEL_COMPONENT = new BaseCraftingItem("meat_steel_component", 0, new MeatlibItemSettings().group(NMItemGroups.INGREDIENTS));
     public static Item CONTROL_UNIT = new BaseCraftingItem("control_unit", 0, new MeatlibItemSettings().group(NMItemGroups.INGREDIENTS));
@@ -106,9 +107,28 @@ public class NMItems
     public static Item NETWORKING_TOOL = new NetworkingToolItem("networking_tool", TooltipSupplier.hidden(3), new MeatlibItemSettings().group(NMItemGroups.GENERAL));
     public static Item DOSIMETER = new DosimeterItem("dosimeter", TooltipSupplier.hidden(1), new MeatlibItemSettings().group(NMItemGroups.GENERAL));
 
+
     public static Item DEBUG_ITEM = ItemRegistry.queue(new DebugItem("debug", new MeatlibItemSettings().group(NMItemGroups.GENERAL)));
 
     public static void init()
     {
+        registerCompostable(NMBlocks.WHISPER_WHEAT.getSeedsItem(), 0.5f);
+        registerCompostable(NMBlocks.FLESH_POTATO.getSeedsItem(), 0.85f);
+        registerCompostable(WHISPER_FLOUR, 0.5f);
+        registerCompostable(WHISPER_BREAD, 0.85f);
+        registerCompostable(MOB_EGG, 1f);
+        registerCompostable(ANIMAL_HEART, 0.85f);
+        registerCompostable(REANIMATED_HEART, 0.85f);
+        registerCompostable(MEAT_SCRAP, 0.5f);
+        registerCompostable(RAW_MEAT_BRICK, 1f);
+        registerCompostable(COOKED_MEAT_BRICK, 1f);
+        registerCompostable(ROUGH_BRAIN, 0.85f);
+        registerCompostable(ENLIGHTENED_BRAIN, 0.85f);
+        registerCompostable(ASSORTED_BIOMASS, 1f);
+    }
+
+    private static void registerCompostable(ItemConvertible itemConvertible, float chance)
+    {
+        ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(itemConvertible.asItem(), chance);
     }
 }

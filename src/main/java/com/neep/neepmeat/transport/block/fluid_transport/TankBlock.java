@@ -1,11 +1,13 @@
 package com.neep.neepmeat.transport.block.fluid_transport;
 
+import com.google.common.collect.Lists;
 import com.neep.meatlib.block.BaseColumnBlock;
 import com.neep.meatlib.item.ItemSettings;
 import com.neep.neepmeat.api.storage.WritableSingleFluidStorage;
 import com.neep.neepmeat.init.NMBlockEntities;
 import com.neep.neepmeat.transport.machine.fluid.TankBlockEntity;
 import com.neep.neepmeat.util.ItemUtil;
+import net.fabricmc.fabric.api.block.BlockPickInteractionAware;
 import net.fabricmc.fabric.api.lookup.v1.item.ItemApiLookup;
 import net.fabricmc.fabric.api.transfer.v1.context.ContainerItemContext;
 import net.fabricmc.fabric.api.transfer.v1.fluid.FluidVariant;
@@ -24,6 +26,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -31,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TankBlock extends BaseColumnBlock implements BlockEntityProvider
+public class TankBlock extends BaseColumnBlock implements BlockEntityProvider, BlockPickInteractionAware
 {
     public TankBlock(String itemName, ItemSettings itemSettings, Settings settings)
     {
@@ -54,15 +57,63 @@ public class TankBlock extends BaseColumnBlock implements BlockEntityProvider
     @Override
     public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
     {
-        ItemStack stack = super.getPickStack(world, pos, state);
-        if (world.getBlockEntity(pos) instanceof TankBlockEntity be)
+        return new ItemStack(this);
+    }
+
+    @Override
+    public ItemStack getPickedStack(BlockState state, BlockView view, BlockPos pos, PlayerEntity player, HitResult result)
+    {
+        if (player.isCreative())
         {
-            if (!be.getStorage(null).isResourceBlank())
+            ItemStack stack = super.getPickStack(view, pos, state);
+            if (view.getBlockEntity(pos) instanceof TankBlockEntity be)
             {
-                be.setStackNbt(stack);
+                if (!be.getStorage(null).isResourceBlank())
+                {
+                    be.setStackNbt(stack);
+                }
             }
+            return stack;
         }
-        return stack;
+        else
+        {
+            if (view.getBlockEntity(pos) instanceof TankBlockEntity be)
+            {
+                FluidVariant storedVariant = be.getStorage(null).getResource();
+
+                // Allow picking an empty tank in survival mode. Prioritise stacks with the same fluid.
+                Item asItem = this.asItem();
+                List<ItemStack> matching = Lists.newArrayList();
+                List<ItemStack> matchingFluid = Lists.newArrayList();
+                for (int i = 0; i < player.getInventory().size(); ++i)
+                {
+                    ItemStack stack = player.getInventory().getStack(i);
+                    if (stack.isOf(asItem))
+                    {
+                        matching.add(stack);
+
+                        NbtCompound stackNbt = stack.getSubNbt("BlockEntityTag");
+                        if (stackNbt != null)
+                        {
+                            FluidVariant fluidVariant = WritableSingleFluidStorage.readFluidVariant(stackNbt);
+                            if (fluidVariant.getFluid() == storedVariant.getFluid())
+                                matchingFluid.add(stack);
+                        }
+                    }
+                }
+
+                if (!matchingFluid.isEmpty())
+                {
+                    return matchingFluid.get(0);
+                }
+                else if (!matching.isEmpty())
+                {
+                    return matching.get(0);
+                }
+            }
+
+            return getPickStack(view, pos, state);
+        }
     }
 
     @Override

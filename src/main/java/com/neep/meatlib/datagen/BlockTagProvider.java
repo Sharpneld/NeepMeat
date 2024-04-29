@@ -22,14 +22,10 @@ public class BlockTagProvider extends FabricTagProvider.BlockTagProvider
     {
         for (Block entry : BlockRegistry.REGISTERED_BLOCKS)
         {
-//            if (entry instanceof MeatlibBlock meatBlock)
-//            {
-//                this.getOrCreateTagBuilder(meatBlock.getPreferredTool()).add(entry);
-//            }
-
             MeatlibBlockExtension.TagConsumer<Block> consumer = t -> getOrCreateTagBuilder(t).add(entry);
             entry.neepmeat$appendTags(consumer);
 
+            // JAAAAAAAAAAANK
             if (entry instanceof BaseWallBlock wall)
             {
                 this.getOrCreateTagBuilder(wall.getWallTag()).add(entry);

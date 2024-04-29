@@ -87,7 +87,7 @@ public class NMFeatures extends FabricDynamicRegistryProvider
 
         RuleTest ruleTest = new TagMatchRuleTest(BlockTags.BASE_STONE_OVERWORLD);
         entries.add(ORE_ASBESTOS, new ConfiguredFeature<>(Feature.ORE, new OreFeatureConfig(ruleTest, NMBlocks.ASBESTOS.getDefaultState(), 64)));
-        placedFeature(ORE_ASBESTOS_UPPER, ORE_ASBESTOS, entries, modifiersWithRarity(6, HeightRangePlacementModifier.uniform(YOffset.fixed(64), YOffset.fixed(128))));
+        placedFeature(ORE_ASBESTOS_UPPER, ORE_ASBESTOS, entries, modifiersWithRarity(4, HeightRangePlacementModifier.uniform(YOffset.fixed(64), YOffset.fixed(128))));
         placedFeature(ORE_ASBESTOS_LOWER, ORE_ASBESTOS, entries, modifiersWithCount(1, HeightRangePlacementModifier.uniform(YOffset.fixed(0), YOffset.fixed(60))));
     }
 

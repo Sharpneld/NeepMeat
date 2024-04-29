@@ -11,6 +11,8 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
+import java.util.List;
+
 @Environment(value = EnvType.CLIENT)
 public class ContentDetectorScreen extends HandledScreen<ContentDetectorScreenHandler>
 {
@@ -57,34 +59,42 @@ public class ContentDetectorScreen extends HandledScreen<ContentDetectorScreenHa
         super.init();
 
         this.behaviourButton = new CyclingButtonWidget(this.x + 20, this.y + 16, 32,
-                16, 0, 8, 32, 3, COUNT_WIDGET, 32, 128, Text.of("uwu"), (button, mouseButton) ->
+                16, 0, 8, 32, 3, COUNT_WIDGET, 32, 128, Text.of("uwu"),
+                (button, mouseButton) -> this.buttonPress(InventoryDetectorBehaviour.DEL_COUNT))
         {
-            this.buttonPress(InventoryDetectorBehaviour.DEL_COUNT);
-        });
-//        (buttonWidget, matrices, mouseX, mouseY) ->
-//        {
-//            drawMouseoverTooltip(null, Text.of("Stack Condition"), mouseX, mouseY);
-//        });
+            @Override
+            public void renderButton(DrawContext matrices, int mouseX, int mouseY, float delta)
+            {
+                super.renderButton(matrices, mouseX, mouseY, delta);
+                if (isMouseOver(mouseX, mouseY))
+                {
+                    matrices.drawTooltip(textRenderer, Text.translatable("screen.neepmeat.content_detector.stack_condition"), mouseX, mouseY);
+                }
+            }
+        };
 
         this.countButton = new CyclingButtonWidget(this.x + 20, this.y + 54, 32, 16, 0, 8,
-                32, 1, BEHAVIOUR_WIDGET, 32, 64, Text.of("uwu"), (button, mouseButton) ->
+                32, 1, BEHAVIOUR_WIDGET, 32, 64, Text.of("uwu"),
+                (button, mouseButton) -> this.buttonPress(InventoryDetectorBehaviour.DEL_BEHAVIOUR))
         {
-            this.buttonPress(InventoryDetectorBehaviour.DEL_BEHAVIOUR);
-        });
-//        (buttonWidget, matrices, mouseX, mouseY) ->
-//        {
-//            renderTooltip(matrices, Text.of("owo"), mouseX, mouseY);
-//            switch (((CyclingButtonWidget) buttonWidget).index)
-//            {
-//                case 0:
-//                    renderTooltip(matrices, List.of(Text.of("Regulate"), Text.of("Stays powered until all filter items have left")), mouseX, mouseY);
-//                    break;
-//                case 1:
-//                    renderTooltip(matrices, List.of(Text.of("Absolute"), Text.of("Stays powered only while conditions are met")), mouseX, mouseY);
-
-//            }
-//        });
-
+            @Override
+            public void renderButton(DrawContext matrices, int mouseX, int mouseY, float delta)
+            {
+                super.renderButton(matrices, mouseX, mouseY, delta);
+                if (isMouseOver(mouseX, mouseY))
+                {
+                    switch (index)
+                    {
+                        case 0 ->
+                                matrices.drawTooltip(textRenderer, List.of(Text.translatable("screen.neepmeat.content_detector.regulate"),
+                                        Text.translatable("screen.neepmeat.content_detector.regulate.desc")), mouseX, mouseY);
+                        case 1 ->
+                                matrices.drawTooltip(textRenderer, List.of(Text.translatable("screen.neepmeat.content_detector.absolute"),
+                                        Text.translatable("screen.neepmeat.content_detector.absolute.desc")), mouseX, mouseY);
+                    }
+                }
+            }
+        };
 
         this.addDrawableChild(countButton);
         this.addDrawableChild(behaviourButton);

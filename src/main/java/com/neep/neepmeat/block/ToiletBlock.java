@@ -77,7 +77,8 @@ public class ToiletBlock extends BaseHorFacingBlock
     @Override
     public BlockState getPlacementState(ItemPlacementContext context)
     {
-        return super.getPlacementState(context).with(OPEN, false).cycle(FACING);
+        BlockState def = super.getPlacementState(context).with(OPEN, false);
+        return def.with(FACING, def.get(FACING).getOpposite());
     }
 
     @Override

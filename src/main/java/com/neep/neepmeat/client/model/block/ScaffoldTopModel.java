@@ -36,22 +36,18 @@ public class ScaffoldTopModel implements UnbakedModel, BakedModel, FabricBakedMo
 {
 
     private static final Identifier DEFAULT_BLOCK_MODEL = new Identifier("minecraft:block/block");
-    private ModelTransformation transformation;
-
     private final SpriteIdentifier[] SPRITE_IDS = new SpriteIdentifier[2];
+    private final Sprite[] SPRITES = new Sprite[2];
 //            {
 //            new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, new Identifier(NeepMeat.NAMESPACE, "block/scaffold_side")),
 //            new SpriteIdentifier(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE, new Identifier(NeepMeat.NAMESPACE, "block/scaffold_top")),
 //    };
-
-    private final Sprite[] SPRITES = new Sprite[2];
-
     private final Mesh[] SIDES = new Mesh[6];
     private final Mesh[] SIDES_INV = new Mesh[6];
-
+    private final Block block;
+    private ModelTransformation transformation;
     private Mesh outerMesh;
     private Mesh innerMesh;
-    private final Block block;
 
     public ScaffoldTopModel(Identifier sideTexture, Identifier topTexture, Block block)
     {
@@ -67,16 +63,19 @@ public class ScaffoldTopModel implements UnbakedModel, BakedModel, FabricBakedMo
         this.block = block;
     }
 
+    public static boolean getFaces(MutableQuadView quad, BlockRenderView blockView, BlockPos pos, Block block)
+    {
+        Direction face = quad.nominalFace();
+        BlockPos newPos = pos.offset(face);
+        BlockState newState = blockView.getBlockState(newPos);
+//        return !(newState.isOf(block) || newState.isSideSolidFullSquare(blockView, newPos, face.getOpposite()));
+        return !(newState.isOf(block) || newState.isFullCube(blockView, newPos));
+    }
+
     @Override
     public Collection<Identifier> getModelDependencies()
     {
         return Arrays.asList(DEFAULT_BLOCK_MODEL);
-    }
-
-    @Override
-    public void setParents(Function<Identifier, UnbakedModel> modelLoader)
-    {
-
     }
 
 //    @Override
@@ -85,12 +84,19 @@ public class ScaffoldTopModel implements UnbakedModel, BakedModel, FabricBakedMo
 //        return Arrays.asList(SPRITE_IDS);
 //    }
 
+    @Override
+    public void setParents(Function<Identifier, UnbakedModel> modelLoader)
+    {
+
+    }
+
     @Nullable
     @Override
     public BakedModel bake(Baker baker, Function<SpriteIdentifier, Sprite> textureGetter, ModelBakeSettings rotationContainer, Identifier modelId)
     {
         // Get the sprites
-        for(int i = 0; i < 2; ++i) {
+        for (int i = 0; i < 2; ++i)
+        {
             SPRITES[i] = textureGetter.apply(SPRITE_IDS[i]);
         }
         // Build the mesh using the Renderer API
@@ -100,9 +106,8 @@ public class ScaffoldTopModel implements UnbakedModel, BakedModel, FabricBakedMo
         QuadEmitter emitter = builder.getEmitter();
 
         // Create outer faces
-        for(Direction direction : Direction.values())
+        for (Direction direction : Direction.values())
         {
-
             int spriteIdx = direction == Direction.UP || direction == Direction.DOWN ? 1 : 0;
 
             emitter.square(direction, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
@@ -114,12 +119,12 @@ public class ScaffoldTopModel implements UnbakedModel, BakedModel, FabricBakedMo
         outerMesh = builder.build();
 
         // Create inner faces
-        for(Direction direction : Direction.values())
+        for (Direction direction : Direction.values())
         {
 //            int spriteIdx = direction == Direction.UP || direction == Direction.DOWN ? 1 : 0;
             int spriteIdx = direction == Direction.UP ? 1 : 0;
 
-            emitter.square(direction.getOpposite(), 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+            emitter.square(direction.getOpposite(), 0.0f, 0.0f, 1.0f, 1.0f, 0.999f);
             emitter.nominalFace(direction);
             emitter.spriteBake(0, SPRITES[spriteIdx], MutableQuadView.BAKE_LOCK_UV);
             emitter.spriteColor(0, -1, -1, -1, -1);
@@ -139,7 +144,6 @@ public class ScaffoldTopModel implements UnbakedModel, BakedModel, FabricBakedMo
     {
         return false;
     }
-
 
     @Override
     public void emitBlockQuads(BlockRenderView blockView, BlockState state, BlockPos pos, Supplier<Random> randomSupplier, RenderContext context)
@@ -186,14 +190,6 @@ public class ScaffoldTopModel implements UnbakedModel, BakedModel, FabricBakedMo
         context.meshConsumer().accept(innerMesh);
         context.popTransform();
 
-    }
-
-    public static boolean getFaces(MutableQuadView quad, BlockRenderView blockView, BlockPos pos, Block block)
-    {
-        Direction face = quad.nominalFace();
-        BlockPos newPos = pos.offset(face);
-        BlockState newState = blockView.getBlockState(newPos);
-        return !(newState.isOf(block) || newState.isSideSolidFullSquare(blockView, newPos, face.getOpposite()));
     }
 
     @Override

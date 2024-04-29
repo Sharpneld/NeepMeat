@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_bottom_left",
+  "textures": {
+    "top": "neepmeat:block/rusty_metal_door_top",
+    "bottom": "neepmeat:block/rusty_metal_door_bottom"
+  }
+}

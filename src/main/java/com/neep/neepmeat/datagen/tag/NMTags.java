@@ -16,6 +16,7 @@ public class NMTags
     public static final TagKey<Item> METAL_SCAFFOLDING = TagKey.of(Registries.ITEM.getKey(), new Identifier("c", "metal_scaffolding"));
     public static final TagKey<Item> ROUGH_CONCRETE = TagKey.of(Registries.ITEM.getKey(), new Identifier("neepmeat", "rough_concrete"));
     public static final TagKey<Item> SMOOTH_TILE = TagKey.of(Registries.ITEM.getKey(), new Identifier("neepmeat", "smooth_tile"));
+    public static final TagKey<Item> PAINTED_CORRUGATED_ASBESTOS = TagKey.of(Registries.ITEM.getKey(), new Identifier("neepmeat", "painted_corrugated_asbestos"));
     public static final TagKey<Item> GUIDE_LOOKUP = TagKey.of(Registries.ITEM.getKey(), new Identifier(NeepMeat.NAMESPACE, "guide_lookup"));
 
     public static final TagKey<EntityType<?>> CLONEABLE = TagKey.of(Registries.ENTITY_TYPE.getKey(), new Identifier(NeepMeat.NAMESPACE, "cloneable"));

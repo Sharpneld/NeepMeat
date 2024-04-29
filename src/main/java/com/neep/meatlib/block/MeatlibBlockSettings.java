@@ -124,6 +124,7 @@ public class MeatlibBlockSettings extends FabricBlockSettings
         return this;
     }
 
+    // Could use varargs, but that may be unsafe.
     public MeatlibBlockSettings tags()
     {
         this.tags = Set.of();

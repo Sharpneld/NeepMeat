@@ -46,10 +46,4 @@ public class BaseBlockItem extends BlockItem implements MeatlibItem
     {
         return name;
     }
-
-    @Override
-    public void appendTags(Consumer<TagKey<Item>> consumer)
-    {
-        MeatlibItem.super.appendTags(consumer);
-    }
 }

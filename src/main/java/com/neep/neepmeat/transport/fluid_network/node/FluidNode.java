@@ -23,7 +23,7 @@ public class FluidNode implements PipeFlowComponent
     private final NodePos nodePos;
 
     private FluidPump pump;
-    private boolean hasPump;
+    public boolean hasPump;
 
     private Storage<FluidVariant> storage;
     public boolean isStorage;
@@ -97,12 +97,18 @@ public class FluidNode implements PipeFlowComponent
 
     public void loadDeferred(ServerWorld world)
     {
-        if (!(needsDeferredLoading && storage == null) || !world.getServer().isOnThread())
-        {
-            return;
-        }
-        boolean bl1 = findStorage(world);
-        boolean bl2 = findPump(world);
+//        if (!(needsDeferredLoading && storage == null) || !world.getServer().isOnThread())
+//        {
+//            return;
+//        }
+//        boolean bl1 = findStorage(world);
+//        boolean bl2 = findPump(world);
+
+        load(world);
+
+        // Invalid state that should never arise (but does)
+        if (hasPump && pump == null)
+            hasPump = false;
 
         needsDeferredLoading = false;
     }
@@ -156,7 +162,9 @@ public class FluidNode implements PipeFlowComponent
 
     public float getFlow()
     {
-        if (hasPump) return getPump().getFlow();
+        if (hasPump)
+            return getPump().getFlow();
+
         return getMode().getFlow();
     }
 
@@ -166,12 +174,19 @@ public class FluidNode implements PipeFlowComponent
         {
             load(world);
         }
+
+        // Invalid state that should never arise
+        if (storage == null)
+            return Storage.empty();
+
         return storage;
     }
 
     public FluidPump getPump()
     {
-        if (!hasPump) return null;
+        if (!hasPump)
+            return null;
+
         return pump;
     }
 

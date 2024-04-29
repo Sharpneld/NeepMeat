@@ -4,7 +4,11 @@ import com.neep.meatlib.block.BaseBuildingBlock;
 import com.neep.meatlib.datagen.MeatRecipeProvider;
 import com.neep.meatlib.item.BaseBlockItem;
 import com.neep.meatlib.item.ItemSettings;
+import com.neep.meatlib.item.MeatlibItemSettings;
+import com.neep.neepmeat.NMItemGroups;
 import com.neep.neepmeat.datagen.tag.NMTags;
+import com.neep.neepmeat.init.NMBlocks;
+import com.neep.neepmeat.init.NMItems;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.item.DyeItem;
@@ -34,13 +38,7 @@ public class RoughConcreteBlock extends BaseBuildingBlock
     {
         public Item(Block block, String registryName, ItemSettings itemSettings)
         {
-            super(block, registryName, itemSettings);
-        }
-
-        @Override
-        public void appendTags(Consumer<TagKey<net.minecraft.item.Item>> consumer)
-        {
-            consumer.accept(NMTags.ROUGH_CONCRETE);
+            super(block, registryName, itemSettings, new MeatlibItemSettings().tags(NMTags.ROUGH_CONCRETE).group(NMItemGroups.BUILDING));
         }
     }
 }

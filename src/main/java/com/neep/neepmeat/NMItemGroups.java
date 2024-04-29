@@ -20,10 +20,9 @@ public class NMItemGroups
 //            .icon(() -> new ItemStack(NMItems.COOKED_MEAT_BRICK)).build();
 
     public static final ItemGroup GENERAL = FabricItemGroup.builder().displayName(Text.translatable("itemGroup." + NeepMeat.NAMESPACE + ".general")).icon(() -> FluidTransport.PUMP.asItem().getDefaultStack()).build();
-
     public static final ItemGroup INGREDIENTS = GENERAL;
-
     public static final ItemGroup FOOD = GENERAL;
+    public static final ItemGroup BUILDING = GENERAL;
 
 //    public static final ItemGroup INGREDIENTS = FabricItemGroupBuilder.build( new Identifier(NeepMeat.NAMESPACE, "ingredients"),
 //            () -> new ItemStack(NMItems.INTERNAL_COMPONENTS));

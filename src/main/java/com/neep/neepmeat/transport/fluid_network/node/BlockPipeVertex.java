@@ -40,10 +40,16 @@ public class BlockPipeVertex extends SimplePipeVertex implements NbtSerialisable
         components.size(6);
     }
 
+    public boolean canSimplify(FluidPipe pipe, BlockState state)
+    {
+        return super.canSimplify() && numNodes() == 0 && pipe.countConnections(state) <= 2;
+    }
+
     @Override
     public boolean canSimplify()
     {
-        return super.canSimplify() && numNodes() == 0;
+        return canSimplify((FluidPipe) parent.getCachedState().getBlock(), parent.getCachedState());
+//        return super.canSimplify() && numNodes() == 0 && ((FluidPipe) parent.getCachedState().getBlock()).countConnections(parent.getCachedState()) <= 2;
     }
 
     @Override
@@ -179,7 +185,8 @@ public class BlockPipeVertex extends SimplePipeVertex implements NbtSerialisable
             for (int dir = 0; dir < getAdjVertices().length; ++dir)
             {
                 PipeVertex vertex = getAdjacent(dir);
-                if (vertex != null && vertex.getTotalHeight() - this.getTotalHeight() <= 0)
+                if (vertex != null && vertex.getTotalHeight() - this.getTotalHeight() <= 0
+                        && ((SimplePipeVertex) vertex).canInsert((ServerWorld) parent.getWorld(), dir, variant, amount) > 0)
                 {
                     components.set(dir, vertex);
                     ++transfers;
@@ -222,8 +229,8 @@ public class BlockPipeVertex extends SimplePipeVertex implements NbtSerialisable
             }
         }
     }
-    // Get the flow with respect to the node
 
+    // Get the flow with respect to the node
     protected float getNodeFlow(NodePos pos, FluidNode node)
     {
         // Negative for influx, positive for efflux.

@@ -19,29 +19,6 @@ public interface MeatlibBlock extends ItemConvertible
 {
     String getRegistryName();
 
-    default List<TagKey<Block>> getBlockTags()
-    {
-        return List.of(BlockTags.PICKAXE_MINEABLE);
-    }
-
-    static void validate(MeatlibBlock meatBlock)
-    {
-        if (!(meatBlock instanceof Block)) throw new IllegalStateException("IMeatBlock must only be implemented by blocks");
-    }
-
-    default void addTags()
-    {
-        for (TagKey<Block> id : getBlockTags())
-        {
-//            BlockTagProvider.addToTag(id, (Block) this);
-        }
-    }
-
-//    default TagKey<Block> getPreferredTool()
-//    {
-//        return BlockTags.PICKAXE_MINEABLE;
-//    }
-
     default boolean autoGenDrop()
     {
         return true;
@@ -49,7 +26,6 @@ public interface MeatlibBlock extends ItemConvertible
 
     default ItemConvertible dropsLike()
     {
-//        validate(this);
         return this;
     }
 

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "d": {
+      "item": "minecraft:lime_dye"
+    },
+    "i": {
+      "tag": "neepmeat:painted_corrugated_asbestos"
+    }
+  },
+  "pattern": [
+    "iii",
+    "idi",
+    "iii"
+  ],
+  "result": {
+    "count": 8,
+    "item": "neepmeat:painted_corrugated_asbestos_lime"
+  },
+  "show_notification": true
+}

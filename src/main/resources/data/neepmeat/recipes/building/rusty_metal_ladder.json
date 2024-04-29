@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "s s",
+    "srs",
+    "s s"
+  ],
+  "key": {
+    "r": {
+      "item": "neepmeat:rusty_metal"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "neepmeat:rusty_metal_ladder",
+    "count": 6
+  }
+}

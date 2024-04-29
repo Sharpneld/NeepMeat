@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "neepmeat:block/ladder/rusty_metal_rungs",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "neepmeat:block/ladder/rusty_metal_rungs"
+    },
+    "facing=south": {
+      "model": "neepmeat:block/ladder/rusty_metal_rungs",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "neepmeat:block/ladder/rusty_metal_rungs",
+      "y": 270
+    }
+  }
+}

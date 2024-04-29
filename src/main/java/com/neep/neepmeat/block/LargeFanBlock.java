@@ -7,6 +7,7 @@ import com.neep.meatlib.item.ItemSettings;
 import com.neep.meatlib.item.MeatlibItemSettings;
 import com.neep.meatlib.registry.BlockRegistry;
 import com.neep.meatlib.registry.ItemRegistry;
+import com.neep.neepmeat.NMItemGroups;
 import com.neep.neepmeat.NeepMeat;
 import com.neep.neepmeat.api.big_block.BigBlock;
 import com.neep.neepmeat.api.big_block.BigBlockPattern;
@@ -46,7 +47,7 @@ public class LargeFanBlock extends BigBlock<LargeFanBlock.LargeFanStructureBlock
         super(settings);
         BigBlockPattern upPattern = BigBlockPattern.makeOddCylinder(1, 0, 0, getStructure().getDefaultState());
         BigBlockPattern northPattern = BigBlockPattern.makeRange(-1, -1, 0, 1, 1, 0, getStructure().getDefaultState());
-        ItemRegistry.queue(new BaseBlockItem(this, name, itemSettings, new MeatlibItemSettings()));
+        ItemRegistry.queue(new BaseBlockItem(this, name, itemSettings, new MeatlibItemSettings().group(NMItemGroups.GENERAL)));
         this.name = name;
 
         patternMap = new EnumMap<>(Map.of(

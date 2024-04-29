@@ -46,6 +46,9 @@
   "block.neepmeat.rusty_metal": "Rusty Metal",
   "block.neepmeat.rusty_metal_slab": "Rusty Metal Slab",
   "block.neepmeat.rusty_metal_stairs": "Rusty Metal Stairs",
+  "block.neepmeat.rusty_metal_door": "Rusty Metal Door",
+  "block.neepmeat.rusty_metal_ladder": "Rusty Metal Ladder",
+  "block.neepmeat.rusty_metal_rungs": "Rusty Metal Rungs",
 
   "block.neepmeat.grey_rough_concrete": "Gray Rough Concrete",
   "block.neepmeat.grey_rough_concrete_stairs": "Gray Rough Concrete Stairs",
@@ -114,6 +117,7 @@
   "block.neepmeat.yellow_metal_scaffold_stairs": "Yellow Metal Scaffold Stairs",
   "block.neepmeat.yellow_metal_scaffold_slab": "Yellow Metal Scaffold Slab",
 
+
   "block.neepmeat.rusty_vent": "Rusty Vent",
   "block.neepmeat.rusty_column": "Rusty Column",
 
@@ -124,6 +128,7 @@
   "block.neepmeat.caution_block": "Caution Stripes",
   "block.neepmeat.caution_block_slab": "Caution Stripes Slab",
   "block.neepmeat.caution_block_stairs": "Caution Stripes Stairs",
+  "block.neepmeat.caution_block_door": "Caution Stripes Door",
 
   "block.neepmeat.machine_block": "Machine Block",
 
@@ -144,6 +149,23 @@
   "block.neepmeat.corrugated_asbestos_slab": "Corrugated Asbestos Slab",
   "block.neepmeat.corrugated_asbestos_stairs": "Corrugated Asbestos Stairs",
   "block.neepmeat.corrugated_asbestos_wall": "Corrugated Asbestos Wall",
+
+  "block.neepmeat.painted_corrugated_asbestos_black": "Black Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_red": "Red Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_green": "Green Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_brown": "Brown Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_blue": "Blue Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_purple": "Purple Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_cyan": "Cyan Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_light_gray": "Light Gray Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_gray": "Gray Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_pink": "Pink Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_lime": "Lime Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_yellow": "Yellow Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_light_blue": "Light Blue Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_magenta": "Magenta Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_orange": "Orange Corrugated Asbestos",
+  "block.neepmeat.painted_corrugated_asbestos_white": "White Corrugated Asbestos",
 
   "block.neepmeat.asbestos_shingle": "Asbestos Shingle",
   "block.neepmeat.asbestos_shingle_slab": "Asbestos Shingle Slab",
@@ -200,9 +222,9 @@
   "block.neepmeat.limiter_valve.lore_1": "Set the maximum flow rate in the GUI.",
   "block.neepmeat.window_fluid_pipe": "Window Fluid pipe",
 
-  "block.neepmeat.item_pipe": "Pneumatic Pipe",
+  "block.neepmeat.item_pipe": "Item Pipe",
   "block.neepmeat.item_pipe.lore_0": "Items must be inserted with an Ejector or Item Pump.",
-  "block.neepmeat.merge_item_pipe": "Merge Pneumatic Pipe",
+  "block.neepmeat.merge_item_pipe": "Merge Item Pipe",
   "block.neepmeat.pipe_driver": "Pipe Driver",
   "block.neepmeat.pipe_driver.lore_0": "Permits advanced item routing in connected item pipes. One Driver is allowed per network.",
   "block.neepmeat.item_requester": "Manual Requester",
@@ -219,7 +241,7 @@
   "block.neepmeat.encased_vascular_conduit": "Encased Vascular Conduit",
   "block.neepmeat.encased_vascular_conduit.lore_0": "Takes on the model shape of the block it is right-clicked with.",
   "block.neepmeat.vsc": "Vascular Source Converter",
-  "block.neepmeat.vsc.lore_0": "Consumes a configurable amount of power from a vascular network and emits it from the front. Useful for controlling the speed of motors.",
+  "block.neepmeat.vsc.lore_0": "Consumes a configurable amount of power from a vascular network and emits it from the front. Useful for controlling the speed of motors.\nDisabled by redstone by default. Right-click while sneaking to toggle.",
   "screen.neepmeat.vsc.text.power": "Target output power",
 
   "block.neepmeat.power_emitter": "Creative Power Emitter",
@@ -310,6 +332,7 @@
   "block.neepmeat.router": "Item Router",
   "block.neepmeat.router.lore_0": "Distributes items based on filters.",
   "block.neepmeat.grinder": "Crusher",
+  "block.neepmeat.grinder.lore_0": "Shift-right click with an empty hand to eject XP.",
   "block.neepmeat.large_crusher": "Large Crusher",
   "block.neepmeat.alloy_kiln": "Alloy Kiln",
   "block.neepmeat.collector": "Fat Collector",
@@ -489,6 +512,12 @@
   "item.neepmeat.meat_steel_ingot": "Meat Steel Ingot",
   "item.neepmeat.meat_steel_ingot.lore_0": "Forged from iron and flesh.",
   "item.neepmeat.meat_steel_component": "Meat Steel Component",
+
+  "item.neepmeat.meat_steel_pickaxe": "Meat Steel Pickaxe",
+  "item.neepmeat.meat_steel_axe": "Meat Steel Axe",
+  "item.neepmeat.meat_steel_shovel": "Meat Steel Shovel",
+  "item.neepmeat.meat_steel_hoe": "Meat Steel Hoe",
+
   "item.neepmeat.transforming_tool_base": "Transforming Tool Base",
   "item.neepmeat.transforming_tool_base.lore_0": "Can combine two items into one.",
 
@@ -588,7 +617,7 @@
 
   "item.neepmeat.compound_injector": "Compound Injector",
   "item.neepmeat.compound_injector_lore_0": "Heals 4 hearts when used.",
-  "item.neepmeat.compound_injector_lore_1": "Click with a %s in inventory to reload.",
+  "item.neepmeat.compound_injector_lore_1": "Click this item with a %s in an inventory slot to reload.",
 
   "effect.neepmeat.ash_preparation": "Ash Preparation",
   "item.minecraft.potion.effect.ash_preparation": "Ash Preparation",
@@ -713,6 +742,12 @@
   "screen.neepmeat.upgrade_manager": "Upgrade Manager",
   "screen.neepmeat.upgrade_manager.remove": "Remove",
 
+  "screen.neepmeat.content_detector.stack_condition": "Stack Condition",
+  "screen.neepmeat.content_detector.regulate": "Regulate",
+  "screen.neepmeat.content_detector.absolute": "Absolute",
+  "screen.neepmeat.content_detector.regulate.desc": "Stays powered until all filter items have left",
+  "screen.neepmeat.content_detector.absolute.desc": "Stays powered only while conditions are met",
+
   "category.neepmeat.pressing": "Pressing",
   "category.neepmeat.grinding": "Crushing",
   "category.neepmeat.advanced_crushing": "Advanced Crushing",
@@ -785,5 +820,59 @@
   "advancements.neepmeat.main.obtain_power_flower_seeds.desc": "Obtain Power Flower Seeds.",
 
   "key.neepmeat.category.neepmeat": "NEEPMeat",
-  "key.neepmeat.transform": "Tool Transform"
+  "key.neepmeat.transform": "Tool Transform",
+
+  "subtitles.neepmeat.click": "UI Clicks",
+  "subtitles.neepmeat.error": "UI Errors",
+
+  "subtitles.neepmeat.fusion_fire": "Fusion Cannon fires",
+
+  "subtitles.neepmeat.cosmic_beam": "Integrator beam",
+
+  "subtitles.neepmeat.compound_injector": "Compound Injector",
+
+  "subtitles.neepmeat.beep": "UI Beep",
+
+  "subtitles.neepmeat.pylon_start": "Pylon starts",
+
+  "subtitles.neepmeat.pylon_active": "Pylon activates",
+
+  "subtitles.neepmeat.cake_scream": "Cake screams",
+  "subtitles.neepmeat.cake_fire": "Cake burns",
+
+  "subtitles.neepmeat.mechanical_machine_place": "Mechanical machine placed",
+  "subtitles.neepmeat.mechanical_machine_break": "Mechanical machine broken",
+  "subtitles.neepmeat.flesh_machine_place": "Flesh machine placed",
+  "subtitles.neepmeat.multiblock_assemble": "Multiblock assembles",
+  "subtitles.neepmeat.multiblock_disassemble": "Multiblock disassembles",
+
+  "subtitles.neepmeat.glome_hit": "Glome hurts",
+  "subtitles.neepmeat.hound_hit": "Hound hurts",
+  "subtitles.neepmeat.hound_death": "Hound dies",
+  "subtitles.neepmeat.bovine_horror_hit": "Bovine Horror dies",
+  "subtitles.neepmeat.bovine_horror_charge": "Bovine Horror charges",
+  "subtitles.neepmeat.bovine_horror_spit": "Bovine Horror spits",
+  "subtitles.neepmeat.bovine_horror_phase_2": "Bovine Horror phase 2",
+  "subtitles.neepmeat.bovine_horror_death": "Bovine Horror dies",
+
+  "subtitles.neepmeat.advanced_integrator_charge": "Advanced Integrator beam",
+  "subtitles.neepmeat.advanced_integrator_ambient": "Advanced Integrator breathes",
+
+  "subtitles.neepmeat.metal_barrel_open": "Metal barrel opened",
+  "subtitles.neepmeat.metal_barrel_close": "Metal barrel closed",
+
+  "subtitles.neepmeat.plc_select_block": "PLC selects",
+  "subtitles.neepmeat.plc_select": "PLC selects block",
+  "subtitles.neepmeat.implant_instruction_apply": "Implant completed",
+  "subtitles.neepmeat.combine_instruction_apply": "Combine completed",
+  "subtitles.neepmeat.inject_instruction_apply": "Inject completed",
+
+  "subtitles.neepmeat.phage_ray.charge": "Phage Ray charges",
+  "subtitles.neepmeat.phage_ray.running": "Phage Ray active",
+
+  "subtitles.neepmeat.vivisection_complete": "Vivisection completes",
+  "subtitles.neepmeat.scalpel_hit": "Scalpel attack",
+
+  "subtitles.neepmeat.big_lever_on": "Big lever clicks on",
+  "subtitles.neepmeat.big_lever_off": "Big lever clicks off"
 }

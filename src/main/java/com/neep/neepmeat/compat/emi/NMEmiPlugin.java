@@ -132,7 +132,7 @@ public class NMEmiPlugin implements EmiPlugin {
 
         // Charnel Compactor recipes
         int page = 0;
-        UnmodifiableIterator<List<Item>> iterator = Iterators.partition(Registries.ITEM.getEntryList(NMTags.RAW_MEAT).orElseThrow().stream().map(RegistryEntry::value).iterator(), 35);
+        UnmodifiableIterator<List<Item>> iterator = Iterators.partition(Registries.ITEM.getEntryList(NMTags.CHARNEL_COMPACTOR).orElseThrow().stream().map(RegistryEntry::value).iterator(), 35);
         while (iterator.hasNext()) {
             List<Item> entries = iterator.next();
             registry.addRecipe(new CompactingEmiRecipe(entries, NMItems.CRUDE_INTEGRATION_CHARGE, page++));

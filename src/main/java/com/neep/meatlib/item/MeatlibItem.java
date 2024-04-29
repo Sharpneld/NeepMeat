@@ -8,8 +8,4 @@ import java.util.function.Consumer;
 public interface MeatlibItem
 {
     String getRegistryName();
-
-    default void appendTags(Consumer<TagKey<Item>> consumer)
-    {
-    }
 }

@@ -70,7 +70,7 @@ public abstract class AbstractAxialFluidPipe extends BaseFacingBlock implements 
             createStorageNodes(world, pos, state);
         }
 
-        FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateAdjacent(state));
+        FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateHiddenConnections(state));
     }
 
     @Override
@@ -80,7 +80,7 @@ public abstract class AbstractAxialFluidPipe extends BaseFacingBlock implements 
             return;
 
         createStorageNodes(world, pos, state);
-        FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateAdjacent(state));
+        FluidPipeBlockEntity.find(world, pos).ifPresent(be -> be.updateHiddenConnections(state));
     }
 
     @Override

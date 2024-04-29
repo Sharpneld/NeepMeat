@@ -10,8 +10,7 @@
   },
   "extra": {
     "resource": "minecraft:diamond",
-    "amount": 1,
-    "chance": 0.3
+    "amount": 1
   },
   "experience": 5,
   "processtime": 50

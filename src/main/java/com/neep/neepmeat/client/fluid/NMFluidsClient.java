@@ -109,7 +109,7 @@ public class NMFluidsClient
         FluidRenderHandlerRegistry.INSTANCE.register(NMFluids.STILL_MEAT, NMFluids.FLOWING_MEAT, new SimpleFluidRenderHandler(MEAT, MEAT_FLOWING));
         FluidRenderHandlerRegistry.INSTANCE.register(NMFluids.STILL_C_MEAT, NMFluids.FLOWING_C_MEAT, new SimpleFluidRenderHandler(MEAT, MEAT_FLOWING));
         FluidRenderHandlerRegistry.INSTANCE.register(NMFluids.STILL_TISSUE_SLURRY, NMFluids.FLOWING_TISSUE_SLURRY, new SimpleFluidRenderHandler(TISSUE_SLURRY_STILL, TISSUE_SLURRY_FLOWING));
-//        FluidRenderHandlerRegistry.INSTANCE.register(NMFluids.STILL_MILK, NMFluids.FLOWING_MILK, new SimpleFluidRenderHandler(MILK, MILK_FLOWING, 0xecebe1));
+        FluidRenderHandlerRegistry.INSTANCE.register(NMFluids.STILL_MILK, NMFluids.FLOWING_MILK, new SimpleFluidRenderHandler(MILK, MILK_FLOWING, 0xecebe1));
         FluidRenderHandlerRegistry.INSTANCE.register(NMFluids.STILL_PASTEURISED_MILK, NMFluids.FLOWING_P_MILK, new SimpleFluidRenderHandler(PASTEURISED_MILK, PASTEURISED_MILK_FLOWING, 0xFFFFFF));
 
         FluidRenderHandlerRegistry.INSTANCE.register(NMFluids.STILL_FEED, NMFluids.FLOWING_FEED, new SimpleFluidRenderHandler(FEED, FEED_FLOWING));

@@ -88,7 +88,7 @@ public class NeepMeat implements ModInitializer
 			NMRecipeGenerator.init();
 			NMItemTagProvider.init();
 			NMAdvancements.init();
-			NMModelProvider.init();
+			//NMModelProvider.init();
 
 
 			PLCBlocks.init();

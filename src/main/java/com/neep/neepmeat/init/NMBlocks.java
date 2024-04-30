@@ -138,7 +138,7 @@ public class NMBlocks
     public static Block ASBESTOS = new BaseBuildingBlock("asbestos", false, MeatlibBlockSettings.copyOf(Blocks.STONE));
     public static Block ASBESTOS_TILE = new BaseBuildingBlock("asbestos_tile", false, MeatlibBlockSettings.copyOf(ASBESTOS));
     public static Block CORRUGATED_ASBESTOS = new BaseBuildingBlock("corrugated_asbestos", true, MeatlibBlockSettings.copyOf(ASBESTOS));
-    public static PaintedBlockManager<?> PAINTED_CORRUGATED_ASBESTOS = new PaintedBlockManager<>("painted_corrugated_asbestos", PaintedCorrugatedAsbestosBlock::new, MeatlibBlockSettings.copyOf(CORRUGATED_ASBESTOS));
+    //public static PaintedBlockManager<?> PAINTED_CORRUGATED_ASBESTOS = new PaintedBlockManager<>("painted_corrugated_asbestos", PaintedCorrugatedAsbestosBlock::new, MeatlibBlockSettings.copyOf(CORRUGATED_ASBESTOS));
     public static Block ASBESTOS_SHINGLE = new BaseBuildingBlock("asbestos_shingle", false, MeatlibBlockSettings.copyOf(ASBESTOS));
 
     public static Block BLOODY_BRICKS = new BaseBuildingBlock("bloody_bricks", true, MeatlibBlockSettings.copyOf(Blocks.BRICKS));

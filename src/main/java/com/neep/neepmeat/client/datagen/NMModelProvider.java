@@ -27,6 +27,7 @@ public class NMModelProvider extends FabricModelProvider
     @Override
     public String getName()
     {
+        //IncompatibleClassChangeError: NMModelProvider overrides final method
         return super.getName() + "(neepmeat)";
     }
 
@@ -34,14 +35,14 @@ public class NMModelProvider extends FabricModelProvider
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator)
     {
 //        Identifier modelId = new Identifier(NeepMeat.NAMESPACE, "block/painted_corrugated_asbestos");
-        for (var block : NMBlocks.PAINTED_CORRUGATED_ASBESTOS.entries)
-        {
-            blockStateModelGenerator.registerSimpleCubeAll(block);
+        //for (var block : NMBlocks.PAINTED_CORRUGATED_ASBESTOS.entries)
+        //{
+        //    blockStateModelGenerator.registerSimpleCubeAll(block);
 //            blockStateModelGenerator.blockStateCollector.accept(new SimpleBlockStateSupplier(block, modelId));
 //            Identifier modelId = blockStateModelGenerator.
 //            blockStateModelGenerator.blockStateCollector.accept(new SimpleBlockStateSupplier(block, ));
 //            blockStateModelGenerator.item(block);
-        }
+        //}
     }
 
     @Override

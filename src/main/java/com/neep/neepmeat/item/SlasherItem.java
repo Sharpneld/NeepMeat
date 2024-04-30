@@ -170,11 +170,6 @@ public class SlasherItem extends AnimatedSword implements GeoItem
     }
 
     @Override
-    public void appendTags(Consumer<TagKey<Item>> consumer) {
-        super.appendTags(consumer);
-    }
-
-    @Override
     public @Nullable ItemGroup meatlib$getItemGroup() {
         return super.meatlib$getItemGroup();
     }

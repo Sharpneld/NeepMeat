@@ -69,11 +69,6 @@ public class GogglesItem extends ArmorItem implements MeatlibItem, GeoItem
     }
 
     @Override
-    public void appendTags(Consumer<TagKey<Item>> consumer) {
-        MeatlibItem.super.appendTags(consumer);
-    }
-
-    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context)
     {
         this.tooltip.apply(this, tooltip);

@@ -117,11 +117,6 @@ public class AssaultDrillItem extends Item implements MeatlibItem, GeoItem, Powe
     }
 
     @Override
-    public void appendTags(Consumer<TagKey<Item>> consumer) {
-        MeatlibItem.super.appendTags(consumer);
-    }
-
-    @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext)
     {
         tooltip.add(Text.translatable("item." + MeatWeapons.NAMESPACE + "." + registryName + ".lore"));
